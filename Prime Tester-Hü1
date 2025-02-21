@@ -5,13 +5,23 @@
     <meta charset="UTF-8">
     <title>Primzahl Tester für Anfänger</title>
     <style>
+	body {
+  	  background-color: beige;
+   	  color: darkblue;
+	}
+
+	h1 {
+   	 text-transform: uppercase;
+	    }
         body {
+            background-color: beige;
+   	    color: darkblue;
             font-family: Arial, sans-serif;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             text-align: center;
-            background-color: #f4f4f4;
+            
         }
         .container {
             background-color: white;
