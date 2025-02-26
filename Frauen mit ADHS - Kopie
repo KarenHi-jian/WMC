@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frauen mit ADHS - Information und Unterstützung</title>
+    <style>
+        :root {
+            --primary-color: #9b4dca;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+        }
+    
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+    
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+    
+        nav {
+            background-color: #813dad;
+            padding: 1rem;
+        }
+    
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+    
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+        }
+    
+        nav a:hover {
+            background-color: #9b4dca;
+            border-radius: 4px;
+        }
+    
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+    
+        section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    
+        .symptom-list {
+            background-color: #f0e6f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+    
+        aside {
+            background-color: #e9e1f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        </style>
+    
+</head>
+<body>
+    <header>
+        <h1>Frauen mit ADHS</h1>
+        <p>Information, Verständnis und Unterstützung</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#ueberblick">Überblick</a></li>
+            <li><a href="#symptome">Symptome</a></li>
+            <li><a href="#diagnose">Diagnose</a></li>
+            <li><a href="#hilfe">Hilfe finden</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="ueberblick">
+            <h2>ADHS bei Frauen verstehen</h2>
+            <p>ADHS (Aufmerksamkeitsdefizit-/Hyperaktivitätsstörung) zeigt sich bei Frauen oft anders als bei Männern. Viele Frauen werden erst im Erwachsenenalter diagnostiziert, da ihre Symptome in der Kindheit häufig übersehen werden.</p>
+            <p>Frauen entwickeln oft Bewältigungsstrategien, die ihre ADHS-Symptome nach außen hin maskieren können. Dies kann zu zusätzlichen Belastungen führen.</p>
+        </section>
+
+        <section id="symptome">
+            <h2>Häufige Symptome bei Frauen</h2>
+            <div class="symptom-list">
+                <h3>Innere Unruhe und Organisation</h3>
+                <ul>
+                    <li>Schwierigkeiten bei der Alltagsorganisation</li>
+                    <li>Ständiges Gefühl von innerer Unruhe</li>
+                    <li>Probleme mit Zeitmanagement</li>
+                    <li>Vergesslichkeit bei alltäglichen Aufgaben</li>
+                </ul>
+            </div>
+            
+            <div class="symptom-list">
+                <h3>Emotionale Aspekte</h3>
+                <ul>
+                    <li>Emotionale Sensibilität</li>
+                    <li>Stimmungsschwankungen</li>
+                    <li>Selbstzweifel und niedriges Selbstwertgefühl</li>
+                    <li>Überwältigung in sozialen Situationen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="diagnose">
+            <h2>Diagnose und Erkennung</h2>
+            <p>Die Diagnose von ADHS bei Frauen erfordert oft einen spezialisierten Ansatz. Wichtig ist es, eine Fachperson zu finden, die Erfahrung mit der Diagnose von ADHS bei Frauen hat.</p>
+            <aside>
+                <h3>Wichtiger Hinweis</h3>
+                <p>Wenn Sie vermuten, dass Sie ADHS haben könnten, ist der erste Schritt ein Gespräch mit Ihrer Hausärztin oder Ihrem Hausarzt. Sie können Sie an entsprechende Fachärzte oder Psychiater überweisen.</p>
+            </aside>
+        </section>
+
+        <section id="hilfe">
+            <h2>Hilfe und Unterstützung</h2>
+            <p>Es gibt verschiedene Möglichkeiten der Unterstützung:</p>
+            <ul>
+                <li>Psychotherapie und Coaching</li>
+                <li>Selbsthilfegruppen und Austausch mit anderen Betroffenen</li>
+                <li>Medikamentöse Behandlung nach ärztlicher Absprache</li>
+                <li>Entwicklung individueller Bewältigungsstrategien</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Diese Webseite dient der Information und ersetzt keine professionelle medizinische Beratung.</p>
+        <p>&copy; 2025 Frauen mit ADHS - Information und Unterstützung</p>
+    </footer>
+</body>
+</html>
