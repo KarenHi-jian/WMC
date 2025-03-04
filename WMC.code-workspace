@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Plocha/HTL/WMC/sj24-25-4akif-wmc"
+		},
+		{
+			"path": "../../../Plocha/HTL/WMC/sj24-25-4akif-wmc-main"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
