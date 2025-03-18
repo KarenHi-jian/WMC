@@ -11,6 +11,7 @@
 		}
 	],
 	"settings": {
-		"git.ignoreLimitWarning": true
+		"git.ignoreLimitWarning": true,
+		"liveServer.settings.multiRootWorkspaceName": "sj24-25-4akif-wmc"
 	}
 }
