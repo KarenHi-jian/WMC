@@ -5,21 +5,21 @@ console.log("Datum:", document.getElementById('currentDate'));
 const freunde = [
   {
     nachname: "Müller",
-    vorname: "Hans",
+    vorname: "Petra",
     geburtsdatum: "1982/10/08",
     email: "hans.mueller@example.com"
   },
   {
     nachname: "Schmidt",
-    vorname: "Anna",
+    vorname: "Susi",
     geburtsdatum: "1975/09/11",
     email: "anna.schmidt@example.com"
   }
 ];
 function istHeuteGeburtstag(geburtsdatum) {
-  console.log("Hat heute Geburtstag:", geburtsdatum);
+  console.log("Hat  Geburtstag:", geburtsdatum);
   const heute = new Date();
-  const aktuellerMonat = heute.getMonth() + 1; // 
+  const aktuellerMonat = heute.getMonth() + 1; 
   const aktuellerTag = heute.getDate();
  
   console.log("AktuellDatum", aktuellerTag + "/" + aktuellerMonat);
@@ -29,7 +29,7 @@ function istHeuteGeburtstag(geburtsdatum) {
   console.log("GeburtsDatum", geburtstag + "/" + geburtsmonat);
  
   const resultado = geburtsmonat === aktuellerMonat && geburtstag === aktuellerTag;
-  console.log("¿Hat Geburtstag", resultado);
+  console.log("Geburtstag???", resultado);
   return resultado;
 }
 function sendeGeburtstagsEmail(empfaenger, vorname) {
