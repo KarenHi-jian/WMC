@@ -1,8 +1,0 @@
-###
-GET http://localhost:8000/
-###
-GET http://localhost:8000/index.html
-###
-GET http://localhost:8000/style.css
-###
-GET http://localhost:8000/student
