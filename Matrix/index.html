@@ -18,7 +18,7 @@
         body {
             background-color: var(--space-black);
             color: #fff;
-            font-family: 'Pathway Gothic One', sans-serif;
+            font-family: Arial, sans-serif;  /* O cualquier fuente del sistema */
             margin: 0;
             padding: 0;
             background: linear-gradient(to bottom, #000000, #0b0b2a, #1a0b35);
@@ -26,11 +26,7 @@
             overflow-x: hidden;
         }
         
-        
-
-
-        
-        .container {
+         .container {
             max-width: 800px;
             margin: 40px auto;
             background-color: rgba(0, 0, 20, 0.8);
@@ -149,7 +145,7 @@
             margin: 10px;
             border-radius: 5px;
             cursor: pointer;
-            font-family: 'Pathway Gothic One', sans-serif;
+            font-family: Arial, sans-serif;
             font-size: 18px;
             text-transform: uppercase;
             transition: all 0.3s;
@@ -190,13 +186,7 @@
             margin-right: 10px;
             -moz-appearance: textfield; /* Firefox */
         }
-        
-        /* Eliminar flechas en webkit browsers */
-        .matrix-size-container input::-webkit-outer-spin-button,
-        .matrix-size-container input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+     
     </style>
 </head>
 <body>
@@ -346,36 +336,63 @@
             return rv;
         }
 
-        // Función para calcular distancias
+
         function calculateDistances(matrix) {
             const n = matrix.length;
+            const allDistances = createMatrix(n, Infinity);
             
-            // Crear matriz de distancias inicial
-            const distances = createMatrix(n, Infinity);
+            // Ejecutar Dijkstra desde cada nodo
             for (let i = 0; i < n; i++) {
-                for (let j = 0; j < n; j++) {
-                    if (i === j) {
-                        distances[i][j] = 0; // Distancia a sí mismo
-                    } else if (matrix[i][j] > 0) {
-                        distances[i][j] = 1; // Hay conexión directa
-                    }
-                }
+                allDistances[i] = dijkstraSimple(matrix, i);
             }
             
-            // Algoritmo de Floyd-Warshall para calcular distancias
-            for (let k = 0; k < n; k++) {
-                for (let i = 0; i < n; i++) {
-                    for (let j = 0; j < n; j++) {
-                        if (distances[i][k] + distances[k][j] < distances[i][j]) {
-                            distances[i][j] = distances[i][k] + distances[k][j];
-                        }
-                    }
-                }
-            }
-            
-            return distances;
+            return allDistances;
         }
 
+
+
+
+            
+        // Función Dijkstra simple - CORREGIDA
+function dijkstraSimple(matrix, start) {
+    const n = matrix.length;
+    const distances = new Array(n).fill(Infinity);
+    const visited = new Array(n).fill(false);
+    
+    distances[start] = 0;
+    
+    for (let count = 0; count < n; count++) {
+        let minDist = Infinity;
+        let current = -1;
+        
+        // Encontrar el nodo no visitado con menor distancia
+        for (let i = 0; i < n; i++) {
+            if (!visited[i] && distances[i] < minDist) {
+                minDist = distances[i];
+                current = i;
+            }
+        }
+        
+        // Si no encontramos nodo, terminar
+        if (current === -1) break;
+        
+        // Marcar como visitado
+        visited[current] = true;
+        
+        // Actualizar distancias de los vecinos
+        for (let neighbor = 0; neighbor < n; neighbor++) {
+            if (matrix[current][neighbor] > 0 && !visited[neighbor]) {
+                const newDist = distances[current] + 1; // Usa 1 porque es no ponderado
+                
+                if (newDist < distances[neighbor]) {
+                    distances[neighbor] = newDist;
+                }
+            }
+        }
+    }
+    
+    return distances;
+}
         // Función para calcular excentricidad
         function calculateEccentricity(distances) {
             const n = distances.length;
@@ -454,7 +471,7 @@
                 activeMatrix = adj2;
                 document.getElementById('output').textContent = 'Matrix 2 für Berechnungen ausgewählt.';
             });
-            
+
             // Botón de cálculo
             document.getElementById('calculate-btn').addEventListener('click', function() {
                 const outputDiv = document.getElementById('output');
@@ -482,7 +499,6 @@
                     outputDiv.textContent = `Berechnungsfehler: ${error.message}`;
                 }
             });
-            
             // Botón de limpiar
             document.getElementById('clear-btn').addEventListener('click', function() {
                 document.getElementById('output').textContent = 'MATRIX VOYAGER wartet auf Befehle...';
