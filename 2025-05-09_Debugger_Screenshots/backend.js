@@ -1,6 +1,4 @@
-// matrices_backend.js
 
-// Matrices simples
 const adj1 = [
     [0, 1, 0],
     [1, 0, 1],
@@ -13,7 +11,6 @@ const adj2 = [
     [1, 1, 0],
 ];
 
-// Función para imprimir una matriz
 function printAdj(matrix) {
     console.log("Matriz:");
     for (let i = 0; i < matrix.length; i++) {
@@ -21,17 +18,16 @@ function printAdj(matrix) {
     }
 }
 
-// Función para multiplicar matrices
+
 function multiply(m_A, m_B) {
     const n = m_A.length;
     const result = [];
     
-    // Crear matriz vacía para el resultado
+    
     for (let i = 0; i < n; i++) {
         result.push(new Array(n).fill(0));
     }
     
-    // Multiplicación de matrices
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             let sum = 0;
@@ -45,7 +41,6 @@ function multiply(m_A, m_B) {
     return result;
 }
 
-// Ejecutar el programa
 console.log("=== PROGRAMA DE MATRICES ===\n");
 
 console.log("Matriz 1:");
@@ -54,12 +49,10 @@ printAdj(adj1);
 console.log("\nMatriz 2:");
 printAdj(adj2);
 
-// Multiplicar matrices
 const producto = multiply(adj1, adj2);
 console.log("\nResultado de la multiplicación:");
 printAdj(producto);
 
-// Elevar al cuadrado
 const cuadrado = multiply(adj2, adj2);
 console.log("\nMatriz 2 al cuadrado:");
 printAdj(cuadrado);
