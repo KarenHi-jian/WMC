@@ -13,7 +13,9 @@
             background: black;
             overflow: auto;
             font-family: 'Pathway Gothic One', sans-serif;
-            color: #FFE81F;
+            color: #00BFFF; 
+            
+        
         }
         
         .stars {
@@ -51,12 +53,13 @@
         .title {
             font-size: 3em;
             margin-bottom: 30px;
-            text-shadow: 0 0 10px #FFE81F;
+            text-shadow: 0 0 10px #FFFF00;
         }
         
         .subtitle {
             font-size: 2em;
             margin: 20px 0;
+            color:#FFFF00
         }
         
         .text {
@@ -92,15 +95,6 @@
             box-shadow: 0 0 20px #FFE81F;
         }
         
-        /* Fade in effect */
-        .fade-in {
-            animation: fadeIn 3s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -124,7 +118,7 @@
         </p>
         
         <p class="text">
-            Angeführt von der brillanten Programmiererin ARIA NOVAK arbeiten diese Ingenieure unermüdlich von ihrer verborgenen Basis auf dem Planeten Codex Prime aus, während die imperialen Streitkräfte versuchen, ihren Fortschritt zu stoppen, wohl wissend, dass derjenige, der diese Algorithmen kontrolliert, die Handelsrouten der gesamten Galaxie beherrschen wird...
+            Angeführt von der brillanten Programmiererin Karen Hi-Jian arbeiten diese Ingenieure unermüdlich von ihrer verborgenen Basis auf dem Planeten Codex Prime aus, während die imperialen Streitkräfte versuchen, ihren Fortschritt zu stoppen, wohl wissend, dass derjenige, der diese Algorithmen kontrolliert, die Handelsrouten der gesamten Galaxie beherrschen wird...
         </p>
         
         <p class="text">
@@ -135,7 +129,7 @@
     </div>
     
     <script>
-        // Create random stars
+      
         function createStars() {
             const starsContainer = document.getElementById('stars');
             for (let i = 0; i < 300; i++) {
@@ -151,10 +145,8 @@
         }
         
         createStars();
-        
-        // Function to start the application (redirect to your matrix application)
         function startApplication() {
-             window.location.href = 'MatrixIndex.html';
+             window.location.href = '/Matrix/MatrixIndex.html';
         }
     </script>
 </body>
