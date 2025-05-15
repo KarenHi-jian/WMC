@@ -1,0 +1,92 @@
+/* Estilos específicos para prueba final */
+
+.prueba-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.pregunta {
+    background-color: rgba(0, 0, 20, 0.7);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.pregunta h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.opciones {
+    list-style: none;
+    padding: 0;
+}
+
+.opciones li {
+    margin: 10px 0;
+}
+
+.opciones input[type="radio"] {
+    margin-right: 10px;
+}
+
+.opciones label {
+    color: var(--accent-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.opciones label:hover {
+    color: var(--primary-color);
+}
+
+.boton-enviar {
+    display: block;
+    margin: 40px auto;
+    background-color: var(--primary-color);
+    color: var(--space-black);
+    border: none;
+    padding: 15px 40px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.boton-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px var(--primary-glow);
+}
+
+.resultado {
+    text-align: center;
+    font-size: 24px;
+    margin: 40px 0;
+    padding: 30px;
+    border-radius: 10px;
+    display: none;
+}
+
+.resultado.exito {
+    background-color: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+    color: #90EE90;
+}
+
+.resultado.fallo {
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 2px solid #ff0000;
+    color: #ff9999;
+}
+
+.puntuacion {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: var(--primary-color);
+}

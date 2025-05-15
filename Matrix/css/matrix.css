@@ -1,0 +1,121 @@
+/* ================================
+   ESTILOS ESPECÍFICOS DE MATRICES
+   ================================ */
+
+/* Contenedor de matrices */
+.matrix-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 30px 0;
+    gap: 20px;
+}
+
+.matrix-display {
+    margin: 15px;
+    position: relative;
+}
+
+.matrix-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Tablas de matrices */
+table.matrix-table {
+    border-collapse: collapse;
+    background-color: rgba(0, 191, 255, 0.1);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-glow);
+    margin: 0 auto;
+}
+
+table.matrix-table td {
+    border: 1px solid var(--primary-color);
+    padding: 5px;
+    text-align: center;
+    width: 45px;
+    height: 45px;
+}
+
+/* Inputs de matrices */
+input.matrix-input {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0, 20, 40, 0.7);
+    color: white;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+    font-size: 16px;
+    -moz-appearance: textfield;
+    margin: 0;
+}
+
+input.matrix-input::-webkit-outer-spin-button,
+input.matrix-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input.matrix-input:focus {
+    background-color: rgba(0, 191, 255, 0.2);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Controles de tamaño de matriz */
+.matrix-size-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 15px;
+}
+
+.matrix-size-container label {
+    color: var(--accent-color);
+    font-size: 18px;
+}
+
+.matrix-size-container input {
+    width: 60px;
+    background-color: rgba(0, 20, 40, 0.7);
+    color: white;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+    padding: 8px;
+    font-size: 16px;
+}
+
+/* Botones de control de matrices */
+.matrix-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* Resultados de matrices */
+.matrix-result {
+    background-color: rgba(0, 191, 255, 0.05);
+    border: 2px solid var(--accent-color);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+/* Animaciones para matrices */
+@keyframes matrix-highlight {
+    0% { background-color: rgba(0, 191, 255, 0.1); }
+    50% { background-color: rgba(0, 191, 255, 0.3); }
+    100% { background-color: rgba(0, 191, 255, 0.1); }
+}
+
+.matrix-active {
+    animation: matrix-highlight 2s ease-in-out infinite;
+}

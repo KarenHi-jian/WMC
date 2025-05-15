@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba Final - Matrix Galactic Odyssey</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pruebafinalcss.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>DIE ODYSSEE DER GALAKTISCHEN BERECHNUNG</h1>
+    <div class="lightsaber"></div>
+
+    <!-- Tabs -->
+    <div class="navigation-tabs">
+      <button class="nav-button active" id="matrix-tab">Matrix Voyager</button>
+      <button class="nav-button" id="nasa-tab">NASA Daten</button>
+      <button class="nav-button" id="jedi-tab">Jedi Weisheit</button>
+      <button class="nav-button" id="weather-tab">Wetter</button>
+    </div>
+
+    <!-- MATRIX SECTION -->
+    <div id="matrix-section">
+      <div class="matrix-size-container">
+        <label for="matrix-size">Matrix Größe:</label>
+        <input type="number" id="matrix-size" min="2" max="10" value="3" />
+        <button class="button" id="resize-btn">Ändern</button>
+      </div>
+
+      <h2>MATRIX VOYAGER - Sternnavigationssystem</h2>
+      <div class="matrix-container">
+        <div class="matrix-display">
+          <div class="matrix-title">Rebellenbasis (A-matrix)</div>
+          <div id="A-matrix"></div>
+        </div>
+        <div class="matrix-display">
+          <div class="matrix-title">Imperiale Station (B-matrix)</div>
+          <div id="B-matrix"></div>
+        </div>
+      </div>
+
+      <div class="buttons-container">
+        <button class="button" id="use-matrix1-btn">Matrix A Verwenden</button>
+        <button class="button" id="use-matrix2-btn">Matrix B Verwenden</button>
+      </div>
+
+      <div class="lightsaber alt"></div>
+      <h2>Fortgeschrittene Galaktische Berechnungen</h2>
+      <div id="output" class="output">MATRIX VOYAGER wartet auf Befehle...</div>
+      <div class="buttons-container">
+        <button class="button" id="calculate-btn">Berechnen</button>
+        <button class="button" id="clear-btn">Löschen</button>
+      </div>
+    </div>
+
+    <!-- NASA SECTION -->
+    <div id="nasa-section" style="display: none;">
+      <div class="lightsaber alt"></div>
+      <h2>🌟 NASA Daten</h2>
+      <div id="react-root"></div>
+    </div>
+
+    <!-- JEDI SECTION -->
+    <div id="jedi-section" style="display: none;">
+      <div class="lightsaber alt"></div>
+      <h2>🌟 Jedi Weisheit</h2>
+      <div style="text-align: center; margin: 30px 0;">
+        <button class="button" onclick="getJediWisdom()">
+          <span style="margin-right: 10px;">⚔️</span> Neue Jedi-Weisheit erhalten
+        </button>
+      </div>
+      <div id="jedi-output" class="output" style="margin-top: 20px; min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center;">
+          <div style="color: #90EE90; font-size: 1.8em; font-style: italic; margin-bottom: 20px;">
+            "Möge die Macht mit dir sein!"
+          </div>
+          <div style="color: var(--accent-color); font-size: 1.1em;">
+            - Obi-Wan Kenobi
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 40px; text-align: center;">
+        <h3 style="color: var(--primary-color); margin-bottom: 20px;">Zufällige Jedi-Herausforderung</h3>
+        <button class="button" onclick="getJediChallenge()"><span style="margin-right: 5px;">🎯</span> Tägliche Herausforderung</button>
+        <div id="jedi-challenge" class="output" style="margin-top: 20px; padding: 20px;">
+          Klicke für deine heutige Jedi-Herausforderung...
+        </div>
+      </div>
+    </div>
+
+    <!-- WEATHER SECTION -->
+    <div id="weather-section" style="display: none;">
+      <div class="lightsaber alt"></div>
+      <h2>🌍 Wetter</h2>
+      <div class="weather-input">
+        <input type="text" id="city-input" placeholder="Stadt eingeben..." />
+        <button class="button" onclick="getSimpleWeather()">Wetter abrufen</button>
+      </div>
+      <div id="weather-output" class="output" style="min-height: 400px; max-width: 600px; margin: 20px auto;">
+        <div style="text-align: center;">Geben Sie eine Stadt ein, um das Wetter zu sehen...</div>
+      </div>
+    </div>
+
+    <!-- React + Babel (necesario para NASA) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- JavaScript Files (orden importante) -->
+    <script src="js/matrix-operations.js"></script>
+    <script src="js/jedi.js"></script>
+    <script src="js/weather.js"></script>
+    <script type="text/babel" src="js/nasa.js"></script>
+    <script src="js/main.js"></script>
+  </div>
+</body>
+</html>
