@@ -105,6 +105,24 @@
       </div>
     </div>
 
+        <!-- NEWS SECTION - Agregar esto a tu index.html -->
+      <div id="news-section" style="display: none;">
+        <div class="lightsaber alt"></div>
+        <h2>📡 Rebellion News Network</h2>
+      
+      <div style="text-align: center; margin-bottom: 20px;">
+        <button class="button" id="refresh-news" onclick="loadRebellionNews()">
+          <span style="margin-right: 5px;">🔄</span> Nachrichten aktualisieren
+        </button>
+      </div>
+      
+      <div id="news-output" class="output" style="min-height: 400px; max-width: 1000px; margin: 20px auto;">
+        <div style="text-align: center;">
+          <button class="button" onclick="loadRebellionNews()">Nachrichten laden</button>
+        </div>
+      </div>
+    </div>
+
     <!-- React + Babel (necesario para NASA) -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>

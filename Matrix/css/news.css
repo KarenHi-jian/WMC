@@ -1,0 +1,94 @@
+/* news.css - Estilos específicos para Rebellion News */
+
+/* News container */
+.news-container {
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* News header */
+.news-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.news-header h3 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+/* News card */
+.news-card {
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    background-color: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.news-card h4 {
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    line-height: 1.4;
+}
+
+/* News links */
+.news-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s;
+    margin: 2px;
+}
+
+.news-link:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    text-decoration: none;
+}
+
+/* News info */
+.news-info {
+    color: var(--accent-color);
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+.news-score {
+    color: var(--primary-color);
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+/* News scrollbar personalizado */
+.news-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.news-container::-webkit-scrollbar-track {
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}

@@ -1,4 +1,21 @@
-// main.js
+// main.js - Actualizado con navegación para Rebellion News
+
+// Variables globales
+let A = createMatrix(3, 0);
+let B = createMatrix(3, 0);
+let activeMatrix = B;
+
+// Función para crear matrices
+function createMatrix(size, value) {
+    const matrix = [];
+    for (let i = 0; i < size; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < size; j++) {
+            matrix[i][j] = value;
+        }
+    }
+    return matrix;
+}
 
 // Función para inicializar las matrices
 function initializeMatrices() {
@@ -12,14 +29,16 @@ function initNavigation() {
         'matrix': document.getElementById('matrix-section'),
         'nasa': document.getElementById('nasa-section'),
         'jedi': document.getElementById('jedi-section'),
-        'weather': document.getElementById('weather-section')
+        'weather': document.getElementById('weather-section'),
+        'news': document.getElementById('news-section')  // Nueva sección
     };
 
     const allTabs = {
         'matrix': document.getElementById('matrix-tab'),
         'nasa': document.getElementById('nasa-tab'),
         'jedi': document.getElementById('jedi-tab'),
-        'weather': document.getElementById('weather-tab')
+        'weather': document.getElementById('weather-tab'),
+        'news': document.getElementById('news-tab')  // Nuevo tab
     };
 
     // Función para cambiar secciones
@@ -40,6 +59,11 @@ function initNavigation() {
         }
         if (allTabs[sectionName]) {
             allTabs[sectionName].classList.add('active');
+        }
+        
+        // Cargar contenido específico si es necesario
+        if (sectionName === 'news' && typeof loadRebellionNews === 'function') {
+            loadRebellionNews();
         }
     }
 
