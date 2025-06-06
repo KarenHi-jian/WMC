@@ -3,24 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prueba Final - Matrix Galactic Odyssey</title>
+  <title>Matrix Galactic Odyssey - News API</title>
   
-  <!-- CSS -->
+  <!-- CSS FILES - ORDEN IMPORTANTE -->
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/pruebafinalcss.css" />
+  <!-- ⭐ NUEVO: CSS específico para sección de noticias -->
+  <link rel="stylesheet" href="css/hackers-section.css" />
+  <link rel="stylesheet" href="css/jedi-section-sinAuto.css" />
+  <link rel="stylesheet" href="css/matrix.css" />  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
 </head>
 <body>
   <div class="container">
-    <h1>DIE ODYSSEE DER GALAKTISCHEN BERECHNUNG</h1>
+    <h1>📰 DIE GALAKTISCHE NEWS ODYSSEE</h1>
     <div class="lightsaber"></div>
 
-    <!-- Tabs -->
+    <!-- Navigation -->
     <div class="navigation-tabs">
       <button class="nav-button active" id="matrix-tab">Matrix Voyager</button>
       <button class="nav-button" id="nasa-tab">NASA Daten</button>
       <button class="nav-button" id="jedi-tab">Jedi Weisheit</button>
       <button class="nav-button" id="weather-tab">Wetter</button>
+      <button class="nav-button" id="hackers-tab">📰 Real News API</button>
     </div>
 
     <!-- MATRIX SECTION -->
@@ -85,7 +92,9 @@
       </div>
       <div style="margin-top: 40px; text-align: center;">
         <h3 style="color: var(--primary-color); margin-bottom: 20px;">Zufällige Jedi-Herausforderung</h3>
-        <button class="button" onclick="getJediChallenge()"><span style="margin-right: 5px;">🎯</span> Tägliche Herausforderung</button>
+        <button class="button" onclick="getJediChallenge()">
+          <span style="margin-right: 5px;">🎯</span> Tägliche Herausforderung
+        </button>
         <div id="jedi-challenge" class="output" style="margin-top: 20px; padding: 20px;">
           Klicke für deine heutige Jedi-Herausforderung...
         </div>
@@ -105,35 +114,79 @@
       </div>
     </div>
 
-        <!-- NEWS SECTION - Agregar esto a tu index.html -->
-      <div id="news-section" style="display: none;">
-        <div class="lightsaber alt"></div>
-        <h2>📡 Rebellion News Network</h2>
+    <!-- NEWS SECTION - CON CLASES ESPECÍFICAS -->
+    <div id="hackers-section" style="display: none;">
+      <div class="lightsaber alt"></div>
+      <h2>📰 Real-Time News API Dashboard</h2>
       
-      <div style="text-align: center; margin-bottom: 20px;">
-        <button class="button" id="refresh-news" onclick="loadRebellionNews()">
-          <span style="margin-right: 5px;">🔄</span> Nachrichten aktualisieren
+      <!-- API Status con clases específicas -->
+      <div class="api-status">
+        <h4>🔗 Live API Connection Status</h4>
+        <div style="color: var(--accent-color); font-size: 0.9em;">
+          <strong>Primary API:</strong> jsonplaceholder.typicode.com/posts<br>
+          <strong>Backup:</strong> Local news database<br>
+          <strong>Status:</strong> 
+          <span class="status-indicator status-online"></span>
+          <span style="color: var(--success-color);">Ready</span>
+        </div>
+      </div>
+      
+      <!-- Controles con clases específicas -->
+      <div class="controls-container">
+        <button class="button" onclick="loadVulnerabilities()">
+          🛡️ Security Database
+        </button>
+        <button class="button news-feed" onclick="loadHackerNews()">
+          📰 Real News Feed
+        </button>
+        <button class="button local-news" onclick="loadLocalNews()">
+          📚 Local Backup
+        </button>
+        <button class="button breaches" onclick="checkBreaches()">
+          💀 Data Breaches
         </button>
       </div>
       
-      <div id="news-output" class="output" style="min-height: 400px; max-width: 1000px; margin: 20px auto;">
-        <div style="text-align: center;">
-          <button class="button" onclick="loadRebellionNews()">Nachrichten laden</button>
+      <!-- Containers con mejores estilos -->
+      <div id="vulnerabilities-container" class="output">
+        <div class="loading">
+          🔍 Click <strong>"Security Database"</strong> to load vulnerability data...
         </div>
+      </div>
+      
+      <div id="security-news-container" class="output">
+        <div class="loading">
+          📰 Click <strong>"Real News Feed"</strong> to connect to live API or <strong>"Local Backup"</strong> for offline data...
+        </div>
+      </div>
+      
+      <div id="breaches-container" class="output">
+        <div class="loading">
+          💻 Click <strong>"Data Breaches"</strong> to view historical cybersecurity incidents...
+        </div>
+      </div>
+      
+      <!-- Footer informativo con clases específicas -->
+      <div class="info-footer">
+        <strong>📊 Technical Info:</strong> Real-time data from JSONPlaceholder API • 
+        100% free and reliable • No API key required • 
+        Local backup system included • 
+        <span style="color: var(--success-color);">Production ready</span>
       </div>
     </div>
 
-    <!-- React + Babel (necesario para NASA) -->
+    <!-- Scripts -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- JavaScript Files (orden importante) -->
-    <script src="js/matrix-operations.js"></script>
-    <script src="js/jedi.js"></script>
-    <script src="js/weather.js"></script>
-    <script type="text/babel" src="js/nasa.js"></script>
-    <script src="js/main.js"></script>
+    <!-- JavaScript Files -->
+    <script src="js/matriySinAuto.js"></script>
+    <script src="js/jediSinAuto.js"></script>
+    <script src="js/climaSinAuto.js"></script>
+    <script src="js/hackersSinAuto.js"></script>
+    <script type="text/babel" src="js/nasa-sinAuto.js"></script>
+    <script src="js/mainsinAutomatic.js"></script>
   </div>
 </body>
 </html>

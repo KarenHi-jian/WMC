@@ -1,0 +1,307 @@
+/* ===== JEDI SECTION STYLES - SIN FUNCIONES AUTOMÁTICAS ===== */
+
+/* Sección principal Jedi */
+#jedi-section {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.9) 0%, 
+    rgba(0, 20, 40, 0.8) 50%, 
+    rgba(0, 0, 0, 0.9) 100%);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px 0;
+  border: 2px solid rgba(144, 238, 144, 0.3);
+  box-shadow: 
+    0 0 30px rgba(144, 238, 144, 0.2),
+    inset 0 0 20px rgba(0, 100, 200, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Título de sección Jedi */
+#jedi-section h2 {
+  color: #90EE90;
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  text-shadow: 
+    0 0 10px rgba(144, 238, 144, 0.5),
+    0 0 20px rgba(144, 238, 144, 0.3);
+}
+
+/* ===== SISTEMA DE PESTAÑAS JEDI ===== */
+.jedi-tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(144, 238, 144, 0.3);
+}
+
+.jedi-tab-button {
+  background: linear-gradient(135deg, 
+    rgba(144, 238, 144, 0.1) 0%, 
+    rgba(0, 100, 200, 0.1) 100%);
+  border: 2px solid rgba(144, 238, 144, 0.4);
+  color: #90EE90;
+  padding: 12px 25px;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 10px rgba(144, 238, 144, 0.2);
+}
+
+.jedi-tab-button:hover {
+  background: linear-gradient(135deg, 
+    rgba(144, 238, 144, 0.2) 0%, 
+    rgba(0, 150, 255, 0.2) 100%);
+  border-color: rgba(144, 238, 144, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(144, 238, 144, 0.3);
+}
+
+/* Pestaña activa */
+.jedi-tab-button.active {
+  background: linear-gradient(135deg, 
+    rgba(144, 238, 144, 0.4) 0%, 
+    rgba(0, 200, 255, 0.3) 100%);
+  border-color: #90EE90;
+  color: #FFFFFF;
+  box-shadow: 
+    0 0 20px rgba(144, 238, 144, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 10px rgba(144, 238, 144, 0.8);
+}
+
+.jedi-tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #90EE90, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(144, 238, 144, 0.8);
+}
+
+/* Pestaña Challenge específica */
+.jedi-tab-button.challenge-tab {
+  border-color: rgba(255, 140, 0, 0.4);
+  color: #FFA500;
+}
+
+.jedi-tab-button.challenge-tab:hover {
+  border-color: rgba(255, 140, 0, 0.6);
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.2) 0%, 
+    rgba(255, 69, 0, 0.2) 100%);
+}
+
+.jedi-tab-button.challenge-tab.active {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.4) 0%, 
+    rgba(255, 69, 0, 0.3) 100%);
+  border-color: #FFA500;
+  color: #FFFFFF;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+}
+
+.jedi-tab-button.challenge-tab.active::after {
+  background: linear-gradient(90deg, transparent, #FFA500, transparent);
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+}
+
+/* ===== CONTENIDO DE PESTAÑAS ===== */
+.jedi-content-container {
+  position: relative;
+  min-height: 300px;
+}
+
+.jedi-content-panel {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.jedi-content-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  pointer-events: auto;
+}
+
+/* ===== BOTONES DE ACCIÓN ===== */
+.jedi-action-button {
+  background: linear-gradient(135deg, 
+    rgba(144, 238, 144, 0.2) 0%, 
+    rgba(0, 100, 200, 0.2) 50%, 
+    rgba(144, 238, 144, 0.2) 100%);
+  border: 2px solid rgba(144, 238, 144, 0.6);
+  color: #90EE90;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 
+    0 4px 15px rgba(144, 238, 144, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: block;
+  margin: 0 auto 30px;
+}
+
+.jedi-action-button:hover {
+  background: linear-gradient(135deg, 
+    rgba(144, 238, 144, 0.4) 0%, 
+    rgba(0, 150, 255, 0.3) 50%, 
+    rgba(144, 238, 144, 0.4) 100%);
+  border-color: #90EE90;
+  box-shadow: 
+    0 6px 25px rgba(144, 238, 144, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(144, 238, 144, 0.8);
+}
+
+.jedi-action-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(144, 238, 144, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Botones de desafío */
+#jedi-challenge-panel .jedi-action-button {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.2) 0%, 
+    rgba(255, 69, 0, 0.2) 50%, 
+    rgba(255, 140, 0, 0.2) 100%);
+  border: 2px solid rgba(255, 140, 0, 0.6);
+  color: #FFA500;
+}
+
+#jedi-challenge-panel .jedi-action-button:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.4) 0%, 
+    rgba(255, 69, 0, 0.3) 50%, 
+    rgba(255, 140, 0, 0.4) 100%);
+  border-color: #FFA500;
+  box-shadow: 
+    0 6px 25px rgba(255, 140, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+}
+
+/* ===== CONTENEDORES DE SALIDA ===== */
+
+/* Contenedor de sabiduría Jedi */
+#jedi-output {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(0, 20, 40, 0.6) 50%, 
+    rgba(0, 0, 0, 0.8) 100%);
+  border: 2px solid rgba(144, 238, 144, 0.4);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 20px 0;
+  position: relative;
+  box-shadow: 
+    0 0 20px rgba(144, 238, 144, 0.2),
+    inset 0 0 15px rgba(0, 100, 200, 0.1);
+  overflow: hidden;
+}
+
+/* Contenedor de desafío Jedi */
+#jedi-challenge {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.1) 0%, 
+    rgba(255, 69, 0, 0.1) 50%, 
+    rgba(255, 140, 0, 0.1) 100%);
+  border: 2px solid rgba(255, 140, 0, 0.5);
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 20px;
+  color: #FFA500;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+  box-shadow: 
+    0 0 15px rgba(255, 140, 0, 0.3),
+    inset 0 0 10px rgba(255, 69, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Texto de sabiduría */
+#jedi-output div[style*="font-size: 1.8em"] {
+  font-family: 'Georgia', serif;
+  color: #90EE90 !important;
+  text-shadow: 0 0 15px rgba(144, 238, 144, 0.6);
+  position: relative;
+}
+
+/* Autor de la cita */
+#jedi-output div[style*="color: var(--accent-color)"] {
+  color: #4CAF50 !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+}
+
+/* Emoji */
+#jedi-section span[style*="margin-right"] {
+  display: inline-block;
+  filter: drop-shadow(0 0 5px rgba(144, 238, 144, 0.5));
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #jedi-section {
+    padding: 20px 15px;
+    margin: 15px 0;
+  }
+  
+  #jedi-section h2 {
+    font-size: 1.8em;
+  }
+  
+  .jedi-tabs-container {
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px;
+  }
+  
+  .jedi-tab-button {
+    padding: 10px 20px;
+    font-size: 0.9em;
+  }
+  
+  .jedi-action-button {
+    padding: 12px 20px !important;
+    font-size: 1em !important;
+  }
+  
+  #jedi-output, #jedi-challenge {
+    padding: 20px 15px;
+  }
+}

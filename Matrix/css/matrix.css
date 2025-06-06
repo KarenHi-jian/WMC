@@ -1,8 +1,3 @@
-/* ================================
-   ESTILOS ESPECÍFICOS DE MATRICES
-   ================================ */
-
-/* Contenedor de matrices */
 .matrix-container {
     display: flex;
     justify-content: space-around;
@@ -35,34 +30,49 @@ table.matrix-table {
 
 table.matrix-table td {
     border: 1px solid var(--primary-color);
-    padding: 5px;
+    padding: 2px; /* Reducido de 5px a 2px */
     text-align: center;
-    width: 45px;
-    height: 45px;
+    width: 50px; /* Aumentado de 45px a 50px */
+    height: 50px; /* Aumentado de 45px a 50px */
+    vertical-align: middle; /* Añadido para centrar verticalmente */
 }
 
-/* Inputs de matrices */
+/* Inputs de matrices - CORREGIDO */
 input.matrix-input {
-    width: 35px;
-    height: 35px;
+    width: 44px; /* Aumentado de 35px a 44px */
+    height: 44px; /* Aumentado de 35px a 44px */
     background-color: rgba(0, 20, 40, 0.7);
     color: white;
     border: 1px solid var(--primary-color);
     text-align: center;
     font-size: 16px;
-    -moz-appearance: textfield;
+    font-weight: bold; /* Añadido para mejor visibilidad */
+    border-radius: 3px; /* Añadido para esquinas redondeadas */
+    box-sizing: border-box; /* Añadido para incluir border en el tamaño */
     margin: 0;
+    padding: 0; /* Asegurar que no hay padding interno */
+    -moz-appearance: textfield;
 }
 
+/* Eliminar spinners de números */
 input.matrix-input::-webkit-outer-spin-button,
 input.matrix-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
+/* Efectos focus mejorados */
 input.matrix-input:focus {
     background-color: rgba(0, 191, 255, 0.2);
     box-shadow: 0 0 10px var(--primary-glow);
+    outline: none; /* Remover outline por defecto */
+    border-color: var(--accent-color); /* Cambiar color del borde al enfocar */
+}
+
+/* Hover effect para inputs */
+input.matrix-input:hover {
+    background-color: rgba(0, 191, 255, 0.15);
+    border-color: rgba(0, 191, 255, 0.8);
 }
 
 /* Controles de tamaño de matriz */
@@ -81,12 +91,21 @@ input.matrix-input:focus {
 
 .matrix-size-container input {
     width: 60px;
+    height: 40px; /* Añadido height específico */
     background-color: rgba(0, 20, 40, 0.7);
     color: white;
     border: 1px solid var(--primary-color);
     text-align: center;
     padding: 8px;
     font-size: 16px;
+    border-radius: 3px; /* Añadido */
+    box-sizing: border-box; /* Añadido */
+}
+
+.matrix-size-container input:focus {
+    background-color: rgba(0, 191, 255, 0.2);
+    box-shadow: 0 0 10px var(--primary-glow);
+    outline: none;
 }
 
 /* Botones de control de matrices */
@@ -109,13 +128,55 @@ input.matrix-input:focus {
     font-size: 14px;
 }
 
-/* Animaciones para matrices */
+/* Animaciones para matrices - SIN AUTO */
 @keyframes matrix-highlight {
     0% { background-color: rgba(0, 191, 255, 0.1); }
     50% { background-color: rgba(0, 191, 255, 0.3); }
     100% { background-color: rgba(0, 191, 255, 0.1); }
 }
 
+/* La clase matrix-active solo se aplicará manualmente */
 .matrix-active {
-    animation: matrix-highlight 2s ease-in-out infinite;
+    background-color: rgba(0, 191, 255, 0.2);
+    border-color: var(--accent-color);
+}
+
+/* Responsive design para matrices */
+@media (max-width: 768px) {
+    .matrix-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    table.matrix-table td {
+        width: 45px;
+        height: 45px;
+        padding: 1px;
+    }
+    
+    input.matrix-input {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .matrix-size-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    table.matrix-table td {
+        width: 40px;
+        height: 40px;
+    }
+    
+    input.matrix-input {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
 }

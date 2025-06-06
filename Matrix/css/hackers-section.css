@@ -1,0 +1,466 @@
+/* css/hackers-section.css - ESTILOS ESPECÍFICOS PARA SECCIÓN DE NOTICIAS */
+
+/* ===== VARIABLES ESPECÍFICAS PARA NOTICIAS ===== */
+#hackers-section {
+  --news-critical: #FF0000;
+  --news-high: #FF8C00;
+  --news-medium: #FFD700;
+  --news-low: #32CD32;
+  --news-info: #87CEFA;
+  --news-tech: #00BFFF;
+  --news-health: #32CD32;
+  --news-business: #FFD700;
+  --news-sports: #FF6347;
+  --news-environment: #228B22;
+  --news-general: #87CEFA;
+  --card-bg: rgba(0, 8, 20, 0.95);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --card-hover: rgba(0, 8, 30, 0.98);
+  --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --glow-blue: 0 0 20px rgba(0, 191, 255, 0.4);
+  --glow-red: 0 0 20px rgba(255, 107, 107, 0.4);
+  --glow-green: 0 0 20px rgba(50, 205, 50, 0.4);
+}
+
+/* ===== API STATUS INDICATOR ===== */
+#hackers-section .api-status {
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(0, 191, 255, 0.05));
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+#hackers-section .api-status::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+#hackers-section .api-status h4 {
+  color: var(--primary-color);
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  text-shadow: var(--glow-blue);
+}
+
+/* ===== BOTONES DE CONTROL OPTIMIZADOS ===== */
+#hackers-section .controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+#hackers-section .button {
+  background: linear-gradient(135deg, rgba(0, 0, 20, 0.8), rgba(0, 0, 40, 0.8));
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 14px 28px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-light);
+}
+
+#hackers-section .button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+#hackers-section .button:hover::before {
+  left: 100%;
+}
+
+#hackers-section .button:hover {
+  background: linear-gradient(135deg, var(--primary-color), #0066CC);
+  color: white;
+  box-shadow: var(--glow-blue);
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Colores específicos para cada botón */
+#hackers-section .button.news-feed {
+  border-color: #FF6600;
+  color: #FF6600;
+}
+
+#hackers-section .button.news-feed:hover {
+  background: linear-gradient(135deg, #FF6600, #FF8800);
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+}
+
+#hackers-section .button.local-news {
+  border-color: var(--news-low);
+  color: var(--news-low);
+}
+
+#hackers-section .button.local-news:hover {
+  background: linear-gradient(135deg, var(--news-low), #228B22);
+  box-shadow: var(--glow-green);
+}
+
+#hackers-section .button.breaches {
+  border-color: #FF6B6B;
+  color: #FF6B6B;
+}
+
+#hackers-section .button.breaches:hover {
+  background: linear-gradient(135deg, #FF6B6B, #CC5555);
+  box-shadow: var(--glow-red);
+}
+
+/* ===== GRID CONTAINER OPTIMIZADO ===== */
+#hackers-section .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin: 30px 0;
+  padding: 0;
+}
+
+/* ===== CARDS DE NOTICIAS MEJORADAS ===== */
+#hackers-section .news-card,
+#hackers-section .vuln-card,
+#hackers-section .breach-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+#hackers-section .news-card::before,
+#hackers-section .vuln-card::before,
+#hackers-section .breach-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#hackers-section .news-card:hover,
+#hackers-section .vuln-card:hover,
+#hackers-section .breach-card:hover {
+  background: var(--card-hover);
+  box-shadow: var(--shadow-heavy);
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary-color);
+}
+
+#hackers-section .news-card:hover::before,
+#hackers-section .vuln-card:hover::before,
+#hackers-section .breach-card:hover::before {
+  opacity: 1;
+}
+
+/* ===== TÍTULOS DE CARDS ===== */
+#hackers-section .news-card h4,
+#hackers-section .vuln-card h4,
+#hackers-section .breach-card h4 {
+  color: white;
+  margin: 0 0 15px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.4;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#hackers-section .news-card h5,
+#hackers-section .vuln-card h5 {
+  color: white;
+  margin: 10px 0;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+/* ===== CONTENIDO DE CARDS ===== */
+#hackers-section .news-card p,
+#hackers-section .vuln-card p {
+  color: var(--accent-color);
+  line-height: 1.6;
+  margin: 15px 0;
+  font-size: 0.95em;
+}
+
+/* ===== BADGES Y ETIQUETAS ===== */
+#hackers-section .severity-badge,
+#hackers-section .category-badge,
+#hackers-section .status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+/* Colores específicos para severidades */
+#hackers-section .severity-critical {
+  background: linear-gradient(135deg, var(--news-critical), #CC0000);
+  color: white;
+  box-shadow: var(--glow-red);
+}
+
+#hackers-section .severity-high {
+  background: linear-gradient(135deg, var(--news-high), #CC6600);
+  color: white;
+}
+
+#hackers-section .severity-medium {
+  background: linear-gradient(135deg, var(--news-medium), #CCAA00);
+  color: black;
+}
+
+#hackers-section .severity-low {
+  background: linear-gradient(135deg, var(--news-low), #228B22);
+  color: white;
+}
+
+/* ===== INFORMACIÓN ADICIONAL ===== */
+#hackers-section .card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#hackers-section .card-date {
+  color: #999;
+  font-size: 0.85em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#hackers-section .card-source {
+  color: var(--accent-color);
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+/* ===== ESTADOS DE LOADING ===== */
+#hackers-section .loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  color: var(--primary-color);
+  font-size: 16px;
+  text-align: center;
+  background: rgba(0, 191, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+#hackers-section .loading::before {
+  content: "⏳";
+  font-size: 2em;
+  margin-bottom: 15px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== ESTADOS DE ERROR ===== */
+#hackers-section .error-container {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(200, 0, 0, 0.05));
+  border: 2px solid #FF6B6B;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  color: #FF6B6B;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--glow-red);
+}
+
+#hackers-section .error-container h3 {
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+
+#hackers-section .error-container .button {
+  margin: 10px 5px;
+}
+
+/* ===== HEADERS DE SECCIONES ===== */
+#hackers-section .section-header {
+  text-align: center;
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(0, 191, 255, 0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+#hackers-section .section-header h3 {
+  color: var(--primary-color);
+  margin: 0 0 10px 0;
+  font-size: 1.4em;
+  text-shadow: var(--glow-blue);
+}
+
+#hackers-section .section-subtitle {
+  color: var(--accent-color);
+  font-size: 0.9em;
+  margin: 0;
+}
+
+/* ===== SCROLLBAR PERSONALIZADA ===== */
+#hackers-section .output::-webkit-scrollbar {
+  width: 10px;
+}
+
+#hackers-section .output::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+#hackers-section .output::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#hackers-section .output::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+}
+
+/* ===== FOOTER INFORMATIVO ===== */
+#hackers-section .info-footer {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.85em;
+  color: #999;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+#hackers-section .info-footer strong {
+  color: var(--primary-color);
+}
+
+#hackers-section .status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: pulse-dot 2s infinite;
+}
+
+#hackers-section .status-online {
+  background: var(--news-low);
+  box-shadow: 0 0 10px var(--news-low);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  #hackers-section .grid-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  #hackers-section .controls-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #hackers-section .button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  #hackers-section .news-card,
+  #hackers-section .vuln-card,
+  #hackers-section .breach-card {
+    padding: 20px;
+  }
+  
+  #hackers-section .card-info {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  #hackers-section .api-status {
+    padding: 15px;
+  }
+  
+  #hackers-section .section-header {
+    padding: 15px;
+  }
+  
+  #hackers-section .news-card h4,
+  #hackers-section .vuln-card h4,
+  #hackers-section .breach-card h4 {
+    font-size: 1em;
+  }
+  
+  #hackers-section .button {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}
