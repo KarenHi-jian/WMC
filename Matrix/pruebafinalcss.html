@@ -332,109 +332,144 @@
     </div>
 
     <!-- Scripts -->
+    <!-- Scripts base -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- JavaScript Files -->
+    <!-- JavaScript Files originales -->
     <script src="js/matriySinAuto.js"></script>
     <script src="js/jediSinAuto.js"></script>
     <script src="js/climaSinAuto.js"></script>
     <script src="js/hackersSinAuto.js"></script>
     <script type="text/babel" src="js/nasa-sinAuto.js"></script>
-    <!-- Cytoscape.js para grafos -->
+    
+    <!-- Cytoscape ANTES de los módulos de Dijkstra -->
     <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
-    <script src="js/mainsinAutomatic.js"></script>
-  </div>
-  <!-- SCRIPTS PARA DIJKSTRA - PASO A PASO -->
-<script type="module">
-  // Importar funciones desde los archivos compilados
-  import { 
-    initializeApp, 
-    loadRandomData, 
-    getApp, 
-    isAppReady, 
-    clearApp,
-    selectNodesManually,
-    runDijkstraWithLogging,
-    runDijkstraSilent,
-    resetGraphManual,
-    showGraphStats,
-    clearAlgorithmOutput
-  } from './js/main-sinAuto.js';
-  
-  // Hacer funciones disponibles globalmente para los botones HTML
-  window.initializeApp = initializeApp;
-  window.loadRandomData = loadRandomData;
-  window.getApp = getApp;
-  window.isAppReady = isAppReady;
-  window.clearApp = clearApp;
-  window.selectNodesManually = selectNodesManually;
-  window.runDijkstraWithLogging = runDijkstraWithLogging;
-  window.runDijkstraSilent = runDijkstraSilent;
-  window.resetGraphManual = resetGraphManual;
-  window.showGraphStats = showGraphStats;
-  window.clearAlgorithmOutput = clearAlgorithmOutput;
-  
-  console.log("🚀 Dijkstra Voyager módulos cargados correctamente");
-</script>
 
-<!-- ACTUALIZAR FUNCIÓN DE NAVEGACIÓN -->
-<script>
-  // Actualizar la función showSection existente para incluir algorithm-section
-  const originalShowSection = window.showSection;
-  
-  window.showSection = function(sectionId) {
-    // Llamar la función original si existe
-    if (originalShowSection) {
-      originalShowSection(sectionId);
-    } else {
-      // Función básica si no existe
-      // Ocultar todas las secciones
-      const sections = ['matrix-section', 'nasa-section', 'jedi-section', 'weather-section', 'hackers-section', 'algorithm-section'];
-      sections.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.style.display = 'none';
+    <!-- DIJKSTRA: Importar módulos y hacer funciones globales -->
+    <script type="module">
+      console.log("🔧 Iniciando carga de módulos Dijkstra...");
+      
+      try {
+        // Verificar que Cytoscape está disponible
+        if (typeof cytoscape === 'undefined') {
+          throw new Error('Cytoscape no está cargado');
+        }
+        console.log("✅ Cytoscape disponible");
+        
+        // Importar funciones desde los archivos compilados
+        const { 
+          initializeApp, 
+          loadRandomData, 
+          getApp, 
+          isAppReady, 
+          clearApp,
+          selectNodesManually,
+          runDijkstraWithLogging,
+          runDijkstraSilent,
+          resetGraphManual,
+          showGraphStats,
+          clearAlgorithmOutput
+        } = await import('./js/main-sinAuto.js');
+        
+        // Hacer funciones disponibles globalmente
+        window.initializeApp = initializeApp;
+        window.loadRandomData = loadRandomData;
+        window.getApp = getApp;
+        window.isAppReady = isAppReady;
+        window.clearApp = clearApp;
+        window.selectNodesManually = selectNodesManually;
+        window.runDijkstraWithLogging = runDijkstraWithLogging;
+        window.runDijkstraSilent = runDijkstraSilent;
+        window.resetGraphManual = resetGraphManual;
+        window.showGraphStats = showGraphStats;
+        window.clearAlgorithmOutput = clearAlgorithmOutput;
+        
+        console.log("🚀 Dijkstra Voyager módulos cargados correctamente");
+        console.log("✅ Funciones disponibles:", {
+          initializeApp: typeof window.initializeApp,
+          loadRandomData: typeof window.loadRandomData,
+          selectNodesManually: typeof window.selectNodesManually,
+          runDijkstraWithLogging: typeof window.runDijkstraWithLogging
+        });
+        
+      } catch (error) {
+        console.error("❌ Error cargando módulos Dijkstra:", error);
+        console.log("📝 Verifica que los archivos js/app.js, js/dijkstra-sinAuto.js y js/main-sinAuto.js existen");
+      }
+    </script>
+
+    <!-- NAVEGACIÓN: Función showSection actualizada -->
+    <script>
+      console.log("🔧 Configurando navegación...");
+      
+      // Guardar función original si existe
+      const originalShowSection = window.showSection;
+      
+      window.showSection = function(sectionId) {
+        console.log(`🔀 Cambiando a sección: ${sectionId}`);
+        
+        // Llamar función original si existe
+        if (originalShowSection) {
+          originalShowSection(sectionId);
+        } else {
+          // Función básica de navegación
+          const sections = ['matrix-section', 'nasa-section', 'jedi-section', 'weather-section', 'hackers-section', 'algorithm-section'];
+          
+          // Ocultar todas las secciones
+          sections.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+              element.style.display = 'none';
+            }
+          });
+          
+          // Quitar active de todos los botones
+          const navButtons = document.querySelectorAll('.nav-button');
+          navButtons.forEach(btn => btn.classList.remove('active'));
+        }
+        
+        // Mostrar la sección seleccionada
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          targetSection.style.display = 'block';
+          console.log(`✅ Sección ${sectionId} mostrada`);
+        } else {
+          console.warn(`⚠️ Sección ${sectionId} no encontrada`);
+        }
+        
+        // Activar el botón correspondiente
+        const buttonMap = {
+          'matrix-section': 'matrix-tab',
+          'nasa-section': 'nasa-tab', 
+          'jedi-section': 'jedi-tab',
+          'weather-section': 'weather-tab',
+          'hackers-section': 'hackers-tab',
+          'algorithm-section': 'algorithm-tab'
+        };
+        
+        const targetButton = document.getElementById(buttonMap[sectionId]);
+        if (targetButton) {
+          targetButton.classList.add('active');
+        }
+      };
+      
+      // Event listener para el botón de Dijkstra
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("🔧 DOM cargado, configurando eventos...");
+        
+        const algorithmTab = document.getElementById('algorithm-tab');
+        if (algorithmTab) {
+          algorithmTab.addEventListener('click', function() {
+            window.showSection('algorithm-section');
+          });
+          console.log("✅ Event listener para Dijkstra configurado");
+        } else {
+          console.warn("⚠️ Botón algorithm-tab no encontrado");
         }
       });
-      
-      // Quitar active de todos los botones
-      const navButtons = document.querySelectorAll('.nav-button');
-      navButtons.forEach(btn => btn.classList.remove('active'));
-    }
-    
-    // Mostrar la sección seleccionada
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-      targetSection.style.display = 'block';
-    }
-    
-    // Activar el botón correspondiente
-    const buttonMap = {
-      'matrix-section': 'matrix-tab',
-      'nasa-section': 'nasa-tab', 
-      'jedi-section': 'jedi-tab',
-      'weather-section': 'weather-tab',
-      'hackers-section': 'hackers-tab',
-      'algorithm-section': 'algorithm-tab'
-    };
-    
-    const targetButton = document.getElementById(buttonMap[sectionId]);
-    if (targetButton) {
-      targetButton.classList.add('active');
-    }
-  };
-  
-  // Agregar event listener para el botón de algoritmo
-  document.addEventListener('DOMContentLoaded', function() {
-    const algorithmTab = document.getElementById('algorithm-tab');
-    if (algorithmTab) {
-      algorithmTab.addEventListener('click', function() {
-        window.showSection('algorithm-section');
-      });
-    }
-  });
-</script>
+    </script>
+  </div>
 </body>
 </html>
