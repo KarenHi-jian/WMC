@@ -1,0 +1,370 @@
+/* ===== DIJKSTRA ALGORITHM SECTION STYLES ===== */
+
+#algorithm-section {
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/* Paneles principales */
+.control-panel, 
+.algorithm-panel, 
+.node-selection, 
+.graph-panel, 
+.output-panel,
+.help-panel {
+  background: linear-gradient(135deg, 
+    rgba(0, 20, 40, 0.8) 0%, 
+    rgba(0, 40, 80, 0.6) 50%, 
+    rgba(0, 20, 40, 0.8) 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 
+    0 0 20px rgba(0, 191, 255, 0.3),
+    inset 0 0 20px rgba(0, 100, 200, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo sutil en los paneles */
+.control-panel::before, 
+.algorithm-panel::before, 
+.node-selection::before,
+.graph-panel::before,
+.output-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(144, 238, 144, 0.1), 
+    transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.control-panel:hover::before, 
+.algorithm-panel:hover::before, 
+.node-selection:hover::before,
+.graph-panel:hover::before,
+.output-panel:hover::before {
+  left: 100%;
+}
+
+/* Títulos de paneles */
+.control-panel h3, 
+.algorithm-panel h3, 
+.node-selection h3,
+.graph-panel h3,
+.output-panel h3,
+.help-panel h3 {
+  color: var(--accent-color);
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
+}
+
+/* Filas de botones */
+.buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.buttons-row .button {
+  flex: 1;
+  min-width: 180px;
+  max-width: 250px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Botones específicos de Dijkstra */
+.dijkstra-button {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.3) 0%, 
+    rgba(255, 69, 0, 0.3) 50%, 
+    rgba(255, 140, 0, 0.3) 100%);
+  border: 2px solid rgba(255, 140, 0, 0.6);
+  color: #FFA500;
+}
+
+.dijkstra-button:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.5) 0%, 
+    rgba(255, 69, 0, 0.5) 50%, 
+    rgba(255, 140, 0, 0.5) 100%);
+  border-color: #FFA500;
+  box-shadow: 
+    0 6px 25px rgba(255, 140, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+}
+
+/* Display de estado */
+.status-display {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(0, 20, 40, 0.8) 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 15px;
+  box-shadow: 
+    inset 0 0 15px rgba(0, 191, 255, 0.2),
+    0 0 10px rgba(0, 191, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Selección de nodos */
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-group label {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.input-row input {
+  background: linear-gradient(135deg, 
+    rgba(0, 20, 40, 0.9) 0%, 
+    rgba(0, 40, 80, 0.9) 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 120px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.1);
+}
+
+.input-row input:focus {
+  background: linear-gradient(135deg, 
+    rgba(0, 191, 255, 0.2) 0%, 
+    rgba(0, 100, 255, 0.2) 100%);
+  border-color: var(--accent-color);
+  box-shadow: 
+    0 0 15px rgba(0, 191, 255, 0.5),
+    inset 0 0 15px rgba(0, 191, 255, 0.2);
+  outline: none;
+  transform: scale(1.05);
+}
+
+.input-row input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+/* Contenedor del grafo */
+#graph-container {
+  border: 3px solid var(--primary-color);
+  border-radius: 12px;
+  box-shadow: 
+    0 0 20px rgba(0, 191, 255, 0.4),
+    inset 0 0 20px rgba(0, 100, 200, 0.2);
+  transition: all 0.3s ease;
+}
+
+#graph-container:hover {
+  box-shadow: 
+    0 0 30px rgba(0, 191, 255, 0.6),
+    inset 0 0 25px rgba(0, 100, 200, 0.3);
+}
+
+/* Output del algoritmo */
+#algorithm-output {
+  background: linear-gradient(135deg, 
+    rgba(0, 0, 0, 0.9) 0%, 
+    rgba(0, 20, 40, 0.8) 50%, 
+    rgba(0, 0, 0, 0.9) 100%);
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 25px;
+  color: #87CEFA;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  max-height: 350px;
+  overflow-y: auto;
+  box-shadow: 
+    0 0 20px rgba(0, 191, 255, 0.3),
+    inset 0 0 25px rgba(0, 100, 200, 0.2);
+  margin-top: 15px;
+  position: relative;
+}
+
+#algorithm-output::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    rgba(0, 191, 255, 0.3), 
+    rgba(135, 206, 250, 0.3), 
+    rgba(0, 191, 255, 0.3));
+  border-radius: 12px;
+  z-index: -1;
+}
+
+/* Scrollbar personalizada para el output */
+#algorithm-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+#algorithm-output::-webkit-scrollbar-track {
+  background: rgba(0, 20, 40, 0.5);
+  border-radius: 4px;
+}
+
+#algorithm-output::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+#algorithm-output::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Panel de ayuda */
+.help-panel {
+  border-color: rgba(144, 238, 144, 0.5);
+  background: linear-gradient(135deg, 
+    rgba(0, 40, 0, 0.3) 0%, 
+    rgba(0, 60, 20, 0.3) 50%, 
+    rgba(0, 40, 0, 0.3) 100%);
+}
+
+.help-panel h3 {
+  color: #90EE90;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #algorithm-section {
+    padding: 15px 10px;
+  }
+  
+  .control-panel, 
+  .algorithm-panel, 
+  .node-selection,
+  .graph-panel,
+  .output-panel,
+  .help-panel {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .buttons-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .buttons-row .button {
+    min-width: auto;
+    max-width: none;
+  }
+  
+  .input-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input-group {
+    width: 100%;
+  }
+  
+  .input-row input {
+    min-width: auto;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  #graph-container {
+    height: 300px !important;
+  }
+  
+  #algorithm-output {
+    font-size: 12px;
+    max-height: 250px;
+    padding: 15px;
+  }
+}
+
+/* Animaciones para efectos visuales */
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(0, 191, 255, 0.6);
+  }
+}
+
+.status-display.active {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Efectos hover para paneles */
+.control-panel:hover, 
+.algorithm-panel:hover, 
+.node-selection:hover,
+.graph-panel:hover,
+.output-panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 30px rgba(0, 191, 255, 0.4),
+    inset 0 0 25px rgba(0, 100, 200, 0.15);
+}
+
+/* Estilo para el botón de navegación */
+#algorithm-tab {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.3) 0%, 
+    rgba(255, 69, 0, 0.3) 100%);
+  border-color: rgba(255, 140, 0, 0.6);
+  color: #FFA500;
+}
+
+#algorithm-tab.active {
+  background: linear-gradient(135deg, 
+    rgba(255, 140, 0, 0.6) 0%, 
+    rgba(255, 69, 0, 0.6) 100%);
+  border-color: #FFA500;
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+}

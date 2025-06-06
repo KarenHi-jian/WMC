@@ -1,243 +1,194 @@
-// matriySinAuto.js - Operaciones de matrices SIN AUTOMATIC FUNCTIONS
+//1.APPLICATION STATE OBJECT
+// (Sin estado automático)
 
-// Función para crear una matriz de tamaño n×n
-function createMatrix(n, fillValue) {
-    if (fillValue === undefined) {
-        fillValue = 0;
-    }
-    
-    const matrix = [];
-    for (let i = 0; i < n; i++) {
-        const row = [];
-        for (let j = 0; j < n; j++) {
-            row.push(fillValue);
-        }
-        matrix.push(row);
-    }
-    return matrix;
-}
+//2.DOM Node Refs
+const btn_clear_1 = document.getElementById("btn_clear_1");
+const btn_clear_2 = document.getElementById("btn_clear_2");
+const btn_validate_1 = document.getElementById("btn_validate_1");
+const btn_validate_2 = document.getElementById("btn_validate_2");
+const btn_calculate = document.getElementById("btn_calculate");
+const matrix_1 = document.getElementById("matrix_1");
+const matrix_2 = document.getElementById("matrix_2");
+const toastLiveExample = document.getElementById("liveToast");
+const toast_body = document.getElementById("toast_body");
+const output = document.getElementById("output");
 
-// Función para crear matriz editable en el DOM
-function createEditableMatrix(matrix, elementId, matrixNumber) {
-    const container = document.getElementById(elementId);
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    const table = document.createElement('table');
-    
-    for (let i = 0; i < matrix.length; i++) {
-        const row = document.createElement('tr');
-        
-        for (let j = 0; j < matrix[i].length; j++) {
-            const cell = document.createElement('td');
-            const input = document.createElement('input');
-            input.type = 'number';
-            input.min = '0';
-            input.className = 'matrix-input';
-            input.value = matrix[i][j];
-            input.dataset.row = i;
-            input.dataset.col = j;
-            input.dataset.matrix = matrixNumber;
-            
-            // Event listener para actualizar la matriz
-            input.addEventListener('input', function(e) {
-                updateMatrixValue(this);
-            });
-            
-            // Seleccionar todo el texto al hacer clic
-            input.addEventListener('focus', function() {
-                this.select();
-            });
-            
-            cell.appendChild(input);
-            row.appendChild(cell);
-        }
-        
-        table.appendChild(row);
-    }
-    
-    container.appendChild(table);
-}
+//3.DOM Node Creation Fn's
+// (Sin funciones de creación automática)
 
-// Función para actualizar valores de matriz
-function updateMatrixValue(input) {
-    const row = parseInt(input.dataset.row);
-    const col = parseInt(input.dataset.col);
-    const matrixNum = parseInt(input.dataset.matrix);
-    let value = parseInt(input.value);
-    
-    if (isNaN(value)) {
-        value = 0;
-        input.value = "0";
-    }
-    
-    if (matrixNum === 1) {
-        if (window.A_matrix) {
-            window.A_matrix[row][col] = value;
+//4.RENDER FN
+// (Sin render automático)
+
+//5.EVENT HANDLERS - CONVERTIDOS A FUNCIONES MANUALES
+function showToast({ msg, error }) {
+    // Solo verifica si bootstrap está disponible
+    if (typeof bootstrap !== 'undefined' && toastLiveExample && toast_body) {
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(
+            toastLiveExample,
+        );
+        toastLiveExample.classList.remove("bg-danger");
+        toastLiveExample.classList.add("bg-success");
+        toastBootstrap.show();
+        toast_body.textContent = msg;
+        if (error) {
+            toastLiveExample.classList.add("bg-danger");
+            toastLiveExample.classList.remove("bg-success");
         }
     } else {
-        if (window.B_matrix) {
-            window.B_matrix[row][col] = value;
+        // Fallback si no hay bootstrap o elementos
+        if (error) {
+            alert("Error: " + msg);
+        } else {
+            alert("Info: " + msg);
         }
     }
 }
 
-// Función para imprimir matrices
-function printAdj(matrix) {
-    let result = '';
-    for (let z = 0; z < matrix.length; z++) {
-        result += `Zeile ${z}: `;
-        for (let i = 0; i < matrix[z].length; i++) {
-            result += matrix[z][i];
-            if (i < matrix[z].length - 1) {
-                result += " ";
-            }
-        }
-        result += "\n";
-    }
-    return result;
+function matrix_toString(matrix) {
+    return `  [\n${
+        matrix.map((line) => `[${line.join(", ")}]`).join(",\n")
+    }\n  ]`;
 }
 
-// Función de multiplicación de matrices
-function multiply(m_A, m_B) {
-    const n = m_A.length;
-    const rv = createMatrix(n, 0);
-    
-    for (let z = 0; z < n; z++) {
-        for (let s = 0; s < n; s++) {
-            let wert = 0;
-            for (let i = 0; i < n; i++) {
-                wert += m_A[z][i] * m_B[i][s];
-            }
-            rv[z][s] = wert;
-        }
+function validateMatrix(elt) {
+    if (!elt || !elt.value) {
+        showToast({ msg: "No matrix data to validate.", error: true });
+        return false;
     }
     
-    return rv;
-}
-
-// Algoritmo de Dijkstra simple
-function dijkstraSimple(matrix, start) {
-    const n = matrix.length;
-    const distances = [];
-    const visited = [];
-    
-    for (let i = 0; i < n; i++) {
-        distances.push(Infinity);
-        visited.push(false);
-    }
-    
-    distances[start] = 0;
-    
-    for (let count = 0; count < n; count++) {
-        let minDist = Infinity;
-        let current = -1;
-        
-        for (let i = 0; i < n; i++) {
-            if (!visited[i] && distances[i] < minDist) {
-                minDist = distances[i];
-                current = i;
-            }
+    let matrix = elt.value;
+    try {
+        matrix = JSON.parse(matrix);
+        if (!Array.isArray(matrix)) {
+            throw new Error("Matrix is not an array.");
         }
-        
-        if (current === -1) break;
-        
-        visited[current] = true;
-        
-        for (let neighbor = 0; neighbor < n; neighbor++) {
-            if (matrix[current][neighbor] > 0 && !visited[neighbor]) {
-                const newDist = distances[current] + 1;
-                
-                if (newDist < distances[neighbor]) {
-                    distances[neighbor] = newDist;
+        for (let i = 0; i < matrix.length; i++) {
+            if (!Array.isArray(matrix[i])) {
+                throw new Error(`Line ${i} is not an array.`);
+            }
+            for (let j = 0; j < matrix[i].length; j++) {
+                if (typeof matrix[i][j] !== "number") {
+                    throw new Error(`Line ${i}, column ${j} is not a number.`);
                 }
             }
         }
+        showToast({ msg: "Matrix is valid." });
+        return true;
+    } catch (error) {
+        showToast({ msg: error.message, error: true });
+        return false;
     }
-    
-    return distances;
 }
 
-// Función para calcular todas las distancias
-function calculateDistances(matrix) {
-    const n = matrix.length;
-    const allDistances = createMatrix(n, Infinity);
-    
-    for (let i = 0; i < n; i++) {
-        allDistances[i] = dijkstraSimple(matrix, i);
-    }
-    
-    return allDistances;
-}
-
-// Función para calcular excentricidad
-function calculateEccentricity(distances) {
-    const n = distances.length;
-    const eccentricity = [];
-    
-    for (let i = 0; i < n; i++) {
-        let maxDist = 0;
-        for (let j = 0; j < n; j++) {
-            if (distances[i][j] !== Infinity && distances[i][j] > maxDist) {
-                maxDist = distances[i][j];
-            }
-        }
-        eccentricity.push(maxDist);
-    }
-    
-    return eccentricity;
-}
-
-// Función para calcular el radio
-function calculateRadius(eccentricity) {
-    let minEccentricity = Infinity;
-    
-    for (let i = 0; i < eccentricity.length; i++) {
-        if (eccentricity[i] > 0 && eccentricity[i] < minEccentricity) {
-            minEccentricity = eccentricity[i];
-        }
-    }
-    
-    return minEccentricity === Infinity ? 0 : minEccentricity;
-}
-
-// Función principal para realizar todos los cálculos
-function performMatrixCalculations() {
-    const outputDiv = document.getElementById('output');
-    
+function multiply() {
     try {
-        const matrix = window.activeMatrix;
-        if (!matrix) {
-            outputDiv.textContent = 'Fehler: Keine aktive Matrix ausgewählt.';
+        // Validar antes de calcular
+        if (!matrix_1.value || !matrix_2.value) {
+            showToast({ msg: "Please enter both matrices.", error: true });
             return;
         }
         
-        const squared = multiply(matrix, matrix);
-        const cubed = multiply(squared, matrix);
-        const distances = calculateDistances(matrix);
-        const eccentricity = calculateEccentricity(distances);
-        const radius = calculateRadius(eccentricity);
+        const matrix1 = JSON.parse(matrix_1.value);
+        const matrix2 = JSON.parse(matrix_2.value);
         
-        let results = `>>> MATRIX VOYAGER INITIALISIERT <<<\n\n`;
-        results += `Adjazenzmatrix:\n${printAdj(matrix)}\n`;
-        results += `\nQuadrat (Hyperraumsprung 2):\n${printAdj(squared)}\n`;
-        results += `\nKubik (Hyperraumsprung 3):\n${printAdj(cubed)}\n`;
-        results += `\nDistanzmatrix (Rebellenrouten):\n${printAdj(distances)}\n`;
-        results += `\nExzentrizität (Machtbalance):\n`;
+        // Verificar que las matrices sean válidas
+        if (!Array.isArray(matrix1) || !Array.isArray(matrix2)) {
+            showToast({ msg: "Invalid matrix format.", error: true });
+            return;
+        }
         
-        for (let i = 0; i < eccentricity.length; i++) {
-            results += eccentricity[i];
-            if (i < eccentricity.length - 1) {
-                results += ", ";
+        // Verificar que las matrices sean cuadradas y del mismo tamaño
+        const n1 = matrix1.length;
+        const n2 = matrix2.length;
+        
+        if (n1 !== n2) {
+            showToast({ msg: "Matrices must be the same size.", error: true });
+            return;
+        }
+        
+        if (matrix1[0].length !== n1 || matrix2[0].length !== n2) {
+            showToast({ msg: "Matrices must be square.", error: true });
+            return;
+        }
+        
+        const n = matrix1.length;
+        const rv = Array(n).fill().map(() => Array(n).fill(0));
+        
+        for (let z = 0; z < n; z++) {
+            for (let s = 0; s < n; s++) {
+                for (let i = 0; i < n; i++) {
+                    rv[z][s] += matrix1[z][i] * matrix2[i][s];
+                }
             }
         }
-        results += `\n`;
-        results += `\nRadius des Graphen (Galaktischer Kern): ${radius}\n`;
-        results += `\n>>> CODEX PRIME ÜBERTRAGUNG BEENDET <<<`;
         
-        outputDiv.textContent = results;
+        output.textContent = matrix_toString(rv);
+        showToast({ msg: "Matrix multiplication completed successfully!" });
+        
     } catch (error) {
-        outputDiv.textContent = `Berechnungsfehler: ${error.message}`;
+        showToast({ msg: "Error in calculation: " + error.message, error: true });
     }
 }
+
+// ✅ FUNCIONES MANUALES - Solo se ejecutan al hacer clic
+function clearMatrix1() {
+    if (matrix_1) {
+        matrix_1.value = "";
+        showToast({ msg: "Matrix 1 cleared." });
+    }
+}
+
+function clearMatrix2() {
+    if (matrix_2) {
+        matrix_2.value = "";
+        showToast({ msg: "Matrix 2 cleared." });
+    }
+}
+
+function validateMatrix1() {
+    validateMatrix(matrix_1);
+}
+
+function validateMatrix2() {
+    validateMatrix(matrix_2);
+}
+
+function calculateMatrix() {
+    multiply();
+}
+
+function clearOutput() {
+    if (output) {
+        output.textContent = "MATRIX VOYAGER wartet auf Befehle...";
+        showToast({ msg: "Output cleared." });
+    }
+}
+
+// ✅ FUNCIÓN PARA LLENAR MATRICES DE EJEMPLO
+function loadExampleMatrices() {
+    const example1 = [[1, 0, 1], [0, 1, 0], [1, 0, 1]];
+    const example2 = [[0, 1, 0], [1, 0, 1], [0, 1, 0]];
+    
+    if (matrix_1 && matrix_2) {
+        matrix_1.value = JSON.stringify(example1);
+        matrix_2.value = JSON.stringify(example2);
+        showToast({ msg: "Example matrices loaded!" });
+    }
+}
+
+//6.INIT BINDINGS - ❌ REMOVIDO: Sin event listeners automáticos
+// ANTES (automático):
+// btn_clear_1.addEventListener("click", () => { matrix_1.value = ""; });
+// btn_clear_2.addEventListener("click", () => { matrix_2.value = ""; });
+// btn_validate_1.addEventListener("click", () => { validateMatrix(matrix_1); });
+// btn_validate_2.addEventListener("click", () => { validateMatrix(matrix_2); });
+// btn_calculate.addEventListener("click", multiply);
+
+// DESPUÉS (manual): Se usan funciones onclick directamente en HTML
+
+//7.INITIAL RENDER - ❌ REMOVIDO: Sin inicialización automática
+// ANTES (automático):
+// matrix_2.value = "";
+// matrix_1.value = "";
+
+// DESPUÉS (manual): El usuario decide qué hacer
