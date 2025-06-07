@@ -51,61 +51,6 @@ function getMatrixSize() {
     return 3; // Valor por defecto
 }
 
-function generateRandomMatrix(size) {
-    const matrix = createMatrix(size, size);
-    
-    // Generar matriz aleatoria con probabilidad de conexión del 40%
-    for (let i = 0; i < size; i++) {
-        for (let j = 0; j < size; j++) {
-            if (i !== j && Math.random() < 0.4) {
-                matrix[i][j] = 1;
-            }
-        }
-    }
-    
-    return matrix;
-}
-
-function generateCircularMatrix(size) {
-    const matrix = createMatrix(size, size);
-    
-    // Crear un grafo circular donde cada nodo se conecta al siguiente
-    for (let i = 0; i < size; i++) {
-        const next = (i + 1) % size;
-        matrix[i][next] = 1;
-        matrix[next][i] = 1; // Hacer simétrico
-        
-        // Agregar algunas conexiones adicionales para hacer más interesante
-        if (size > 4) {
-            const skip = (i + 2) % size;
-            if (Math.random() < 0.5) {
-                matrix[i][skip] = 1;
-                matrix[skip][i] = 1;
-            }
-        }
-    }
-    
-    return matrix;
-}
-
-function generateBipartiteMatrix(size) {
-    const matrix = createMatrix(size, size);
-    
-    // Crear patrón bipartito donde nodos pares se conectan a impares
-    for (let i = 0; i < size; i++) {
-        for (let j = 0; j < size; j++) {
-            if (i !== j) {
-                // Conectar si uno es par y el otro impar
-                if ((i % 2 === 0 && j % 2 === 1) || (i % 2 === 1 && j % 2 === 0)) {
-                    matrix[i][j] = 1;
-                }
-            }
-        }
-    }
-    
-    return matrix;
-}
-
 function matrixToString(matrix) {
     let result = "[";
     for (let i = 0; i < matrix.length; i++) {
@@ -219,78 +164,7 @@ function validateMatrix(matrixElement, matrixName) {
     }
 }
 
-// FUNCIONES DE CARGA DE EJEMPLOS DINÁMICAS
-function loadExampleMatrices() {
-    try {
-        const size = getMatrixSize();
-        console.log(`Generando matrices de ejemplo de tamaño ${size}x${size}`);
-        
-        const matrix1 = generateCircularMatrix(size);
-        const matrix2 = generateBipartiteMatrix(size);
-        
-        if (matrix_1) {
-            matrix_1.value = matrixToString(matrix1);
-            console.log("Matrix 1 cargada con Example");
-        } else {
-            console.log("ERROR: matrix_1 no encontrado en loadExampleMatrices");
-        }
-        
-        if (matrix_2) {
-            matrix_2.value = matrixToString(matrix2);
-            console.log("Matrix 2 cargada con Example");
-        } else {
-            console.log("ERROR: matrix_2 no encontrado en loadExampleMatrices");
-        }
-        
-        showToast({ msg: `Beispiel-Matrizen ${size}x${size} geladen! 📝`, error: false });
-        console.log("Example Matrices loaded successfully!");
-        
-    } catch (error) {
-        console.log("ERROR en loadExampleMatrices:", error.message);
-        showToast({ msg: "Error al cargar ejemplos: " + error.message, error: true });
-    }
-}
-
-function loadGraphExamples() {
-    try {
-        const size = getMatrixSize();
-        console.log(`Generando graph prototypes de tamaño ${size}x${size}`);
-        
-        const matrix1 = generateRandomMatrix(size);
-        const matrix2 = generateRandomMatrix(size);
-        
-        // Asegurar que las matrices estén conectadas agregando un ciclo básico
-        for (let i = 0; i < size; i++) {
-            const next = (i + 1) % size;
-            matrix1[i][next] = 1;
-            matrix1[next][i] = 1;
-            matrix2[i][next] = 1;
-            matrix2[next][i] = 1;
-        }
-        
-        if (matrix_1) {
-            matrix_1.value = matrixToString(matrix1);
-            console.log("Matrix 1 cargada con Graph Prototype");
-        } else {
-            console.log("ERROR: matrix_1 no encontrado");
-        }
-        
-        if (matrix_2) {
-            matrix_2.value = matrixToString(matrix2);
-            console.log("Matrix 2 cargada con Graph Prototype");
-        } else {
-            console.log("ERROR: matrix_2 no encontrado");
-        }
-        
-        showToast({ msg: `Graph-Prototypen ${size}x${size} geladen! 🌐`, error: false });
-        console.log("Graph Examples loaded successfully!");
-        
-    } catch (error) {
-        console.log("ERROR en loadGraphExamples:", error.message);
-        showToast({ msg: "Error al cargar Graph Prototypen: " + error.message, error: true });
-    }
-}
-
+// FUNCIÓN DE CARGA DE HYPERRAUM DEMO
 function loadHyperraumDemo() {
     try {
         const size = getMatrixSize();

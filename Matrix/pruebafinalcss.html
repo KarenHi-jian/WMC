@@ -29,7 +29,7 @@
       <button class="nav-button" id="jedi-tab">Jedi Weisheit</button>
       <button class="nav-button" id="weather-tab">Wetter</button>
       <button class="nav-button" id="hackers-tab">📰 Real News API</button>
-      <button class="nav-button" id="algorithm-tab">🚀 Dijkstra</button>
+      
     </div>
 
     <!-- MATRIX SECTION - CON TÍTULOS CREATIVOS -->
@@ -37,7 +37,6 @@
       <div class="matrix-size-container">
         <label for="matrix-size">🎛️ Matrix Dimension:</label>
         <input type="number" id="matrix-size" min="2" max="10" value="3" />
-        <button class="button" onclick="loadExampleMatrices()">📝 Beispiel Patterns</button>
         <button class="button" onclick="loadGraphExamples()">🌐 Graph Prototypen</button>
         <button class="button" onclick="loadHyperraumDemo()">🚀 HYPERRAUM DEMO</button>
       </div>
@@ -239,141 +238,22 @@
         <span class="production-ready">Production ready</span>
       </div>
     </div>
+    <h4 style="color: var(--primary-color); margin: 20px 0 10px 0;">🔍 NETZWERK INTELLIGENCE</h4>
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+      <button class="button" onclick="analyzeMatrix1()">📊 M1 GRAPH SCANNER</button>
+      <button class="button" onclick="analyzeMatrix2()">📊 M2 GRAPH SCANNER</button>
+  <!-- AGREGA ESTA LÍNEA AQUÍ -->
+      <button class="button" onclick="initializeApp()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+         🚀 DIJKSTRA VOYAGER
+     </button>
+  </div>
 
-    <!-- DIJKSTRA SECTION -->
-    <div id="algorithm-section" style="display: none;">
-      <div class="lightsaber alt"></div>
-      <h2>🚀 DIJKSTRA VOYAGER - Galaktische Pfadfindung</h2>
-      
-      <div class="control-panel">
-        <h3>🔧 Anwendungssteuerung</h3>
-        <div class="buttons-row">
-          <button class="button" onclick="initializeApp()">
-            <span>🔧</span> App initialisieren
-          </button>
-          <button class="button" onclick="loadRandomData()">
-            <span>🎲</span> Zufällige Daten
-          </button>
-          <button class="button" onclick="clearApp()">
-            <span>🗑️</span> App löschen
-          </button>
-        </div>
-        
-        <div class="status-display" id="app-status">
-          App-Status: Nicht initialisiert ❌
-        </div>
-      </div>
-      
-      <div class="graph-panel">
-        <h3>📊 Visualisierung</h3>
-        <div id="graph-container" class="graph-container">
-          <div class="graph-placeholder">
-            Klicken Sie auf "App initialisieren" um zu beginnen
-          </div>
-        </div>
-        
-        <div class="graph-controls">
-          <button class="button" onclick="showGraphStats()">
-            <span>📈</span> Graph-Statistiken
-          </button>
-          <button class="button" onclick="resetGraphManual()">
-            <span>🔄</span> Graph zurücksetzen
-          </button>
-        </div>
-      </div>
-      
-      <div class="node-selection">
-        <h3>🎯 Knotenauswahl für Dijkstra</h3>
-        <div class="input-row">
-          <div class="input-group">
-            <label for="start-node">Start-Knoten:</label>
-            <input type="text" id="start-node" placeholder="node1" />
-          </div>
-          
-          <div class="input-group">
-            <label for="end-node">Ziel-Knoten:</label>
-            <input type="text" id="end-node" placeholder="node3" />
-          </div>
-        </div>
-        
-        <div class="node-selection-button">
-          <button class="button" onclick="selectNodesManually()">
-            <span>🎯</span> Knoten auswählen
-          </button>
-        </div>
-        
-        <div class="node-tip">
-          💡 Tipp: Verwenden Sie die Graph-Statistiken um verfügbare Knoten zu sehen
-        </div>
-      </div>
-      
-      <div class="algorithm-panel">
-        <h3>⚡ Dijkstra Algorithmus</h3>
-        <div class="buttons-row">
-          <button class="button dijkstra-button" onclick="runDijkstraWithLogging()">
-            <span>📊</span> Dijkstra mit Logging
-          </button>
-          <button class="button dijkstra-button" onclick="runDijkstraSilent()">
-            <span>🔇</span> Dijkstra stumm
-          </button>
-        </div>
-        
-        <div class="algorithm-warning">
-          ⚠️ Stellen Sie sicher, dass Start- und Zielknoten ausgewählt sind
-        </div>
-      </div>
-      
-      <div class="output-panel">
-        <h3>📋 Ergebnisse</h3>
-        <div id="algorithm-output" class="output">
-          DIJKSTRA VOYAGER wartet auf Befehle...
-        </div>
-        
-        <div class="clear-output">
-          <button class="button" onclick="clearAlgorithmOutput()">
-            <span>🗑️</span> Output löschen
-          </button>
-        </div>
-      </div>
-      
-      <div class="help-panel">
-        <h3>❓ Anweisungen</h3>
-        <div class="help-content">
-          <strong>Schritt für Schritt:</strong><br>
-          1️⃣ App initialisieren<br>
-          2️⃣ Optional: Zufällige Daten laden<br>
-          3️⃣ Start- und Zielknoten eingeben (z.B. node1, node3)<br>
-          4️⃣ Knoten auswählen<br>
-          5️⃣ Dijkstra-Algorithmus ausführen<br>
-          <br>
-          <strong>Farben im Grafen:</strong><br>
-          🟢 Grün = Start-Knoten<br>
-          🔴 Rot = Ziel-Knoten<br>
-          🟡 Gelb = Pfad-Knoten<br>
-          🔴 Rote Linien = Kürzester Pfad
-        </div>
-      </div>
-    </div>
-
-    <!-- Toast para mensajes - SOLO UNO -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <strong class="me-auto">Matrix Voyager</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body" id="toast_body">
-          <!-- Mensaje aparece aquí -->
-        </div>
-      </div>
-    </div>
 
     <!-- EXTERNAL LIBRARIES -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
-
+    
     <!-- YOUR JAVASCRIPT FILES -->
     <script src="js/matriySinAuto.js"></script>
     <script src="js/jediSinAuto.js"></script>
