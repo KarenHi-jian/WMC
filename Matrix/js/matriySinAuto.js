@@ -1,311 +1,665 @@
-//1.APPLICATION STATE OBJECT
-// (Sin estado automático - ESPECIFICACIÓN DEL PROFESOR)
+// ARCHIVO COMPLETO matriySinAuto.js - ESTILO ACADÉMICO
 
-//2.DOM Node Refs - CORREGIDAS pero manteniendo filosofía manual
-// CORRECCIÓN: Referencias seguras pero sin cambiar la filosofía
-const btn_clear_1 = document.getElementById("btn_clear_1");          // Puede no existir
-const btn_clear_2 = document.getElementById("btn_clear_2");          // Puede no existir  
-const btn_validate_1 = document.getElementById("btn_validate_1");    // Puede no existir
-const btn_validate_2 = document.getElementById("btn_validate_2");    // Puede no existir
-const btn_calculate = document.getElementById("btn_calculate");      // Puede no existir
-const matrix_1 = document.getElementById("matrix_1");                // REQUERIDO
-const matrix_2 = document.getElementById("matrix_2");                // REQUERIDO
-const toastLiveExample = document.getElementById("liveToast");       // Opcional
-const toast_body = document.getElementById("toast_body");            // Opcional
-const output = document.getElementById("output");                    // REQUERIDO
+// VARIABLES GLOBALES
+let matrix_1, matrix_2, output, matrixSizeInput;
 
-//3.DOM Node Creation Fn's
-// (Sin funciones de creación automática - ESPECIFICACIÓN DEL PROFESOR)
-
-//4.RENDER FN
-// (Sin render automático - ESPECIFICACIÓN DEL PROFESOR)
-
-//5.EVENT HANDLERS - CONVERTIDOS A FUNCIONES MANUALES
-// ESPECIFICACIÓN DEL PROFESOR: Solo funciones onclick, sin event listeners
-
-// CORREGIDA: Manejo robusto de Bootstrap
-function showToast({ msg, error }) {
-    // CORRECCIÓN: Verificación más robusta pero manteniendo lógica original
-    if (typeof bootstrap !== 'undefined' && toastLiveExample && toast_body) {
-        try {
-            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-            toastLiveExample.classList.remove("bg-danger", "bg-success");
-            toastLiveExample.classList.add(error ? "bg-danger" : "bg-success");
-            toastBootstrap.show();
-            toast_body.textContent = msg;
-        } catch (bootstrapError) {
-            // CORRECCIÓN: Fallback si Bootstrap falla
-            console.warn("Bootstrap Toast error:", bootstrapError);
-            if (error) {
-                alert("Error: " + msg);
-            } else {
-                alert("Info: " + msg);
-            }
-        }
+// INICIALIZACIÓN MEJORADA
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM cargado, inicializando variables...");
+    
+    matrix_1 = document.getElementById('matrix_1');
+    matrix_2 = document.getElementById('matrix_2');
+    output = document.getElementById('output');
+    matrixSizeInput = document.getElementById('matrix-size');
+    
+    // Verificar que los elementos existan
+    if (matrix_1) {
+        console.log("✅ matrix_1 encontrado");
     } else {
-        // Fallback original mantenido
-        if (error) {
-            alert("Error: " + msg);
-        } else {
-            alert("Info: " + msg);
+        console.log("❌ matrix_1 NO encontrado");
+    }
+    
+    if (matrix_2) {
+        console.log("✅ matrix_2 encontrado");
+    } else {
+        console.log("❌ matrix_2 NO encontrado");
+    }
+    
+    if (output) {
+        console.log("✅ output encontrado");
+    } else {
+        console.log("❌ output NO encontrado");
+    }
+    
+    if (matrixSizeInput) {
+        console.log("✅ matrix-size input encontrado");
+    } else {
+        console.log("❌ matrix-size input NO encontrado");
+    }
+    
+    console.log("Inicialización completa");
+});
+
+// FUNCIONES PARA GENERAR MATRICES DINÁMICAS
+function getMatrixSize() {
+    if (matrixSizeInput && matrixSizeInput.value) {
+        const size = parseInt(matrixSizeInput.value);
+        if (size >= 2 && size <= 10) {
+            return size;
         }
     }
+    return 3; // Valor por defecto
 }
 
-// CORREGIDA: Formateo más robusto pero manteniendo lógica original
-function matrix_toString(matrix) {
-    // CORRECCIÓN: Verificación de entrada pero manteniendo formato original
-    if (!Array.isArray(matrix) || matrix.length === 0) {
-        return "Error: Invalid matrix format";
+function generateRandomMatrix(size) {
+    const matrix = createMatrix(size, size);
+    
+    // Generar matriz aleatoria con probabilidad de conexión del 40%
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (i !== j && Math.random() < 0.4) {
+                matrix[i][j] = 1;
+            }
+        }
     }
     
-    try {
-        return `  [\n${
-            matrix.map((line) => `[${line.join(", ")}]`).join(",\n")
-        }\n  ]`;
-    } catch (error) {
-        return "Error formatting matrix: " + error.message;
-    }
+    return matrix;
 }
 
-// CORREGIDA: Validación más robusta pero manteniendo estructura original
-function validateMatrix(elt) {
-    // CORRECCIÓN: Verificar elemento existe
-    if (!elt) {
-        showToast({ msg: "Matrix element not found.", error: true });
-        return false;
+function generateCircularMatrix(size) {
+    const matrix = createMatrix(size, size);
+    
+    // Crear un grafo circular donde cada nodo se conecta al siguiente
+    for (let i = 0; i < size; i++) {
+        const next = (i + 1) % size;
+        matrix[i][next] = 1;
+        matrix[next][i] = 1; // Hacer simétrico
+        
+        // Agregar algunas conexiones adicionales para hacer más interesante
+        if (size > 4) {
+            const skip = (i + 2) % size;
+            if (Math.random() < 0.5) {
+                matrix[i][skip] = 1;
+                matrix[skip][i] = 1;
+            }
+        }
     }
     
-    if (!elt.value || elt.value.trim() === "") {
-        showToast({ msg: "No matrix data to validate.", error: true });
-        return false;
-    }
+    return matrix;
+}
+
+function generateBipartiteMatrix(size) {
+    const matrix = createMatrix(size, size);
     
-    let matrix = elt.value;
-    try {
-        matrix = JSON.parse(matrix);
-        if (!Array.isArray(matrix)) {
-            throw new Error("Matrix is not an array.");
-        }
-        
-        // CORRECCIÓN: Verificar matriz no vacía
-        if (matrix.length === 0) {
-            throw new Error("Matrix cannot be empty.");
-        }
-        
-        // CORRECCIÓN: Verificar primera fila no vacía
-        if (!Array.isArray(matrix[0]) || matrix[0].length === 0) {
-            throw new Error("Matrix rows cannot be empty.");
-        }
-        
-        const expectedLength = matrix[0].length;
-        
-        for (let i = 0; i < matrix.length; i++) {
-            if (!Array.isArray(matrix[i])) {
-                throw new Error(`Line ${i + 1} is not an array.`);
-            }
-            
-            // CORRECCIÓN: Verificar filas de igual longitud
-            if (matrix[i].length !== expectedLength) {
-                throw new Error(`Line ${i + 1} has incorrect length. Expected: ${expectedLength}, got: ${matrix[i].length}`);
-            }
-            
-            for (let j = 0; j < matrix[i].length; j++) {
-                if (typeof matrix[i][j] !== "number" || isNaN(matrix[i][j])) {
-                    throw new Error(`Line ${i + 1}, column ${j + 1} is not a valid number: "${matrix[i][j]}"`);
+    // Crear patrón bipartito donde nodos pares se conectan a impares
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            if (i !== j) {
+                // Conectar si uno es par y el otro impar
+                if ((i % 2 === 0 && j % 2 === 1) || (i % 2 === 1 && j % 2 === 0)) {
+                    matrix[i][j] = 1;
                 }
             }
         }
-        
-        // CORRECCIÓN: Verificar matriz cuadrada
-        if (matrix.length !== expectedLength) {
-            throw new Error(`Matrix must be square. Got ${matrix.length}x${expectedLength}`);
+    }
+    
+    return matrix;
+}
+
+function matrixToString(matrix) {
+    let result = "[";
+    for (let i = 0; i < matrix.length; i++) {
+        if (i > 0) result += ",";
+        result += "[";
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (j > 0) result += ",";
+            result += matrix[i][j].toString();
         }
-        
-        showToast({ msg: `Matrix is valid (${matrix.length}x${matrix.length}).` });
-        return true;
-    } catch (error) {
-        // CORRECCIÓN: Mejor manejo de errores JSON
-        let errorMessage = error.message;
-        if (error instanceof SyntaxError) {
-            errorMessage = "Invalid JSON format. Use [[1,2],[3,4]] for 2x2 matrix.";
+        result += "]";
+    }
+    result += "]";
+    return result;
+}
+function createMatrix(rows, cols, defaultValue = 0) {
+    const matrix = [];
+    for (let i = 0; i < rows; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < cols; j++) {
+            matrix[i][j] = defaultValue;
         }
-        showToast({ msg: errorMessage, error: true });
-        return false;
+    }
+    return matrix;
+}
+
+function showToast(config) {
+    const toastElement = document.getElementById('liveToast');
+    const toastBody = document.getElementById('toast_body');
+    
+    if (toastBody) {
+        toastBody.textContent = config.msg;
+        toastBody.style.color = config.error ? '#dc3545' : '#198754';
+    }
+    
+    if (toastElement && window.bootstrap) {
+        const toast = new bootstrap.Toast(toastElement);
+        toast.show();
+    } else {
+        console.log(config.msg);
     }
 }
 
-// CORREGIDA: Multiplicación más robusta pero manteniendo algoritmo original
-function multiply() {
-    try {
-        // CORRECCIÓN: Verificar elementos existen
-        if (!matrix_1 || !matrix_2) {
-            showToast({ msg: "Matrix input elements not found.", error: true });
-            return;
+function printAdj(matrix) {
+    let result = "";
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            result += matrix[i][j].toString().padStart(3);
         }
-        
-        // Validar antes de calcular - LÓGICA ORIGINAL MANTENIDA
-        if (!matrix_1.value || !matrix_2.value) {
-            showToast({ msg: "Please enter both matrices.", error: true });
-            return;
-        }
-        
-        const matrix1 = JSON.parse(matrix_1.value);
-        const matrix2 = JSON.parse(matrix_2.value);
-        
-        // Verificar que las matrices sean válidas - LÓGICA ORIGINAL MANTENIDA
-        if (!Array.isArray(matrix1) || !Array.isArray(matrix2)) {
-            showToast({ msg: "Invalid matrix format.", error: true });
-            return;
-        }
-        
-        // CORRECCIÓN: Verificar matrices no vacías
-        if (matrix1.length === 0 || matrix2.length === 0 || 
-            !matrix1[0] || !matrix2[0] || 
-            matrix1[0].length === 0 || matrix2[0].length === 0) {
-            showToast({ msg: "Matrices cannot be empty.", error: true });
-            return;
-        }
-        
-        // Verificar que las matrices sean cuadradas y del mismo tamaño - LÓGICA ORIGINAL MANTENIDA
-        const n1 = matrix1.length;
-        const n2 = matrix2.length;
-        
-        if (n1 !== n2) {
-            showToast({ msg: "Matrices must be the same size.", error: true });
-            return;
-        }
-        
-        if (matrix1[0].length !== n1 || matrix2[0].length !== n2) {
-            showToast({ msg: "Matrices must be square.", error: true });
-            return;
-        }
-        
-        // ALGORITMO ORIGINAL MANTENIDO - Sin cambios
-        const n = matrix1.length;
-        const rv = Array(n).fill().map(() => Array(n).fill(0));
-        
-        for (let z = 0; z < n; z++) {
-            for (let s = 0; s < n; s++) {
-                for (let i = 0; i < n; i++) {
-                    rv[z][s] += matrix1[z][i] * matrix2[i][s];
-                }
-            }
-        }
-        
-        // CORRECCIÓN: Verificar elemento output existe
-        if (!output) {
-            showToast({ msg: "Output element not found.", error: true });
-            return;
-        }
-        
-        output.textContent = matrix_toString(rv);
-        showToast({ msg: "Matrix multiplication completed successfully!" });
-        
-    } catch (error) {
-        showToast({ msg: "Error in calculation: " + error.message, error: true });
+        result += "\n";
     }
+    return result;
 }
 
-// ✅ FUNCIONES MANUALES - Solo se ejecutan al hacer clic
-// ESPECIFICACIÓN DEL PROFESOR: Control manual, sin automático
-
-// CORREGIDA: Verificación de elemento pero manteniendo lógica simple
+// FUNCIONES DE LIMPIEZA Y VALIDACIÓN
 function clearMatrix1() {
     if (matrix_1) {
-        matrix_1.value = "";
-        showToast({ msg: "Matrix 1 cleared." });
-    } else {
-        showToast({ msg: "Matrix 1 element not found.", error: true });
+        matrix_1.value = '';
+        showToast({ msg: "Matrix 1 gelöscht!", error: false });
     }
 }
 
-// CORREGIDA: Verificación de elemento pero manteniendo lógica simple
 function clearMatrix2() {
     if (matrix_2) {
-        matrix_2.value = "";
-        showToast({ msg: "Matrix 2 cleared." });
-    } else {
-        showToast({ msg: "Matrix 2 element not found.", error: true });
+        matrix_2.value = '';
+        showToast({ msg: "Matrix 2 gelöscht!", error: false });
+    }
+}
+
+function clearOutput() {
+    if (output) {
+        output.textContent = '🌌 MATRIX VOYAGER - Quantensystem bereit für Befehle...';
+        showToast({ msg: "Terminal gelöscht!", error: false });
     }
 }
 
 function validateMatrix1() {
-    validateMatrix(matrix_1);
+    validateMatrix(matrix_1, "Matrix 1");
 }
 
 function validateMatrix2() {
-    validateMatrix(matrix_2);
+    validateMatrix(matrix_2, "Matrix 2");
+}
+
+function validateMatrix(matrixElement, matrixName) {
+    if (!matrixElement || !matrixElement.value) {
+        showToast({ msg: `${matrixName} ist leer!`, error: true });
+        return false;
+    }
+    
+    try {
+        const matrix = JSON.parse(matrixElement.value);
+        
+        if (!Array.isArray(matrix)) {
+            showToast({ msg: `${matrixName} ist kein Array!`, error: true });
+            return false;
+        }
+        
+        const n = matrix.length;
+        for (let i = 0; i < n; i++) {
+            if (!Array.isArray(matrix[i]) || matrix[i].length !== n) {
+                showToast({ msg: `${matrixName} ist nicht quadratisch!`, error: true });
+                return false;
+            }
+        }
+        
+        showToast({ msg: `${matrixName} ist gültig! ✅`, error: false });
+        return true;
+    } catch (error) {
+        showToast({ msg: `${matrixName} JSON Fehler: ${error.message}`, error: true });
+        return false;
+    }
+}
+
+// FUNCIONES DE CARGA DE EJEMPLOS DINÁMICAS
+function loadExampleMatrices() {
+    try {
+        const size = getMatrixSize();
+        console.log(`Generando matrices de ejemplo de tamaño ${size}x${size}`);
+        
+        const matrix1 = generateCircularMatrix(size);
+        const matrix2 = generateBipartiteMatrix(size);
+        
+        if (matrix_1) {
+            matrix_1.value = matrixToString(matrix1);
+            console.log("Matrix 1 cargada con Example");
+        } else {
+            console.log("ERROR: matrix_1 no encontrado en loadExampleMatrices");
+        }
+        
+        if (matrix_2) {
+            matrix_2.value = matrixToString(matrix2);
+            console.log("Matrix 2 cargada con Example");
+        } else {
+            console.log("ERROR: matrix_2 no encontrado en loadExampleMatrices");
+        }
+        
+        showToast({ msg: `Beispiel-Matrizen ${size}x${size} geladen! 📝`, error: false });
+        console.log("Example Matrices loaded successfully!");
+        
+    } catch (error) {
+        console.log("ERROR en loadExampleMatrices:", error.message);
+        showToast({ msg: "Error al cargar ejemplos: " + error.message, error: true });
+    }
+}
+
+function loadGraphExamples() {
+    try {
+        const size = getMatrixSize();
+        console.log(`Generando graph prototypes de tamaño ${size}x${size}`);
+        
+        const matrix1 = generateRandomMatrix(size);
+        const matrix2 = generateRandomMatrix(size);
+        
+        // Asegurar que las matrices estén conectadas agregando un ciclo básico
+        for (let i = 0; i < size; i++) {
+            const next = (i + 1) % size;
+            matrix1[i][next] = 1;
+            matrix1[next][i] = 1;
+            matrix2[i][next] = 1;
+            matrix2[next][i] = 1;
+        }
+        
+        if (matrix_1) {
+            matrix_1.value = matrixToString(matrix1);
+            console.log("Matrix 1 cargada con Graph Prototype");
+        } else {
+            console.log("ERROR: matrix_1 no encontrado");
+        }
+        
+        if (matrix_2) {
+            matrix_2.value = matrixToString(matrix2);
+            console.log("Matrix 2 cargada con Graph Prototype");
+        } else {
+            console.log("ERROR: matrix_2 no encontrado");
+        }
+        
+        showToast({ msg: `Graph-Prototypen ${size}x${size} geladen! 🌐`, error: false });
+        console.log("Graph Examples loaded successfully!");
+        
+    } catch (error) {
+        console.log("ERROR en loadGraphExamples:", error.message);
+        showToast({ msg: "Error al cargar Graph Prototypen: " + error.message, error: true });
+    }
+}
+
+function loadHyperraumDemo() {
+    try {
+        const size = getMatrixSize();
+        console.log(`Generando hyperraum demo de tamaño ${size}x${size}`);
+        
+        // Crear matrices más densas para el demo hyperraum
+        const matrix1 = createMatrix(size, size);
+        const matrix2 = createMatrix(size, size);
+        
+        // Patrón denso para matrix1
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                if (i !== j && Math.random() < 0.6) {
+                    matrix1[i][j] = 1;
+                }
+            }
+        }
+        
+        // Patrón de estrella para matrix2
+        const center = Math.floor(size / 2);
+        for (let i = 0; i < size; i++) {
+            if (i !== center) {
+                matrix2[center][i] = 1;
+                matrix2[i][center] = 1;
+            }
+        }
+        
+        if (matrix_1) matrix_1.value = matrixToString(matrix1);
+        if (matrix_2) matrix_2.value = matrixToString(matrix2);
+        
+        showToast({ msg: `Hyperraum-Demo ${size}x${size} geladen! 🚀`, error: false });
+        
+    } catch (error) {
+        console.log("ERROR en loadHyperraumDemo:", error.message);
+        showToast({ msg: "Error al cargar Hyperraum Demo: " + error.message, error: true });
+    }
+}
+
+// FUNCIONES DE MULTIPLICACIÓN Y POTENCIA
+function multiplyMatrices(matrixA, matrixB) {
+    const n = matrixA.length;
+    const result = createMatrix(n, n);
+    
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            for (let k = 0; k < n; k++) {
+                result[i][j] += matrixA[i][k] * matrixB[k][j];
+            }
+        }
+    }
+    
+    return result;
+}
+
+function powerMatrix(matrix, power) {
+    if (power === 1) return matrix;
+    
+    let result = matrix;
+    for (let p = 2; p <= power; p++) {
+        result = multiplyMatrices(result, matrix);
+    }
+    
+    return result;
 }
 
 function calculateMatrix() {
-    multiply();
-}
-
-// CORREGIDA: Verificación de elemento output
-function clearOutput() {
-    if (output) {
-        output.textContent = "MATRIX VOYAGER wartet auf Befehle...";
-        showToast({ msg: "Output cleared." });
-    } else {
-        showToast({ msg: "Output element not found.", error: true });
+    if (!validateMatrix(matrix_1, "Matrix 1") || !validateMatrix(matrix_2, "Matrix 2")) {
+        return;
     }
-}
-
-// ✅ FUNCIÓN PARA LLENAR MATRICES DE EJEMPLO
-// CORREGIDA: Verificación de elementos pero manteniendo lógica simple
-function loadExampleMatrices() {
-    const example1 = [[1, 0, 1], [0, 1, 0], [1, 0, 1]];
-    const example2 = [[0, 1, 0], [1, 0, 1], [0, 1, 0]];
     
-    if (matrix_1 && matrix_2) {
-        matrix_1.value = JSON.stringify(example1);
-        matrix_2.value = JSON.stringify(example2);
-        showToast({ msg: "Example matrices loaded!" });
-    } else {
-        showToast({ msg: "Matrix input elements not found.", error: true });
+    try {
+        const matrixA = JSON.parse(matrix_1.value);
+        const matrixB = JSON.parse(matrix_2.value);
+        
+        if (matrixA.length !== matrixB.length) {
+            showToast({ msg: "Matrizen haben unterschiedliche Größen!", error: true });
+            return;
+        }
+        
+        const result = multiplyMatrices(matrixA, matrixB);
+        
+        let displayResult = "🔢 MATRIX FUSION (A × B)\n";
+        displayResult += "═══════════════════════════\n\n";
+        displayResult += "📊 ERGEBNIS:\n";
+        displayResult += printAdj(result);
+        
+        output.textContent = displayResult;
+        showToast({ msg: "Matrix-Multiplikation abgeschlossen! 🔢", error: false });
+    } catch (error) {
+        showToast({ msg: "Fehler bei Multiplikation: " + error.message, error: true });
     }
 }
 
-//6.INIT BINDINGS - ❌ REMOVIDO: Sin event listeners automáticos
-// ESPECIFICACIÓN DEL PROFESOR: Sin event listeners automáticos
-// ANTES (automático):
-// btn_clear_1.addEventListener("click", () => { matrix_1.value = ""; });
-// btn_clear_2.addEventListener("click", () => { matrix_2.value = ""; });
-// btn_validate_1.addEventListener("click", () => { validateMatrix(matrix_1); });
-// btn_validate_2.addEventListener("click", () => { validateMatrix(matrix_2); });
-// btn_calculate.addEventListener("click", multiply);
-
-// DESPUÉS (manual): Se usan funciones onclick directamente en HTML
-// ESPECIFICACIÓN DEL PROFESOR: onclick="functionName()" en el HTML
-
-//7.INITIAL RENDER - ❌ REMOVIDO: Sin inicialización automática
-// ESPECIFICACIÓN DEL PROFESOR: Sin inicialización automática
-// ANTES (automático):
-// matrix_2.value = "";
-// matrix_1.value = "";
-
-// DESPUÉS (manual): El usuario decide qué hacer
-// ESPECIFICACIÓN DEL PROFESOR: Usuario tiene control total
-
-// ✅ LOGGING PARA DEBUGGING (solo en consola, sin afectar UI)
-// CORRECCIÓN: Logging opcional para desarrollo
-console.log("✅ Matrix Voyager loaded - Manual mode (Professor specifications)");
-console.log("📋 Available functions:", {
-    clearMatrix1: typeof clearMatrix1,
-    clearMatrix2: typeof clearMatrix2,
-    validateMatrix1: typeof validateMatrix1,
-    validateMatrix2: typeof validateMatrix2,
-    calculateMatrix: typeof calculateMatrix,
-    clearOutput: typeof clearOutput,
-    loadExampleMatrices: typeof loadExampleMatrices
-});
-
-// CORRECCIÓN: Verificación silenciosa de elementos críticos
-if (!matrix_1 || !matrix_2 || !output) {
-    console.warn("⚠️ Some critical elements missing:", {
-        matrix_1: !!matrix_1,
-        matrix_2: !!matrix_2,
-        output: !!output
-    });
+function potenzMatrix1() {
+    potenzMatrix(matrix_1, "Matrix 1");
 }
+
+function potenzMatrix2() {
+    potenzMatrix(matrix_2, "Matrix 2");
+}
+
+function potenzMatrix(matrixElement, matrixName) {
+    if (!validateMatrix(matrixElement, matrixName)) {
+        return;
+    }
+    
+    try {
+        const matrix = JSON.parse(matrixElement.value);
+        const power2 = powerMatrix(matrix, 2);
+        const power3 = powerMatrix(matrix, 3);
+        
+        let result = `🚀 ${matrixName} HYPERSPRUNG\n`;
+        result += "═══════════════════════════\n\n";
+        result += "📊 ORIGINAL MATRIX:\n";
+        result += printAdj(matrix);
+        result += "\n🔸 MATRIX² (Quadrat):\n";
+        result += printAdj(power2);
+        result += "\n🔹 MATRIX³ (Kubik):\n";
+        result += printAdj(power3);
+        
+        output.textContent = result;
+        showToast({ msg: `${matrixName} Hypersprung abgeschlossen! 🚀`, error: false });
+    } catch (error) {
+        showToast({ msg: "Fehler bei Potenz: " + error.message, error: true });
+    }
+}
+
+// DIJKSTRA ALGORITHM - ESTILO ACADÉMICO
+function dijkstraSimple(matrix, start) {
+    const n = matrix.length;
+    const distances = new Array(n).fill(Infinity);
+    const visited = new Array(n).fill(false);
+    
+    distances[start] = 0;
+    
+    for (let count = 0; count < n; count++) {
+        let minDist = Infinity;
+        let current = -1;
+        
+        for (let i = 0; i < n; i++) {
+            if (!visited[i] && distances[i] < minDist) {
+                minDist = distances[i];
+                current = i;
+            }
+        }
+        
+        if (current === -1) break;
+        visited[current] = true;
+        
+        for (let neighbor = 0; neighbor < n; neighbor++) {
+            if (matrix[current][neighbor] > 0 && !visited[neighbor]) {
+                const newDist = distances[current] + 1;
+                if (newDist < distances[neighbor]) {
+                    distances[neighbor] = newDist;
+                }
+            }
+        }
+    }
+    
+    return distances;
+}
+
+function calculateDistances(matrix) {
+    const n = matrix.length;
+    const allDistances = [];
+    
+    for (let i = 0; i < n; i++) {
+        allDistances[i] = dijkstraSimple(matrix, i);
+    }
+    
+    return allDistances;
+}
+
+function calculateEccentricity(distances) {
+    const eccentricity = [];
+    
+    for (let i = 0; i < distances.length; i++) {
+        let maxDist = 0;
+        for (let j = 0; j < distances.length; j++) {
+            if (i !== j && distances[i][j] !== Infinity && distances[i][j] > maxDist) {
+                maxDist = distances[i][j];
+            }
+        }
+        eccentricity[i] = maxDist === 0 ? Infinity : maxDist;
+    }
+    
+    return eccentricity;
+}
+
+function calculateRadius(eccentricity) {
+    let minEcc = Infinity;
+    
+    for (let i = 0; i < eccentricity.length; i++) {
+        if (eccentricity[i] > 0 && eccentricity[i] < minEcc) {
+            minEcc = eccentricity[i];
+        }
+    }
+    
+    return minEcc === Infinity ? 0 : minEcc;
+}
+
+function calculateDiameter(eccentricity) {
+    let maxEcc = 0;
+    
+    for (let i = 0; i < eccentricity.length; i++) {
+        if (eccentricity[i] !== Infinity && eccentricity[i] > maxEcc) {
+            maxEcc = eccentricity[i];
+        }
+    }
+    
+    return maxEcc;
+}
+
+function calculateCenter(eccentricity, radius) {
+    const center = [];
+    
+    for (let i = 0; i < eccentricity.length; i++) {
+        if (eccentricity[i] === radius) {
+            center[center.length] = i;
+        }
+    }
+    
+    return center;
+}
+
+function isInCenter(center, nodeIndex) {
+    for (let i = 0; i < center.length; i++) {
+        if (center[i] === nodeIndex) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function centerToString(center) {
+    let result = "";
+    for (let i = 0; i < center.length; i++) {
+        if (i > 0) result += ", ";
+        result += (center[i] + 1).toString();
+    }
+    return result;
+}
+
+function analyzeAdvancedGraph(matrix) {
+    try {
+        const n = matrix.length;
+        
+        let hasConnections = false;
+        for (let i = 0; i < n && !hasConnections; i++) {
+            for (let j = 0; j < n; j++) {
+                if (matrix[i][j] > 0) {
+                    hasConnections = true;
+                    break;
+                }
+            }
+        }
+        
+        if (!hasConnections) {
+            return { error: "Matrix hat keine Verbindungen.", connected: false };
+        }
+        
+        const allDistances = calculateDistances(matrix);
+        const eccentricity = calculateEccentricity(allDistances);
+        const radius = calculateRadius(eccentricity);
+        const diameter = calculateDiameter(eccentricity);
+        const center = calculateCenter(eccentricity, radius);
+        
+        let connected = true;
+        for (let i = 0; i < n && connected; i++) {
+            for (let j = 0; j < n; j++) {
+                if (i !== j && allDistances[i][j] === Infinity) {
+                    connected = false;
+                    break;
+                }
+            }
+        }
+        
+        return {
+            connected,
+            allDistances,
+            eccentricity,
+            radius,
+            diameter,
+            center,
+            nodeCount: n
+        };
+    } catch (error) {
+        return {
+            error: "Fehler bei der Graphanalyse: " + error.message,
+            connected: false
+        };
+    }
+}
+
+function analyzeMatrix(matrixElement, matrixName) {
+    if (!matrixElement || !matrixElement.value) {
+        showToast({ msg: `${matrixName} ist leer.`, error: true });
+        return;
+    }
+    
+    try {
+        const matrix = JSON.parse(matrixElement.value);
+        const analysis = analyzeAdvancedGraph(matrix);
+        
+        let result = `🎯 ADVANCED GRAPH ANALYSIS - ${matrixName}\n`;
+        result += `═══════════════════════════════════\n\n`;
+        
+        if (analysis.error) {
+            result += `❌ ERROR: ${analysis.error}\n\n`;
+            result += `💡 SUGGESTIONS:\n`;
+            result += `• Use 1 for connected, 0 for not connected\n`;
+            result += `• Ensure matrix is square\n`;
+            result += `• Add connections between nodes\n`;
+        } else {
+            result += `📊 BASIC METRICS:\n`;
+            result += `• Nodes: ${analysis.nodeCount}\n`;
+            result += `• Connected: ${analysis.connected ? 'Yes ✅' : 'No ❌'}\n\n`;
+            
+            if (analysis.connected) {
+                result += `🎯 CENTRALITY MEASURES:\n`;
+                result += `• Radius: ${analysis.radius}\n`;
+                result += `• Diameter: ${analysis.diameter}\n`;
+                result += `• Center: Node(s) ${analysis.center.map(i => i + 1).join(', ')}\n\n`;
+                
+                result += `📏 ECCENTRICITY BY NODE:\n`;
+                for (let i = 0; i < analysis.eccentricity.length; i++) {
+                    const ecc = analysis.eccentricity[i];
+                    const isCenter = analysis.center.indexOf(i) !== -1;
+                    result += `• Node ${i + 1}: ${ecc === Infinity ? '∞' : ecc}${isCenter ? ' (CENTER)' : ''}\n`;
+                }
+                
+                result += `\n🗺️ DISTANCE MATRIX:\n`;
+                result += `     `;
+                for (let j = 0; j < analysis.nodeCount; j++) {
+                    result += `N${j + 1}`.padStart(4);
+                }
+                result += `\n`;
+                
+                for (let i = 0; i < analysis.nodeCount; i++) {
+                    result += `N${i + 1}:  `;
+                    for (let j = 0; j < analysis.nodeCount; j++) {
+                        const dist = analysis.allDistances[i][j];
+                        const distStr = dist === Infinity ? '∞' : dist.toString();
+                        result += distStr.padStart(3) + ' ';
+                    }
+                    result += `\n`;
+                }
+                
+                result += `\n📈 INTERPRETATION:\n`;
+                result += `• Radius (${analysis.radius}): Minimum eccentricity\n`;
+                result += `• Diameter (${analysis.diameter}): Maximum eccentricity\n`;
+                result += `• Center: Node(s) with minimum eccentricity\n`;
+                result += `• Eccentricity: Max distance from node to any other node\n`;
+            } else {
+                result += `⚠️ DISCONNECTED GRAPH:\n`;
+                result += `The graph is not connected. Some nodes cannot reach others.\n`;
+                result += `Advanced measures require a connected graph.\n\n`;
+            }
+            
+            result += `\n📋 ADJACENCY MATRIX:\n`;
+            result += printAdj(matrix);
+        }
+        
+        output.textContent = result;
+        showToast({ msg: `Advanced analysis completed for ${matrixName}!` });
+    } catch (error) {
+        showToast({ msg: "Fehler: " + error.message, error: true });
+    }
+}
+
+function analyzeMatrix1() { analyzeMatrix(matrix_1, "Matrix 1"); }
+function analyzeMatrix2() { analyzeMatrix(matrix_2, "Matrix 2"); }

@@ -180,3 +180,243 @@ input.matrix-input:hover {
         font-size: 12px;
     }
 }
+/* ===================================================================
+   CSS ADICIONAL PARA MATRIX VOYAGER ENHANCED
+   Agregar a tu archivo CSS principal o crear nuevo archivo
+   =================================================================== */
+
+/* Sección de análisis de grafos */
+.analysis-section {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 30, 60, 0.3);
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.analysis-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.analysis-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.analysis-btn {
+    background: linear-gradient(45deg, #1e3c72, #2a5298) !important;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.analysis-btn:hover {
+    background: linear-gradient(45deg, #2a5298, #1e3c72) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(42, 82, 152, 0.4);
+}
+
+.analysis-info {
+    font-size: 0.9em;
+    color: var(--accent-color);
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Grupos de botones mejorados */
+.button-group {
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Sección Jedi limpia */
+.jedi-controls {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.jedi-output {
+    margin-top: 20px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jedi-default {
+    text-align: center;
+}
+
+.jedi-quote {
+    color: #90EE90;
+    font-size: 1.8em;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.jedi-author {
+    color: var(--accent-color);
+    font-size: 1.1em;
+}
+
+.jedi-challenge-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.jedi-challenge-section h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* Sección Weather limpia */
+.weather-output {
+    min-height: 400px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.weather-placeholder {
+    text-align: center;
+}
+
+/* News section mejorada */
+.api-details {
+    color: var(--accent-color);
+    font-size: 0.9em;
+}
+
+.status-ready {
+    color: var(--success-color);
+}
+
+.production-ready {
+    color: var(--success-color);
+}
+
+/* Dijkstra section mejorada */
+.graph-container {
+    width: 100%;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.graph-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--accent-color);
+    font-size: 1.2em;
+}
+
+.graph-controls {
+    text-align: center;
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.node-selection-button {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.node-tip {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+
+.algorithm-warning {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--accent-color);
+    margin-top: 10px;
+}
+
+.clear-output {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.help-content {
+    background: rgba(0, 20, 40, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* Responsivo para dispositivos móviles */
+@media (max-width: 768px) {
+    .analysis-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .analysis-btn {
+        width: 90%;
+        max-width: 280px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .button-group .button {
+        width: 90%;
+        max-width: 200px;
+    }
+    
+    .graph-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .buttons-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+/* Mejoras de accesibilidad */
+.button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.analysis-btn:focus {
+    outline: 2px solid #87CEFA;
+    outline-offset: 2px;
+}
+
+/* Animaciones suaves */
+.analysis-section {
+    transition: all 0.3s ease;
+}
+
+.analysis-section:hover {
+    background: rgba(0, 30, 60, 0.4);
+}

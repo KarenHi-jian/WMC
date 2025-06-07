@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/pruebafinalcss.css" />
-  <!-- ⭐ NUEVO: CSS específico para sección de noticias -->
   <link rel="stylesheet" href="css/hackers-section.css" />
   <link rel="stylesheet" href="css/jedi-section-sinAuto.css" />
   <link rel="stylesheet" href="css/matrix.css" />  
   <link rel="stylesheet" href="css/algorithm-section.css" />
+  
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
 </head>
@@ -32,74 +32,107 @@
       <button class="nav-button" id="algorithm-tab">🚀 Dijkstra</button>
     </div>
 
-    <!-- MATRIX SECTION -->
+    <!-- MATRIX SECTION - CON TÍTULOS CREATIVOS -->
     <div id="matrix-section">
-  <div class="matrix-size-container">
-    <label for="matrix-size">Matrix Größe:</label>
-    <input type="number" id="matrix-size" min="2" max="10" value="3" />
-    <button class="button" onclick="loadExampleMatrices()">Beispiele laden</button>
-  </div>
+      <div class="matrix-size-container">
+        <label for="matrix-size">🎛️ Matrix Dimension:</label>
+        <input type="number" id="matrix-size" min="2" max="10" value="3" />
+        <button class="button" onclick="loadExampleMatrices()">📝 Beispiel Patterns</button>
+        <button class="button" onclick="loadGraphExamples()">🌐 Graph Prototypen</button>
+        <button class="button" onclick="loadHyperraumDemo()">🚀 HYPERRAUM DEMO</button>
+      </div>
 
-  <h2>MATRIX VOYAGER - Sternnavigationssystem</h2>
-  
-  <!-- Contenedor de matrices del maestro -->
-  <div class="matrix-container">
-    <div class="matrix-display">
-      <div class="matrix-title">Matrix 1 (JSON Format)</div>
-      <textarea 
-        id="matrix_1" 
-        class="matrix-textarea"
-        placeholder='[[1,0,1],[0,1,0],[1,0,1]]'
-        rows="4"
-        cols="30">
-      </textarea>
-      <div style="text-align: center; margin-top: 10px;">
-        <button class="button" onclick="clearMatrix1()">🗑️ Löschen</button>
-        <button class="button" onclick="validateMatrix1()">✅ Validieren</button>
+      <h2>🌌 MATRIX VOYAGER - Galaktische Navigationsmatrix</h2>
+      
+      <!-- Contenedor de matrices con títulos creativos -->
+      <div class="matrix-container">
+        <div class="matrix-display">
+          <div class="matrix-title">🎯 MATRIX ALPHA [M¹] - Quantenformat</div>
+          <textarea 
+            id="matrix_1" 
+            class="matrix-textarea"
+            placeholder='[[1,0,1],[0,1,0],[1,0,1]]'
+            rows="4"
+            cols="30">
+          </textarea>
+          <div style="text-align: center; margin-top: 10px;">
+            <button class="button" onclick="clearMatrix1()">🗑️ Reset</button>
+            <button class="button" onclick="validateMatrix1()">✅ Validieren</button>
+            <button class="button" onclick="potenzMatrix1()">🚀 Hypersprung</button>
+            <button class="button" onclick="analyzeMatrix1()">📊 Scan</button>
+          </div>
+        </div>
+        
+        <div class="matrix-display">
+          <div class="matrix-title">🎯 MATRIX BETA [M²] - Quantenformat</div>
+          <textarea 
+            id="matrix_2" 
+            class="matrix-textarea"
+            placeholder='[[0,1,0],[1,0,1],[0,1,0]]'
+            rows="4"
+            cols="30">
+          </textarea>
+          <div style="text-align: center; margin-top: 10px;">
+            <button class="button" onclick="clearMatrix2()">🗑️ Reset</button>
+            <button class="button" onclick="validateMatrix2()">✅ Validieren</button>
+            <button class="button" onclick="potenzMatrix2()">🚀 Hypersprung</button>
+            <button class="button" onclick="analyzeMatrix2()">📊 Scan</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="lightsaber alt"></div>
+      <h2>🚀 Galaktische Rechenoperationen</h2>
+      
+      <!-- MATRIX KOMMANDOZENTRALE -->
+      <div style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(0, 30, 60, 0.3); border-radius: 8px; border: 1px solid var(--primary-color);">
+        <h3 style="color: var(--primary-color); margin-bottom: 20px;">⚡ MATRIX KOMMANDOZENTRALE</h3>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+          <button class="button" onclick="calculateMatrix()" style="background: linear-gradient(45deg, #1e3c72, #2a5298);">
+            🔢 MATRIX FUSION (A × B)
+          </button>
+          <button class="button" onclick="potenzMatrix1()" style="background: linear-gradient(45deg, #8360c3, #2ebf91);">
+            🚀 M1 HYPERSPRUNG (²·³)
+          </button>
+          <button class="button" onclick="potenzMatrix2()" style="background: linear-gradient(45deg, #134e5e, #71b280);">
+            🚀 M2 HYPERSPRUNG (²·³)
+          </button>
+        </div>
+        
+        <h4 style="color: var(--primary-color); margin: 20px 0 10px 0;">🔍 NETZWERK INTELLIGENCE</h4>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <button class="button" onclick="analyzeMatrix1()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a52);">
+            📊 M1 GRAPH SCANNER
+          </button>
+          <button class="button" onclick="analyzeMatrix2()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+            📊 M2 GRAPH SCANNER
+          </button>
+          <button class="button" onclick="loadGraphExamples()" style="background: linear-gradient(45deg, #fce38a, #f38181);">
+            🌐 GRAPH PROTOTYPEN LADEN
+          </button>
+        </div>
+        
+        <div style="font-size: 0.9em; color: var(--accent-color); margin-top: 15px;">
+          🚀 <strong>HYPERSPRUNG:</strong> Berechnet Matrix² (Quadrat) und Matrix³ (Kubik)<br>
+          📊 <strong>GRAPH SCANNER:</strong> Analysiert Knoten, Kanten, Dichte, Verbindungen<br>
+          🔢 <strong>MATRIX FUSION:</strong> Klassische Matrixmultiplikation A × B
+        </div>
+      </div>
+      
+      <!-- Quantum Output Display -->
+      <div style="margin: 20px 0;">
+        <h3 style="color: var(--primary-color); text-align: center; margin-bottom: 15px;">📺 QUANTUM DISPLAY TERMINAL</h3>
+        <div id="output" class="output">🌌 MATRIX VOYAGER - Quantensystem bereit für Befehle...</div>
+      </div>
+      
+      <!-- Control Terminal -->
+      <div class="buttons-container" style="text-align: center; margin-top: 20px;">
+        <button class="button" onclick="clearOutput()" style="background: linear-gradient(45deg, #667eea, #764ba2);">
+          🗑️ Terminal löschen
+        </button>
       </div>
     </div>
-    
-    <div class="matrix-display">
-      <div class="matrix-title">Matrix 2 (JSON Format)</div>
-      <textarea 
-        id="matrix_2" 
-        class="matrix-textarea"
-        placeholder='[[0,1,0],[1,0,1],[0,1,0]]'
-        rows="4"
-        cols="30">
-      </textarea>
-      <div style="text-align: center; margin-top: 10px;">
-        <button class="button" onclick="clearMatrix2()">🗑️ Löschen</button>
-        <button class="button" onclick="validateMatrix2()">✅ Validieren</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="lightsaber alt"></div>
-  <h2>Fortgeschrittene Galaktische Berechnungen</h2>
-  
-  <!-- Output del maestro -->
-  <div id="output" class="output">MATRIX VOYAGER wartet auf Befehle...</div>
-  
-  <!-- Botones principales -->
-  <div class="buttons-container">
-    <button class="button" onclick="calculateMatrix()">🚀 Berechnen</button>
-    <button class="button" onclick="clearOutput()">🗑️ Output löschen</button>
-  </div>
-
-  <!-- Toast para mensajes (opcional si usas Bootstrap) -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="me-auto">Matrix Voyager</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body" id="toast_body">
-        <!-- Mensaje aparece aquí -->
-      </div>
-    </div>
-  </div>
-</div>
     <!-- NASA SECTION -->
     <div id="nasa-section" style="display: none;">
       <div class="lightsaber alt"></div>
@@ -111,27 +144,27 @@
     <div id="jedi-section" style="display: none;">
       <div class="lightsaber alt"></div>
       <h2>🌟 Jedi Weisheit</h2>
-      <div style="text-align: center; margin: 30px 0;">
+      <div class="jedi-controls">
         <button class="button" onclick="getJediWisdom()">
-          <span style="margin-right: 10px;">⚔️</span> Neue Jedi-Weisheit erhalten
+          <span>⚔️</span> Neue Jedi-Weisheit erhalten
         </button>
       </div>
-      <div id="jedi-output" class="output" style="margin-top: 20px; min-height: 150px; display: flex; align-items: center; justify-content: center;">
-        <div style="text-align: center;">
-          <div style="color: #90EE90; font-size: 1.8em; font-style: italic; margin-bottom: 20px;">
+      <div id="jedi-output" class="output jedi-output">
+        <div class="jedi-default">
+          <div class="jedi-quote">
             "Möge die Macht mit dir sein!"
           </div>
-          <div style="color: var(--accent-color); font-size: 1.1em;">
+          <div class="jedi-author">
             - Obi-Wan Kenobi
           </div>
         </div>
       </div>
-      <div style="margin-top: 40px; text-align: center;">
-        <h3 style="color: var(--primary-color); margin-bottom: 20px;">Zufällige Jedi-Herausforderung</h3>
+      <div class="jedi-challenge-section">
+        <h3>Zufällige Jedi-Herausforderung</h3>
         <button class="button" onclick="getJediChallenge()">
-          <span style="margin-right: 5px;">🎯</span> Tägliche Herausforderung
+          <span>🎯</span> Tägliche Herausforderung
         </button>
-        <div id="jedi-challenge" class="output" style="margin-top: 20px; padding: 20px;">
+        <div id="jedi-challenge" class="output">
           Klicke für deine heutige Jedi-Herausforderung...
         </div>
       </div>
@@ -145,29 +178,27 @@
         <input type="text" id="city-input" placeholder="Stadt eingeben..." />
         <button class="button" onclick="getSimpleWeather()">Wetter abrufen</button>
       </div>
-      <div id="weather-output" class="output" style="min-height: 400px; max-width: 600px; margin: 20px auto;">
-        <div style="text-align: center;">Geben Sie eine Stadt ein, um das Wetter zu sehen...</div>
+      <div id="weather-output" class="output weather-output">
+        <div class="weather-placeholder">Geben Sie eine Stadt ein, um das Wetter zu sehen...</div>
       </div>
     </div>
 
-    <!-- NEWS SECTION - CON CLASES ESPECÍFICAS -->
+    <!-- NEWS SECTION -->
     <div id="hackers-section" style="display: none;">
       <div class="lightsaber alt"></div>
       <h2>📰 Real-Time News API Dashboard</h2>
       
-      <!-- API Status con clases específicas -->
       <div class="api-status">
         <h4>🔗 Live API Connection Status</h4>
-        <div style="color: var(--accent-color); font-size: 0.9em;">
+        <div class="api-details">
           <strong>Primary API:</strong> jsonplaceholder.typicode.com/posts<br>
           <strong>Backup:</strong> Local news database<br>
           <strong>Status:</strong> 
           <span class="status-indicator status-online"></span>
-          <span style="color: var(--success-color);">Ready</span>
+          <span class="status-ready">Ready</span>
         </div>
       </div>
       
-      <!-- Controles con clases específicas -->
       <div class="controls-container">
         <button class="button" onclick="loadVulnerabilities()">
           🛡️ Security Database
@@ -183,7 +214,6 @@
         </button>
       </div>
       
-      <!-- Containers con mejores estilos -->
       <div id="vulnerabilities-container" class="output">
         <div class="loading">
           🔍 Click <strong>"Security Database"</strong> to load vulnerability data...
@@ -202,31 +232,30 @@
         </div>
       </div>
       
-      <!-- Footer informativo con clases específicas -->
       <div class="info-footer">
         <strong>📊 Technical Info:</strong> Real-time data from JSONPlaceholder API • 
         100% free and reliable • No API key required • 
         Local backup system included • 
-        <span style="color: var(--success-color);">Production ready</span>
+        <span class="production-ready">Production ready</span>
       </div>
     </div>
-    <!-- DIJKSTRA SECTION - PASO A PASO -->
+
+    <!-- DIJKSTRA SECTION -->
     <div id="algorithm-section" style="display: none;">
       <div class="lightsaber alt"></div>
       <h2>🚀 DIJKSTRA VOYAGER - Galaktische Pfadfindung</h2>
       
-      <!-- Control de aplicación -->
       <div class="control-panel">
         <h3>🔧 Anwendungssteuerung</h3>
         <div class="buttons-row">
           <button class="button" onclick="initializeApp()">
-            <span style="margin-right: 5px;">🔧</span> App initialisieren
+            <span>🔧</span> App initialisieren
           </button>
           <button class="button" onclick="loadRandomData()">
-            <span style="margin-right: 5px;">🎲</span> Zufällige Daten
+            <span>🎲</span> Zufällige Daten
           </button>
           <button class="button" onclick="clearApp()">
-            <span style="margin-right: 5px;">🗑️</span> App löschen
+            <span>🗑️</span> App löschen
           </button>
         </div>
         
@@ -235,26 +264,24 @@
         </div>
       </div>
       
-      <!-- Contenedor del grafo -->
       <div class="graph-panel">
         <h3>📊 Visualisierung</h3>
-        <div id="graph-container" style="width: 100%; height: 400px; background: rgba(0, 0, 0, 0.3); border: 2px solid var(--primary-color); border-radius: 8px; margin: 10px 0;">
-          <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--accent-color); font-size: 1.2em;">
+        <div id="graph-container" class="graph-container">
+          <div class="graph-placeholder">
             Klicken Sie auf "App initialisieren" um zu beginnen
           </div>
         </div>
         
-        <div style="text-align: center; margin: 10px 0;">
+        <div class="graph-controls">
           <button class="button" onclick="showGraphStats()">
-            <span style="margin-right: 5px;">📈</span> Graph-Statistiken
+            <span>📈</span> Graph-Statistiken
           </button>
           <button class="button" onclick="resetGraphManual()">
-            <span style="margin-right: 5px;">🔄</span> Graph zurücksetzen
+            <span>🔄</span> Graph zurücksetzen
           </button>
         </div>
       </div>
       
-      <!-- Selección de nodos -->
       <div class="node-selection">
         <h3>🎯 Knotenauswahl für Dijkstra</h3>
         <div class="input-row">
@@ -269,52 +296,49 @@
           </div>
         </div>
         
-        <div style="text-align: center; margin: 15px 0;">
+        <div class="node-selection-button">
           <button class="button" onclick="selectNodesManually()">
-            <span style="margin-right: 5px;">🎯</span> Knoten auswählen
+            <span>🎯</span> Knoten auswählen
           </button>
         </div>
         
-        <div style="text-align: center; font-size: 0.9em; color: var(--accent-color); margin-top: 10px;">
+        <div class="node-tip">
           💡 Tipp: Verwenden Sie die Graph-Statistiken um verfügbare Knoten zu sehen
         </div>
       </div>
       
-      <!-- Algoritmos Dijkstra -->
       <div class="algorithm-panel">
         <h3>⚡ Dijkstra Algorithmus</h3>
         <div class="buttons-row">
           <button class="button dijkstra-button" onclick="runDijkstraWithLogging()">
-            <span style="margin-right: 5px;">📊</span> Dijkstra mit Logging
+            <span>📊</span> Dijkstra mit Logging
           </button>
           <button class="button dijkstra-button" onclick="runDijkstraSilent()">
-            <span style="margin-right: 5px;">🔇</span> Dijkstra stumm
+            <span>🔇</span> Dijkstra stumm
           </button>
         </div>
         
-        <div style="text-align: center; font-size: 0.9em; color: var(--accent-color); margin-top: 10px;">
+        <div class="algorithm-warning">
           ⚠️ Stellen Sie sicher, dass Start- und Zielknoten ausgewählt sind
         </div>
       </div>
       
-      <!-- Output del algoritmo -->
       <div class="output-panel">
         <h3>📋 Ergebnisse</h3>
         <div id="algorithm-output" class="output">
           DIJKSTRA VOYAGER wartet auf Befehle...
         </div>
         
-        <div style="text-align: center; margin-top: 15px;">
+        <div class="clear-output">
           <button class="button" onclick="clearAlgorithmOutput()">
-            <span style="margin-right: 5px;">🗑️</span> Output löschen
+            <span>🗑️</span> Output löschen
           </button>
         </div>
       </div>
       
-      <!-- Información de ayuda -->
       <div class="help-panel">
         <h3>❓ Anweisungen</h3>
-        <div style="background: rgba(0, 20, 40, 0.4); padding: 15px; border-radius: 8px; font-size: 0.9em; line-height: 1.6;">
+        <div class="help-content">
           <strong>Schritt für Schritt:</strong><br>
           1️⃣ App initialisieren<br>
           2️⃣ Optional: Zufällige Daten laden<br>
@@ -331,572 +355,37 @@
       </div>
     </div>
 
-    <!-- Scripts -->
-    <!-- Scripts base -->
+    <!-- Toast para mensajes - SOLO UNO -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">Matrix Voyager</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toast_body">
+          <!-- Mensaje aparece aquí -->
+        </div>
+      </div>
+    </div>
+
+    <!-- EXTERNAL LIBRARIES -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
 
-    <!-- JavaScript Files originales -->
+    <!-- YOUR JAVASCRIPT FILES -->
     <script src="js/matriySinAuto.js"></script>
     <script src="js/jediSinAuto.js"></script>
     <script src="js/climaSinAuto.js"></script>
     <script src="js/hackersSinAuto.js"></script>
     <script type="text/babel" src="js/nasa-sinAuto.js"></script>
+    <script src="js/dijkstra-sinAuto.js"></script>
     
-   <!-- Cytoscape.js para grafos -->
-    <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
-    
-    <!-- DIJKSTRA VOYAGER - Solución standalone funcional -->
+    <!-- NAVIGATION SCRIPT - SIMPLIFICADO -->
     <script>
-    console.log("🚀 Iniciando Dijkstra Voyager (modo standalone funcional)...");
-
-    // Variables globales
-    let dijkstraApp = null;
-    let dijkstraGraph = null;
-    let selectedStart = null;
-    let selectedEnd = null;
-
-    // Verificar Cytoscape
-    if (typeof cytoscape === 'undefined') {
-      console.error('❌ Cytoscape no disponible');
-    } else {
-      console.log('✅ Cytoscape disponible');
-    }
-
-    // Clase App principal
-    class DijkstraApp {
-      constructor() {
-        this.container = document.getElementById('graph-container');
-        if (!this.container) {
-          console.error('❌ Graph container no encontrado');
-          return;
-        }
-        
-        this.container.innerHTML = '';
-        
-        this.cy = cytoscape({
-          container: this.container,
-          
-          elements: [
-            { data: { id: 'node1' } },
-            { data: { id: 'node2' } },
-            { data: { id: 'node3' } },
-            { data: { id: 'node4' } },
-            { data: { id: 'edge1', source: 'node1', target: 'node2', weight: 1 } },
-            { data: { id: 'edge2', source: 'node2', target: 'node3', weight: 2 } },
-            { data: { id: 'edge3', source: 'node1', target: 'node4', weight: 5 } },
-            { data: { id: 'edge4', source: 'node4', target: 'node3', weight: 1 } }
-          ],
-          
-          style: [
-            {
-              selector: 'node',
-              style: {
-                'background-color': '#00BFFF',
-                'label': 'data(id)',
-                'color': 'white',
-                'text-valign': 'center',
-                'text-halign': 'center',
-                'font-size': '14px',
-                'width': 50,
-                'height': 50
-              }
-            },
-            {
-              selector: 'edge',
-              style: {
-                'width': 4,
-                'line-color': '#87CEFA',
-                'target-arrow-color': '#87CEFA',
-                'target-arrow-shape': 'triangle',
-                'curve-style': 'bezier',
-                'label': 'data(weight)',
-                'color': 'white',
-                'text-background-color': '#000',
-                'text-background-opacity': 0.8,
-                'font-size': '12px'
-              }
-            },
-            {
-              selector: '.start-node',
-              style: { 'background-color': '#00FF00' }
-            },
-            {
-              selector: '.end-node',
-              style: { 'background-color': '#FF0000' }
-            },
-            {
-              selector: '.path-node',
-              style: { 'background-color': '#FFFF00' }
-            },
-            {
-              selector: '.path-edge',
-              style: {
-                'line-color': '#FF0000',
-                'target-arrow-color': '#FF0000',
-                'width': 6
-              }
-            }
-          ],
-          
-          layout: { name: 'circle', radius: 150 }
-        });
-        
-        console.log('✅ Grafo inicializado correctamente');
-      }
-      
-      loadRandom() {
-        this.cy.elements().remove();
-        
-        const nodeCount = Math.floor(Math.random() * 4) + 4;
-        const nodes = [];
-        const edges = [];
-        
-        for (let i = 1; i <= nodeCount; i++) {
-          nodes.push({ data: { id: `node${i}` } });
-        }
-        
-        for (let i = 1; i < nodeCount; i++) {
-          const weight = Math.floor(Math.random() * 5) + 1;
-          edges.push({
-            data: {
-              id: `edge${i}-${i+1}`,
-              source: `node${i}`,
-              target: `node${i+1}`,
-              weight: weight
-            }
-          });
-        }
-        
-        for (let i = 1; i <= nodeCount; i++) {
-          for (let j = i + 2; j <= nodeCount; j++) {
-            if (Math.random() > 0.6) {
-              const weight = Math.floor(Math.random() * 8) + 1;
-              edges.push({
-                data: {
-                  id: `edge${i}-${j}`,
-                  source: `node${i}`,
-                  target: `node${j}`,
-                  weight: weight
-                }
-              });
-            }
-          }
-        }
-        
-        this.cy.add([...nodes, ...edges]);
-        this.cy.layout({ name: 'circle', radius: 140 }).run();
-        
-        return { nodes: nodeCount, edges: edges.length };
-      }
-      
-      reset() {
-        this.cy.nodes().removeClass('start-node end-node path-node');
-        this.cy.edges().removeClass('path-edge');
-      }
-      
-      getStats() {
-        const nodes = this.cy.nodes();
-        const edges = this.cy.edges();
-        
-        return {
-          nodeCount: nodes.length,
-          edgeCount: edges.length,
-          nodeIds: nodes.map(n => n.id()),
-          connections: edges.map(e => ({
-            source: e.source().id(),
-            target: e.target().id(),
-            weight: e.data('weight') || 1
-          }))
-        };
-      }
-    }
-
-    // Algoritmo Dijkstra completo y profesional
-    function dijkstra(graph, startId, endId) {
-      const nodes = graph.nodes();
-      const edges = graph.edges();
-      
-      const distances = {};
-      const previous = {};
-      const unvisited = new Set();
-      
-      nodes.forEach(node => {
-        const id = node.id();
-        distances[id] = id === startId ? 0 : Infinity;
-        previous[id] = null;
-        unvisited.add(id);
-      });
-      
-      const log = [`🚀 Iniciando algoritmo de Dijkstra`, `📍 Origen: ${startId}`, `🎯 Destino: ${endId}`, `═══════════════════════════════════`, `🔧 Algoritmo inicializado con ${nodes.length} nodos`];
-      
-      while (unvisited.size > 0) {
-        let currentNode = null;
-        let minDistance = Infinity;
-        
-        for (const nodeId of unvisited) {
-          if (distances[nodeId] < minDistance) {
-            minDistance = distances[nodeId];
-            currentNode = nodeId;
-          }
-        }
-        
-        if (currentNode === null || distances[currentNode] === Infinity) {
-          log.push(`❌ No hay más nodos alcanzables`);
-          break;
-        }
-        
-        unvisited.delete(currentNode);
-        log.push(`🔍 Visitando nodo: ${currentNode} (distancia: ${distances[currentNode]})`);
-        
-        if (currentNode === endId) {
-          log.push(`✅ ¡Destino alcanzado!`);
-          break;
-        }
-        
-        const neighbors = edges.filter(edge => 
-          edge.source().id() === currentNode || edge.target().id() === currentNode
-        );
-        
-        neighbors.forEach(edge => {
-          const neighborId = edge.source().id() === currentNode ? 
-            edge.target().id() : edge.source().id();
-          
-          if (unvisited.has(neighborId)) {
-            const weight = edge.data('weight') || 1;
-            const newDistance = distances[currentNode] + weight;
-            
-            if (newDistance < distances[neighborId]) {
-              distances[neighborId] = newDistance;
-              previous[neighborId] = currentNode;
-              log.push(`    📊 Actualizando ${neighborId}: distancia ${newDistance} (peso: ${weight})`);
-            }
-          }
-        });
-      }
-      
-      const path = [];
-      let current = endId;
-      
-      while (current !== null) {
-        path.unshift(current);
-        current = previous[current];
-      }
-      
-      if (path[0] !== startId) {
-        return { path: [], distance: Infinity, log };
-      }
-      
-      // Agregar resultado final al log
-      const visitedNodes = [];
-      nodes.forEach(node => {
-        if (distances[node.id()] !== Infinity) {
-          visitedNodes.push(node.id());
-        }
-      });
-      
-      log.push(`═══════════════════════════════════`);
-      log.push(`✅ ¡Camino encontrado!`);
-      log.push(`📏 Distancia total: ${distances[endId]}`);
-      log.push(`🛤️ Camino: ${path.join(' → ')}`);
-      log.push(`👁️ Nodos visitados: ${visitedNodes.join(', ')}`);
-      
-      return { path, distance: distances[endId], log, visited: visitedNodes };
-    }
-
-    // Función para actualizar output
-    function updateOutput(message) {
-      const output = document.getElementById('algorithm-output');
-      if (output) {
-        output.textContent = message;
-      }
-    }
-
-    // FUNCIONES GLOBALES PARA LOS BOTONES
-    window.initializeApp = function() {
-      try {
-        dijkstraApp = new DijkstraApp();
-        dijkstraGraph = dijkstraApp.cy;
-        
-        const status = document.getElementById('app-status');
-        if (status) {
-          status.innerHTML = 'App-Status: Initialisiert ✅';
-          status.style.color = '#00FF00';
-        }
-        
-        updateOutput('🚀 DIJKSTRA VOYAGER initialisiert\n\nGraph mit 4 Knoten erstellt\nBereit für Pfadfindung!\n\n💡 Nächste Schritte:\n1. Optional: Zufällige Daten laden\n2. Start- und Zielknoten eingeben\n3. Knoten auswählen\n4. Dijkstra-Algorithmus ausführen\n\n📚 Professionelle Implementierung');
-        console.log('✅ App inicializada correctamente');
-      } catch (error) {
-        console.error('❌ Error:', error);
-        updateOutput('❌ Error al inicializar: ' + error.message);
-      }
-    };
-
-    window.loadRandomData = function() {
-      if (!dijkstraApp) {
-        updateOutput('❌ App nicht initialisiert. Klicken Sie zuerst auf "App initialisieren".');
-        return;
-      }
-      
-      const result = dijkstraApp.loadRandom();
-      selectedStart = null;
-      selectedEnd = null;
-      
-      // Limpiar inputs
-      const startInput = document.getElementById('start-node');
-      const endInput = document.getElementById('end-node');
-      if (startInput) startInput.value = '';
-      if (endInput) endInput.value = '';
-      
-      updateOutput(`🎲 Zufälliger Graph geladen\n\nKnoten: ${result.nodes}\nVerbindungen: ${result.edges}\n\nVerwenden Sie "Graph-Statistiken" um\nverfügbare Knoten zu sehen\n\n💡 Neue Knotenauswahl erforderlich`);
-    };
-
-    window.clearApp = function() {
-      dijkstraApp = null;
-      dijkstraGraph = null;
-      selectedStart = null;
-      selectedEnd = null;
-      
-      const container = document.getElementById('graph-container');
-      if (container) {
-        container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #87CEFA; font-size: 1.2em;">Klicken Sie auf "App initialisieren" um zu beginnen</div>';
-      }
-      
-      const status = document.getElementById('app-status');
-      if (status) {
-        status.innerHTML = 'App-Status: Nicht initialisiert ❌';
-        status.style.color = '#FF0000';
-      }
-      
-      // Limpiar inputs
-      const startInput = document.getElementById('start-node');
-      const endInput = document.getElementById('end-node');
-      if (startInput) startInput.value = '';
-      if (endInput) endInput.value = '';
-      
-      updateOutput('🗑️ App gelöscht\n\nAlle Daten zurückgesetzt\nBereit für Neuinitialisierung');
-    };
-
-    window.selectNodesManually = function() {
-      if (!dijkstraApp) {
-        updateOutput('❌ App nicht initialisiert');
-        return;
-      }
-      
-      const startInput = document.getElementById('start-node');
-      const endInput = document.getElementById('end-node');
-      
-      if (!startInput || !endInput) {
-        updateOutput('❌ Eingabefelder nicht gefunden');
-        return;
-      }
-      
-      const startId = startInput.value.trim();
-      const endId = endInput.value.trim();
-      
-      if (!startId || !endId) {
-        updateOutput('❌ Bitte geben Sie Start- und Zielknoten ein\n\n💡 Beispiel:\nStart-Knoten: node1\nZiel-Knoten: node3');
-        return;
-      }
-      
-      const startNode = dijkstraGraph.$('#' + startId);
-      const endNode = dijkstraGraph.$('#' + endId);
-      
-      if (startNode.length === 0) {
-        updateOutput(`❌ Start-Knoten "${startId}" nicht gefunden\n\nVerwenden Sie "Graph-Statistiken" um\nverfügbare Knoten zu sehen`);
-        return;
-      }
-      
-      if (endNode.length === 0) {
-        updateOutput(`❌ Ziel-Knoten "${endId}" nicht gefunden\n\nVerwenden Sie "Graph-Statistiken" um\nverfügbare Knoten zu sehen`);
-        return;
-      }
-      
-      if (startId === endId) {
-        updateOutput('❌ Start- und Zielknoten müssen\nunterschiedlich sein');
-        return;
-      }
-      
-      dijkstraApp.reset();
-      
-      startNode.addClass('start-node');
-      endNode.addClass('end-node');
-      
-      selectedStart = startId;
-      selectedEnd = endId;
-      
-      updateOutput(`✅ Knoten erfolgreich ausgewählt:\n\n🟢 Start-Knoten: ${startId}\n🔴 Ziel-Knoten: ${endId}\n\n🚀 Bereit für Dijkstra-Algorithmus!\nKlicken Sie auf einen der Dijkstra-Buttons`);
-    };
-
-    window.runDijkstraWithLogging = function() {
-      if (!dijkstraApp || !selectedStart || !selectedEnd) {
-        updateOutput('❌ App nicht initialisiert oder Knoten nicht ausgewählt\n\nBitte:\n1. App initialisieren\n2. Start- und Zielknoten eingeben\n3. "Knoten auswählen" klicken\n4. Dijkstra ausführen');
-        return;
-      }
-      
-      dijkstraApp.reset();
-      dijkstraGraph.$('#' + selectedStart).addClass('start-node');
-      dijkstraGraph.$('#' + selectedEnd).addClass('end-node');
-      
-      const result = dijkstra(dijkstraGraph, selectedStart, selectedEnd);
-      
-      let output = `📊 DIJKSTRA MIT LOGGING\n\n`;
-      output += `📍 Start: ${selectedStart} → 🎯 Ziel: ${selectedEnd}\n`;
-      output += `═══════════════════════════════════\n\n`;
-      
-      if (result.distance === Infinity) {
-        output += `❌ Kein Pfad gefunden!\nDie Knoten sind nicht verbunden.`;
-      } else {
-        output += `✅ Kürzester Pfad gefunden!\n`;
-        output += `📏 Gesamtdistanz: ${result.distance}\n`;
-        output += `🛤️ Optimaler Pfad: ${result.path.join(' → ')}\n`;
-        output += `👁️ Besuchte Knoten: ${result.visited.join(', ')}\n`;
-        output += `🎯 Anzahl Hops: ${result.path.length - 1}\n\n`;
-        
-        // Destacar camino en el grafo
-        for (let i = 0; i < result.path.length - 1; i++) {
-          const edge = dijkstraGraph.edges().filter(edge => 
-            (edge.source().id() === result.path[i] && edge.target().id() === result.path[i + 1]) ||
-            (edge.source().id() === result.path[i + 1] && edge.target().id() === result.path[i])
-          );
-          edge.addClass('path-edge');
-        }
-        
-        result.path.slice(1, -1).forEach(nodeId => {
-          dijkstraGraph.$('#' + nodeId).addClass('path-node');
-        });
-      }
-      
-      output += `\n📋 ALGORITHMUS-LOG:\n`;
-      output += `─────────────────────────\n`;
-      result.log.forEach(logEntry => {
-        output += logEntry + '\n';
-      });
-      
-      updateOutput(output);
-    };
-
-    window.runDijkstraSilent = function() {
-      if (!dijkstraApp || !selectedStart || !selectedEnd) {
-        updateOutput('❌ App nicht initialisiert oder Knoten nicht ausgewählt\n\nBitte:\n1. App initialisieren\n2. Knoten auswählen\n3. Dijkstra ausführen');
-        return;
-      }
-      
-      dijkstraApp.reset();
-      dijkstraGraph.$('#' + selectedStart).addClass('start-node');
-      dijkstraGraph.$('#' + selectedEnd).addClass('end-node');
-      
-      const result = dijkstra(dijkstraGraph, selectedStart, selectedEnd);
-      
-      let output = `🔇 DIJKSTRA STUMM\n\n`;
-      output += `📍 Start: ${selectedStart} → 🎯 Ziel: ${selectedEnd}\n`;
-      output += `═══════════════════════════════════\n\n`;
-      
-      if (result.distance === Infinity) {
-        output += `❌ Kein Pfad von ${selectedStart} zu ${selectedEnd} gefunden.\nDie Knoten sind nicht erreichbar.`;
-      } else {
-        output += `✅ ERGEBNIS:\n`;
-        output += `📏 Kürzeste Distanz: ${result.distance}\n`;
-        output += `🛤️ Optimaler Pfad: ${result.path.join(' → ')}\n`;
-        output += `🎯 Anzahl Hops: ${result.path.length - 1}\n`;
-        output += `👁️ Besuchte Knoten: ${result.visited.length}`;
-        
-        // Destacar camino
-        for (let i = 0; i < result.path.length - 1; i++) {
-          const edge = dijkstraGraph.edges().filter(edge => 
-            (edge.source().id() === result.path[i] && edge.target().id() === result.path[i + 1]) ||
-            (edge.source().id() === result.path[i + 1] && edge.target().id() === result.path[i])
-          );
-          edge.addClass('path-edge');
-        }
-        
-        result.path.slice(1, -1).forEach(nodeId => {
-          dijkstraGraph.$('#' + nodeId).addClass('path-node');
-        });
-      }
-      
-      updateOutput(output);
-    };
-
-    window.resetGraphManual = function() {
-      if (!dijkstraApp) {
-        updateOutput('❌ App nicht initialisiert');
-        return;
-      }
-      
-      dijkstraApp.reset();
-      selectedStart = null;
-      selectedEnd = null;
-      
-      const startInput = document.getElementById('start-node');
-      const endInput = document.getElementById('end-node');
-      if (startInput) startInput.value = '';
-      if (endInput) endInput.value = '';
-      
-      updateOutput('🔄 Graph zurückgesetzt\n\nAlle visuellen Markierungen entfernt\nKnoten-Auswahl gelöscht\nBereit für neue Auswahl');
-    };
-
-    window.showGraphStats = function() {
-      if (!dijkstraApp) {
-        updateOutput('❌ App nicht initialisiert');
-        return;
-      }
-      
-      const stats = dijkstraApp.getStats();
-      
-      let output = `📈 GRAPH-STATISTIKEN\n\n`;
-      output += `📊 Übersicht:\n`;
-      output += `─────────────\n`;
-      output += `🔸 Anzahl Knoten: ${stats.nodeCount}\n`;
-      output += `🔗 Anzahl Kanten: ${stats.edgeCount}\n`;
-      output += `🌐 Verbindungsdichte: ${((stats.edgeCount * 2) / (stats.nodeCount * (stats.nodeCount - 1)) * 100).toFixed(1)}%\n\n`;
-      
-      output += `🏷️ Verfügbare Knoten:\n`;
-      output += `─────────────────────\n`;
-      stats.nodeIds.forEach(nodeId => {
-        const degree = stats.connections.filter(c => c.source === nodeId || c.target === nodeId).length;
-        output += `• ${nodeId} (Grad: ${degree})\n`;
-      });
-      
-      output += `\n🔗 Verbindungen:\n`;
-      output += `─────────────────\n`;
-      stats.connections.forEach(connection => {
-        output += `• ${connection.source} ↔ ${connection.target} (Gewicht: ${connection.weight})\n`;
-      });
-      
-      output += `\n💡 Tipp: Kopieren Sie Knoten-IDs für die Auswahl`;
-      
-      updateOutput(output);
-    };
-
-    window.clearAlgorithmOutput = function() {
-      updateOutput('DIJKSTRA VOYAGER wartet auf Befehle...');
-    };
-
-    // Agregar función showSection si no existe
-    if (typeof window.showSection === 'undefined') {
-      window.showSection = function(sectionId) {
-        // Ocultar todas las secciones
+      function showSection(sectionId) {
         const sections = ['matrix-section', 'nasa-section', 'jedi-section', 'weather-section', 'hackers-section', 'algorithm-section'];
-        sections.forEach(id => {
-          const element = document.getElementById(id);
-          if (element) {
-            element.style.display = 'none';
-          }
-        });
-        
-        // Quitar active de todos los botones
-        const navButtons = document.querySelectorAll('.nav-button');
-        navButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Mostrar la sección seleccionada
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
-          targetSection.style.display = 'block';
-        }
-        
-        // Activar el botón correspondiente
         const buttonMap = {
           'matrix-section': 'matrix-tab',
           'nasa-section': 'nasa-tab', 
@@ -906,36 +395,41 @@
           'algorithm-section': 'algorithm-tab'
         };
         
-        const targetButton = document.getElementById(buttonMap[sectionId]);
-        if (targetButton) {
-          targetButton.classList.add('active');
-        }
-      };
-    }
-
-    // Agregar event listener para el botón de algoritmo
-    document.addEventListener('DOMContentLoaded', function() {
-      const algorithmTab = document.getElementById('algorithm-tab');
-      if (algorithmTab) {
-        algorithmTab.addEventListener('click', function() {
-          window.showSection('algorithm-section');
+        // Ocultar todas las secciones
+        sections.forEach(id => {
+          const element = document.getElementById(id);
+          if (element) element.style.display = 'none';
         });
+        
+        // Quitar active de todos los botones
+        document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+        
+        // Mostrar sección y activar botón
+        const targetSection = document.getElementById(sectionId);
+        const targetButton = document.getElementById(buttonMap[sectionId]);
+        
+        if (targetSection) targetSection.style.display = 'block';
+        if (targetButton) targetButton.classList.add('active');
       }
-    });
 
-    console.log("✅ DIJKSTRA VOYAGER sistema completamente funcional");
-    console.log("🎯 Funciones disponibles:", {
-      initializeApp: typeof window.initializeApp,
-      loadRandomData: typeof window.loadRandomData,
-      selectNodesManually: typeof window.selectNodesManually,
-      runDijkstraWithLogging: typeof window.runDijkstraWithLogging,
-      runDijkstraSilent: typeof window.runDijkstraSilent,
-      resetGraphManual: typeof window.resetGraphManual,
-      showGraphStats: typeof window.showGraphStats,
-      clearAlgorithmOutput: typeof window.clearAlgorithmOutput
-    });
-    
-    console.log("🎉 ¡Sistema listo para uso! Click en pestaña 'Dijkstra'");
+      // Event listeners simplificados
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabs = [
+          { id: 'matrix-tab', section: 'matrix-section' },
+          { id: 'nasa-tab', section: 'nasa-section' },
+          { id: 'jedi-tab', section: 'jedi-section' },
+          { id: 'weather-tab', section: 'weather-section' },
+          { id: 'hackers-tab', section: 'hackers-section' },
+          { id: 'algorithm-tab', section: 'algorithm-section' }
+        ];
+        
+        tabs.forEach(tab => {
+          const element = document.getElementById(tab.id);
+          if (element) {
+            element.addEventListener('click', () => showSection(tab.section));
+          }
+        });
+      });
     </script>
   </div>
 </body>

@@ -110,6 +110,7 @@ function createEditableMatrix(matrix, elementId, matrixNumber) {
             
             return rv;
         }
+        
 
         function calculateDistances(matrix) {
             const n = matrix.length;
@@ -122,6 +123,7 @@ function createEditableMatrix(matrix, elementId, matrixNumber) {
             
             return allDistances;
         }
+        
             
         // Función Dijkstra simple - CORREGIDA
         function dijkstraSimple(matrix, start) {
