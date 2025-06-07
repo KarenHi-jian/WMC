@@ -148,7 +148,7 @@ body {
 
 /* Animaciones */
 .fade-in {
-    animation: crawlUp 90s linear forwards;
+    animation: crawlUp 80s linear forwards;
 }
 
 @keyframes crawlUp {
@@ -218,4 +218,63 @@ body {
         padding: 10px 20px;
         font-size: 1.1em;
     }
+}
+
+/* Indicador de audio */
+.audio-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #00BFFF;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #00BFFF;
+    display: none;
+    z-index: 100;
+}
+
+.audio-indicator.active {
+    display: block;
+}
+
+
+/* Botón de mute */
+.mute-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: 2px solid #00BFFF;
+    color: #00BFFF;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s;
+    z-index: 100;
+}
+
+.mute-button:hover {
+    background: rgba(0, 191, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Animación del crawl (se ajustará dinámicamente) */
+@keyframes crawlUp {
+    0% {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-150vh);
+        opacity: 1;
+    }
+}
+
+/* Clase para iniciar el crawl */
+.start-crawl {
+    animation: crawlUp linear forwards;
+    /* La duración se establecerá con JavaScript */
 }

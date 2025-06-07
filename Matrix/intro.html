@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIE ODYSSEE DER GALAKTISCHEN BERECHNUNG</title>
-    
+
     <!-- CONECTAR CON TU CSS PRINCIPAL -->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/components.css" />
@@ -12,67 +13,178 @@
     <!-- CSS ESPECÍFICO PARA LA INTRODUCCIÓN -->
     <link rel="stylesheet" href="css/intro-styles.css" />
 </head>
+
 <body>
     <div class="stars" id="stars"></div>
-    
+
     <div class="story-container fade-in">
         <h1 class="title">DIE ODYSSEE DER GALAKTISCHEN BERECHNUNG</h1>
-        
+
         <p class="intro-phrase">Vor langer Zeit, in einer nicht so fernen Galaxie...</p>
-        
+
         <h2 class="subtitle">EPISODE I</h2>
-        
+
         <h2 class="subtitle">DIE BEDROHUNG DER BERECHNUNGEN</h2>
-        
+
         <p class="text">
-            Die Galaktische Republik befindet sich in der Krise. Die Planetensysteme sind auf komplexe Berechnungen angewiesen, um zwischen den Sternen zu navigieren, Handelsrouten zu etablieren und riesige astronomische Datensätze zu analysieren.
+            Die Galaktische Republik befindet sich in der Krise. Die Planetensysteme sind auf komplexe Berechnungen
+            angewiesen, um zwischen den Sternen zu navigieren, Handelsrouten zu etablieren und riesige astronomische
+            Datensätze zu analysieren.
         </p>
-        
+
         <p class="text">
-            Inmitten des rechnerischen Chaos hat eine Gruppe rebellischer Ingenieure begonnen, heimlich ein mächtiges Werkzeug zu entwickeln: MATRIX VOYAGER, eine Software, die Matrizenmultiplikationen mit nie zuvor gesehenen Geschwindigkeiten durchführen, stellare Graphen mittels BFS- und DFS-Algorithmen durchqueren und Aktionsradien für Kampfschiffe berechnen kann.
+            Inmitten des rechnerischen Chaos hat eine Gruppe rebellischer Ingenieure begonnen, heimlich ein mächtiges
+            Werkzeug zu entwickeln: MATRIX VOYAGER, eine Software, die Matrizenmultiplikationen mit nie zuvor gesehenen
+            Geschwindigkeiten durchführen, stellare Graphen mittels BFS- und DFS-Algorithmen durchqueren und
+            Aktionsradien für Kampfschiffe berechnen kann.
         </p>
-        
+
         <p class="text">
-            Angeführt von der brillanten Programmiererin Karen Hi-Jian arbeiten diese Ingenieure unermüdlich von ihrer verborgenen Basis auf dem Planeten Codex Prime aus, während die imperialen Streitkräfte versuchen, ihren Fortschritt zu stoppen, wohl wissend, dass derjenige, der diese Algorithmen kontrolliert, die Handelsrouten der gesamten Galaxie beherrschen wird...
+            Angeführt von der brillanten Programmiererin Karen Hi-Jian arbeiten diese Ingenieure unermüdlich von ihrer
+            verborgenen Basis auf dem Planeten Codex Prime aus, während die imperialen Streitkräfte versuchen, ihren
+            Fortschritt zu stoppen, wohl wissend, dass derjenige, der diese Algorithmen kontrolliert, die Handelsrouten
+            der gesamten Galaxie beherrschen wird...
         </p>
-        
+
         <p class="text">
-            Das Schicksal unzähliger Sternensysteme hängt nun vom Erfolg dieses revolutionären Projekts ab, während dunkle Mächte sich darauf vorbereiten, die Technologie an sich zu reißen...
+            Das Schicksal unzähliger Sternensysteme hängt nun vom Erfolg dieses revolutionären Projekts ab, während
+            dunkle Mächte sich darauf vorbereiten, die Technologie an sich zu reißen...
         </p>
-        
+
         <button class="begin-button" onclick="startApplication()">BEGINNE DIE REISE</button>
     </div>
-    
-    <script>
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const starCount = window.innerWidth < 768 ? 150 : 300; // Menos estrellas en móvil
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = Math.random() * 3 + 'px';
-                star.style.height = star.style.width;
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
+
+   <script>
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        const starCount = window.innerWidth < 768 ? 150 : 300;
         
-        function startApplication() {
-            // CONECTAR CON TU HTML PRINCIPAL
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+    
+    function startApplication() {
+        const narration = document.getElementById('narration');
+        const container = document.querySelector('.story-container');
+        const indicator = document.querySelector('.audio-indicator');
+        const button = document.querySelector('.begin-button');
+        
+        // Deshabilitar el botón
+        button.disabled = true;
+        button.style.opacity = '0.5';
+        button.style.cursor = 'not-allowed';
+        
+        // Mostrar indicador de audio
+        indicator.classList.add('active');
+        
+        // Cuando el audio esté listo
+        narration.addEventListener('loadedmetadata', function() {
+            const duration = narration.duration;
+            console.log('Duración de la narración: ' + duration + ' segundos');
+            
+            // Ajustar la animación del texto a la duración exacta del audio
+            container.style.animationDuration = duration + 's';
+            container.classList.add('start-crawl');
+            
+            // Iniciar audio
+            narration.play().catch(function(error) {
+                console.error('Error al reproducir audio:', error);
+                handleAudioError();
+            });
+        });
+        
+        // Si hay error al cargar el audio
+        narration.addEventListener('error', function() {
+            console.error('Error al cargar el audio');
+            handleAudioError();
+        });
+        
+        // Cuando termine la narración
+        narration.addEventListener('ended', function() {
+            console.log('Narración terminada');
+            indicator.classList.remove('active');
+            
+            // Esperar 2 segundos y luego cambiar de página
+            setTimeout(function() {
+                window.location.href = 'pruebafinalcss.html';
+            }, 2000);
+        });
+    }
+    
+    // Función para manejar errores de audio
+    function handleAudioError() {
+        const container = document.querySelector('.story-container');
+        const indicator = document.querySelector('.audio-indicator');
+        
+        indicator.classList.remove('active');
+        
+        // Iniciar crawl sin audio (90 segundos por defecto)
+        container.style.animationDuration = '90s';
+        container.classList.add('start-crawl');
+        
+        setTimeout(function() {
+            window.location.href = 'pruebafinalcss.html';
+        }, 90000);
+    }
+    
+    // Función para mutear/desmutear
+    let isMuted = false;
+    
+    function toggleMute() {
+        const narration = document.getElementById('narration');
+        const icon = document.getElementById('mute-icon');
+        
+        if (isMuted) {
+            narration.muted = false;
+            icon.textContent = '🔊';
+        } else {
+            narration.muted = true;
+            icon.textContent = '🔇';
+        }
+        isMuted = !isMuted;
+    }
+    
+    // Permitir saltar la intro con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const narration = document.getElementById('narration');
+            narration.pause();
             window.location.href = 'pruebafinalcss.html';
         }
-        
-        // Crear estrellas al cargar
+    });
+    
+    // Crear estrellas al cargar
+    createStars();
+    
+    // Recrear estrellas si cambia el tamaño de ventana
+    window.addEventListener('resize', function() {
+        document.getElementById('stars').innerHTML = '';
         createStars();
-        
-        // Recrear estrellas si cambia el tamaño de ventana
-        window.addEventListener('resize', function() {
-            document.getElementById('stars').innerHTML = '';
-            createStars();
-        });
-    </script>
+    });
+</script>
+    <!-- Audio de tu narración -->
+    <audio id="narration">
+        <source src="audio/frida.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <!-- Indicador visual de audio -->
+    <div class="audio-indicator">
+        <span>🔊</span> Reproduciendo narración...
+    </div>
+
+    <!-- Botón de mute -->
+    <button class="mute-button" onclick="toggleMute()">
+        <span id="mute-icon">🔊</span>
+    </button>
 </body>
+
 </html>
