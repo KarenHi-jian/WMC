@@ -1,6 +1,6 @@
-// climaSinAuto.js - API del clima SIN AUTOMATIC FUNCTIONS
+// climaSinAuto.js - API del clima SIN AUTOMATIC FUNCTIONS - VERSIÓN COMPACTA
 
-// Función principal para obtener datos del clima
+// Función principal para obtener datos del clima - ACTUALIZADA
 function getSimpleWeather() {
     const cityInput = document.getElementById('city-input');
     const output = document.getElementById('weather-output');
@@ -13,11 +13,11 @@ function getSimpleWeather() {
     const city = cityInput.value.trim();
     
     if (!city) {
-        output.innerHTML = '<div style="text-align: center; color: #ff9999;">Bitte geben Sie eine Stadt ein!</div>';
+        output.innerHTML = '<div class="weather-error">🌡️ Bitte geben Sie eine Stadt ein!</div>';
         return;
     }
     
-    output.innerHTML = '<div class="loading" style="text-align: center;">Lade Wetterdaten...</div>';
+    output.innerHTML = '<div class="weather-loading">🛰️ Lade Wetterdaten...</div>';
     
     // Llamar a la API del clima
     fetchWeatherData(city)
@@ -55,7 +55,7 @@ function displayWeatherData(data, cityName) {
     output.innerHTML = weatherHTML;
 }
 
-// Función para crear el HTML del clima
+// Función para crear el HTML del clima - ACTUALIZADA PARA DISEÑO COMPACTO
 function createWeatherHTML(current, areaName) {
     const weatherEmoji = getWeatherEmoji(current.weatherCode);
     const temperature = current.temp_C;
@@ -64,24 +64,19 @@ function createWeatherHTML(current, areaName) {
     const windSpeed = current.windspeedKmph;
     
     const html = `
-        <div style="width: 100%;">
-            <h3 style="color: var(--primary-color); text-align: center; margin-bottom: 30px; font-size: 1.5em;">
-                ${areaName}
-            </h3>
+        <div class="weather-compact">
+            <div class="weather-main">
+                <div class="weather-emoji">${weatherEmoji}</div>
+                <div class="weather-temp">${temperature}°C</div>
+            </div>
             
-            <div style="text-align: center;">
-                <div style="font-size: 5em; margin: 20px 0;">
-                    ${weatherEmoji}
+            <div class="weather-details">
+                <h3 class="weather-city">🌍 ${areaName}</h3>
+                <p class="weather-description">✨ ${description}</p>
+                <div class="weather-stats">
+                    <span class="humidity">Feuchtigkeit: ${humidity}%</span><br>
+                    <span class="wind">Wind: ${windSpeed} km/h</span>
                 </div>
-                <p style="font-size: 3.5em; margin: 20px 0; color: white; font-weight: bold;">
-                    ${temperature}°C
-                </p>
-                <p style="color: var(--accent-color); font-size: 1.5em; margin: 20px 0;">
-                    ${description}
-                </p>
-                <p style="color: var(--accent-color); margin-top: 30px; font-size: 1.2em;">
-                    Feuchtigkeit: ${humidity}% | Wind: ${windSpeed} km/h
-                </p>
             </div>
         </div>
     `;
@@ -89,14 +84,14 @@ function createWeatherHTML(current, areaName) {
     return html;
 }
 
-// Función para mostrar errores del clima
+// Función para mostrar errores del clima - ACTUALIZADA
 function displayWeatherError() {
     const output = document.getElementById('weather-output');
     if (!output) return;
     
     const errorHTML = `
-        <div style="text-align: center; color: #ff9999;">
-            Fehler: Stadt nicht gefunden oder Verbindungsproblem
+        <div class="weather-error">
+            🚨 Fehler: Stadt nicht gefunden oder Verbindungsproblem
         </div>
     `;
     

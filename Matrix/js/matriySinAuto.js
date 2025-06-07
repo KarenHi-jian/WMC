@@ -1,43 +1,22 @@
-// ARCHIVO COMPLETO matriySinAuto.js - ESTILO ACADÉMICO
+// ARCHIVO COMPLETO matriySinAuto.js - ESTILO ACADÉMICO CORREGIDO - VERSIÓN FINAL
 
 // VARIABLES GLOBALES
 let matrix_1, matrix_2, output, matrixSizeInput;
+let visualCanvas, visualContext;
+const CANVAS_SIZE = 380;
+const NODE_SIZE = 18;
 
-// INICIALIZACIÓN MEJORADA
+// INICIALIZACIÓN BÁSICA - ESTILO ACADÉMICO
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM cargado, inicializando variables...");
-    
     matrix_1 = document.getElementById('matrix_1');
     matrix_2 = document.getElementById('matrix_2');
     output = document.getElementById('output');
     matrixSizeInput = document.getElementById('matrix-size');
-    
-    // Verificar que los elementos existan
-    if (matrix_1) {
-        console.log("✅ matrix_1 encontrado");
-    } else {
-        console.log("❌ matrix_1 NO encontrado");
+    initGraphVisualization();
+    // Verificación básica de elementos críticos
+    if (!matrix_1 || !matrix_2 || !output) {
+        alert("ERROR: Critical DOM elements not found!");
     }
-    
-    if (matrix_2) {
-        console.log("✅ matrix_2 encontrado");
-    } else {
-        console.log("❌ matrix_2 NO encontrado");
-    }
-    
-    if (output) {
-        console.log("✅ output encontrado");
-    } else {
-        console.log("❌ output NO encontrado");
-    }
-    
-    if (matrixSizeInput) {
-        console.log("✅ matrix-size input encontrado");
-    } else {
-        console.log("❌ matrix-size input NO encontrado");
-    }
-    
-    console.log("Inicialización completa");
 });
 
 // FUNCIONES PARA GENERAR MATRICES DINÁMICAS
@@ -65,6 +44,7 @@ function matrixToString(matrix) {
     result += "]";
     return result;
 }
+
 function createMatrix(rows, cols, defaultValue = 0) {
     const matrix = [];
     for (let i = 0; i < rows; i++) {
@@ -76,20 +56,24 @@ function createMatrix(rows, cols, defaultValue = 0) {
     return matrix;
 }
 
+// FUNCIÓN BÁSICA PARA MOSTRAR MENSAJES - ESTILO ACADÉMICO PURO
 function showToast(config) {
-    const toastElement = document.getElementById('liveToast');
-    const toastBody = document.getElementById('toast_body');
-    
-    if (toastBody) {
-        toastBody.textContent = config.msg;
-        toastBody.style.color = config.error ? '#dc3545' : '#198754';
+    // Método 1: Mostrar en el terminal de output - BÁSICO
+    if (output) {
+        const prefix = config.error ? "ERROR" : "SUCCESS";
+        const message = prefix + ": " + config.msg + "\n\n";
+        
+        // Agregar mensaje al principio del output
+        if (output.textContent && output.textContent.length > 50) {
+            output.textContent = message + output.textContent;
+        } else {
+            output.textContent = message + "MATRIX VOYAGER - Quantensystem bereit für Befehle...";
+        }
     }
     
-    if (toastElement && window.bootstrap) {
-        const toast = new bootstrap.Toast(toastElement);
-        toast.show();
-    } else {
-        console.log(config.msg);
+    // Método 2: Alert básico para errores críticos
+    if (config.error) {
+        alert(config.msg);
     }
 }
 
@@ -108,21 +92,21 @@ function printAdj(matrix) {
 function clearMatrix1() {
     if (matrix_1) {
         matrix_1.value = '';
-        showToast({ msg: "Matrix 1 gelöscht!", error: false });
+        showToast({ msg: "✅ Matrix 1 erfolgreich gelöscht!", error: false });
     }
 }
 
 function clearMatrix2() {
     if (matrix_2) {
         matrix_2.value = '';
-        showToast({ msg: "Matrix 2 gelöscht!", error: false });
+        showToast({ msg: "✅ Matrix 2 erfolgreich gelöscht!", error: false });
     }
 }
 
 function clearOutput() {
     if (output) {
         output.textContent = '🌌 MATRIX VOYAGER - Quantensystem bereit für Befehle...';
-        showToast({ msg: "Terminal gelöscht!", error: false });
+        showToast({ msg: "✅ Terminal erfolgreich geleert!", error: false });
     }
 }
 
@@ -136,7 +120,7 @@ function validateMatrix2() {
 
 function validateMatrix(matrixElement, matrixName) {
     if (!matrixElement || !matrixElement.value) {
-        showToast({ msg: `${matrixName} ist leer!`, error: true });
+        showToast({ msg: `❌ ${matrixName} ist leer!`, error: true });
         return false;
     }
     
@@ -144,62 +128,165 @@ function validateMatrix(matrixElement, matrixName) {
         const matrix = JSON.parse(matrixElement.value);
         
         if (!Array.isArray(matrix)) {
-            showToast({ msg: `${matrixName} ist kein Array!`, error: true });
+            showToast({ msg: `❌ ${matrixName} ist kein Array!`, error: true });
             return false;
         }
         
         const n = matrix.length;
-        for (let i = 0; i < n; i++) {
-            if (!Array.isArray(matrix[i]) || matrix[i].length !== n) {
-                showToast({ msg: `${matrixName} ist nicht quadratisch!`, error: true });
-                return false;
-            }
+        if (n === 0) {
+            showToast({ msg: `❌ ${matrixName} ist leer (0 Zeilen)!`, error: true });
+            return false;
         }
         
-        showToast({ msg: `${matrixName} ist gültig! ✅`, error: false });
-        return true;
-    } catch (error) {
-        showToast({ msg: `${matrixName} JSON Fehler: ${error.message}`, error: true });
-        return false;
-    }
-}
-
-// FUNCIÓN DE CARGA DE HYPERRAUM DEMO
-function loadHyperraumDemo() {
-    try {
-        const size = getMatrixSize();
-        console.log(`Generando hyperraum demo de tamaño ${size}x${size}`);
-        
-        // Crear matrices más densas para el demo hyperraum
-        const matrix1 = createMatrix(size, size);
-        const matrix2 = createMatrix(size, size);
-        
-        // Patrón denso para matrix1
-        for (let i = 0; i < size; i++) {
-            for (let j = 0; j < size; j++) {
-                if (i !== j && Math.random() < 0.6) {
-                    matrix1[i][j] = 1;
+        for (let i = 0; i < n; i++) {
+            if (!Array.isArray(matrix[i])) {
+                showToast({ msg: `❌ ${matrixName} Zeile ${i + 1} ist kein Array!`, error: true });
+                return false;
+            }
+            
+            if (matrix[i].length !== n) {
+                showToast({ msg: `❌ ${matrixName} ist nicht quadratisch! Zeile ${i + 1} hat ${matrix[i].length} Elemente, erwartet ${n}!`, error: true });
+                return false;
+            }
+            
+            // Überprüfen ob alle Werte Zahlen sind
+            for (let j = 0; j < matrix[i].length; j++) {
+                if (typeof matrix[i][j] !== 'number') {
+                    showToast({ msg: `❌ ${matrixName} Position [${i + 1},${j + 1}] ist keine Zahl: "${matrix[i][j]}"!`, error: true });
+                    return false;
+                }
+                
+                if (matrix[i][j] < 0) {
+                    showToast({ msg: `❌ ${matrixName} Position [${i + 1},${j + 1}] ist negativ: ${matrix[i][j]}!`, error: true });
+                    return false;
                 }
             }
         }
         
-        // Patrón de estrella para matrix2
-        const center = Math.floor(size / 2);
-        for (let i = 0; i < size; i++) {
-            if (i !== center) {
-                matrix2[center][i] = 1;
-                matrix2[i][center] = 1;
-            }
-        }
-        
-        if (matrix_1) matrix_1.value = matrixToString(matrix1);
-        if (matrix_2) matrix_2.value = matrixToString(matrix2);
-        
-        showToast({ msg: `Hyperraum-Demo ${size}x${size} geladen! 🚀`, error: false });
+        showToast({ msg: `✅ ${matrixName} ist gültig und bereit!`, error: false });
+        return true;
         
     } catch (error) {
-        console.log("ERROR en loadHyperraumDemo:", error.message);
-        showToast({ msg: "Error al cargar Hyperraum Demo: " + error.message, error: true });
+        if (error instanceof SyntaxError) {
+            showToast({ msg: `❌ ${matrixName} JSON Syntax-Fehler: Überprüfen Sie Klammern und Kommas!`, error: true });
+        } else {
+            showToast({ msg: `❌ ${matrixName} Unbekannter Fehler: ${error.message}`, error: true });
+        }
+        return false;
+    }
+}
+
+// FUNCIONES DE EJEMPLO Y CARGA DE DATOS
+/**
+ * FUNCIÓN ACADÉMICA: CARGAR EJEMPLOS DE DEMOSTRACIÓN
+ * Genera matrices de ejemplo para análisis educativo (SIN Math.random)
+ */
+function loadHyperraumDemo() {
+    try {
+        const size = getMatrixSize();
+        
+        // Crear matrices de ejemplo académicas simples
+        const matrix1 = createExampleMatrix1(size);
+        const matrix2 = createExampleMatrix2(size);
+        
+        // Cargar en los campos de texto
+        if (matrix_1) {
+            matrix_1.value = JSON.stringify(matrix1);
+        }
+        if (matrix_2) {
+            matrix_2.value = JSON.stringify(matrix2);
+        }
+        
+        // Mostrar mensaje de éxito
+        showToast({ 
+            msg: `🚀 Hyperraum-Demo ${size}x${size} erfolgreich geladen!`, 
+            error: false 
+        });
+        
+    } catch (error) {
+        showToast({ 
+            msg: "❌ Fehler beim Laden der Hyperraum-Demo: " + error.message, 
+            error: true 
+        });
+    }
+}
+
+/**
+ * CREAR MATRIZ DE EJEMPLO 1 - PATRÓN ACADÉMICO CIRCULAR
+ * @param {number} n - Tamaño de la matriz
+ * @returns {Array} Matriz de adyacencia ejemplo
+ */
+function createExampleMatrix1(n) {
+    const matrix = createMatrix(n, n, 0);
+    
+    // Crear patrón circular simple: cada nodo conecta con el siguiente
+    for (let i = 0; i < n - 1; i++) {
+        matrix[i][i + 1] = 1;
+    }
+    
+    // Cerrar el ciclo para hacer el grafo más interesante
+    if (n >= 3) {
+        matrix[n - 1][0] = 1;
+    }
+    
+    return matrix;
+}
+
+/**
+ * CREAR MATRIZ DE EJEMPLO 2 - PATRÓN ACADÉMICO ESTRELLA
+ * @param {number} n - Tamaño de la matriz
+ * @returns {Array} Matriz de adyacencia ejemplo
+ */
+function createExampleMatrix2(n) {
+    const matrix = createMatrix(n, n, 0);
+    
+    // Crear patrón estrella: primer nodo conecta con todos los demás
+    if (n > 1) {
+        for (let j = 1; j < n; j++) {
+            matrix[0][j] = 1; // Nodo 0 conecta con todos
+        }
+    }
+    
+    return matrix;
+}
+
+/**
+ * FUNCIÓN PARA EL BOTÓN "GRAPH PROTOTYPEN LADEN"
+ * Carga ejemplos específicos de tipos de grafos
+ */
+function loadGraphExamples() {
+    try {
+        // Ejemplos académicos fijos para demostración
+        const triangleGraph = [
+            [0, 1, 1],
+            [1, 0, 1],
+            [1, 1, 0]
+        ];
+        
+        const pathGraph = [
+            [0, 1, 0],
+            [0, 0, 1],
+            [0, 0, 0]
+        ];
+        
+        // Cargar ejemplos
+        if (matrix_1) {
+            matrix_1.value = JSON.stringify(triangleGraph);
+        }
+        if (matrix_2) {
+            matrix_2.value = JSON.stringify(pathGraph);
+        }
+        
+        showToast({ 
+            msg: "🌐 Graph Prototypen erfolgreich geladen!", 
+            error: false 
+        });
+        
+    } catch (error) {
+        showToast({ 
+            msg: "❌ Fehler beim Laden der Prototypen: " + error.message, 
+            error: true 
+        });
     }
 }
 
@@ -240,7 +327,7 @@ function calculateMatrix() {
         const matrixB = JSON.parse(matrix_2.value);
         
         if (matrixA.length !== matrixB.length) {
-            showToast({ msg: "Matrizen haben unterschiedliche Größen!", error: true });
+            showToast({ msg: "❌ Matrizen haben unterschiedliche Größen!", error: true });
             return;
         }
         
@@ -252,9 +339,9 @@ function calculateMatrix() {
         displayResult += printAdj(result);
         
         output.textContent = displayResult;
-        showToast({ msg: "Matrix-Multiplikation abgeschlossen! 🔢", error: false });
+        showToast({ msg: "🔢 Matrix-Multiplikation erfolgreich abgeschlossen!", error: false });
     } catch (error) {
-        showToast({ msg: "Fehler bei Multiplikation: " + error.message, error: true });
+        showToast({ msg: "❌ Fehler bei Multiplikation: " + error.message, error: true });
     }
 }
 
@@ -286,9 +373,9 @@ function potenzMatrix(matrixElement, matrixName) {
         result += printAdj(power3);
         
         output.textContent = result;
-        showToast({ msg: `${matrixName} Hypersprung abgeschlossen! 🚀`, error: false });
+        showToast({ msg: `🚀 ${matrixName} Hypersprung erfolgreich berechnet!`, error: false });
     } catch (error) {
-        showToast({ msg: "Fehler bei Potenz: " + error.message, error: true });
+        showToast({ msg: "❌ Fehler bei Potenz: " + error.message, error: true });
     }
 }
 
@@ -461,7 +548,7 @@ function analyzeAdvancedGraph(matrix) {
 
 function analyzeMatrix(matrixElement, matrixName) {
     if (!matrixElement || !matrixElement.value) {
-        showToast({ msg: `${matrixName} ist leer.`, error: true });
+        showToast({ msg: `❌ ${matrixName} ist leer.`, error: true });
         return;
     }
     
@@ -487,12 +574,12 @@ function analyzeMatrix(matrixElement, matrixName) {
                 result += `🎯 CENTRALITY MEASURES:\n`;
                 result += `• Radius: ${analysis.radius}\n`;
                 result += `• Diameter: ${analysis.diameter}\n`;
-                result += `• Center: Node(s) ${analysis.center.map(i => i + 1).join(', ')}\n\n`;
+                result += `• Center: Node(s) ${centerToString(analysis.center)}\n\n`;
                 
                 result += `📏 ECCENTRICITY BY NODE:\n`;
                 for (let i = 0; i < analysis.eccentricity.length; i++) {
                     const ecc = analysis.eccentricity[i];
-                    const isCenter = analysis.center.indexOf(i) !== -1;
+                    const isCenter = isInCenter(analysis.center, i);
                     result += `• Node ${i + 1}: ${ecc === Infinity ? '∞' : ecc}${isCenter ? ' (CENTER)' : ''}\n`;
                 }
                 
@@ -529,11 +616,204 @@ function analyzeMatrix(matrixElement, matrixName) {
         }
         
         output.textContent = result;
-        showToast({ msg: `Advanced analysis completed for ${matrixName}!` });
+        showToast({ msg: `📊 Erweiterte Analyse für ${matrixName} abgeschlossen!` });
     } catch (error) {
-        showToast({ msg: "Fehler: " + error.message, error: true });
+        showToast({ msg: "❌ Fehler: " + error.message, error: true });
     }
 }
 
-function analyzeMatrix1() { analyzeMatrix(matrix_1, "Matrix 1"); }
-function analyzeMatrix2() { analyzeMatrix(matrix_2, "Matrix 2"); }
+function analyzeMatrix1() { 
+    analyzeMatrix(matrix_1, "Matrix 1"); 
+}
+
+function analyzeMatrix2() { 
+    analyzeMatrix(matrix_2, "Matrix 2"); 
+}
+
+// FUNCIÓN PARA IR A LA SECCIÓN DIJKSTRA - ESTILO ACADÉMICO
+function goToDijkstraSection() {
+    showSection('dijkstra-section');
+    alert("SUCCESS: Navegando a la sección Dijkstra!");
+}
+
+// =============================================================================
+// MÓDULO DE VISUALIZACIÓN DE GRAFOS - VERSIÓN ACADÉMICA
+// =============================================================================
+
+/**
+ * INICIALIZACIÓN DEL SISTEMA DE VISUALIZACIÓN
+ * Función académica para configurar el canvas HTML5
+ */
+function initGraphVisualization() {
+    visualCanvas = document.getElementById('graph-canvas');
+    if (visualCanvas) {
+        visualContext = visualCanvas.getContext('2d');
+        visualCanvas.width = CANVAS_SIZE;
+        visualCanvas.height = CANVAS_SIZE;
+        clearGraphArea();
+        console.log("Sistema de visualización iniciado correctamente");
+    } else {
+        console.warn("Canvas de visualización no encontrado");
+    }
+}
+
+/**
+ * LIMPIAR ÁREA DE VISUALIZACIÓN
+ * Prepara el canvas con grid académico
+ */
+function clearGraphArea() {
+    if (!visualContext) return;
+    
+    // Fondo blanco académico
+    visualContext.fillStyle = '#ffffff';
+    visualContext.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    // Grid de referencia académico
+    visualContext.strokeStyle = '#f0f0f0';
+    visualContext.lineWidth = 1;
+    
+    // Líneas verticales del grid
+    for (let x = 0; x <= CANVAS_SIZE; x += 20) {
+        visualContext.beginPath();
+        visualContext.moveTo(x, 0);
+        visualContext.lineTo(x, CANVAS_SIZE);
+        visualContext.stroke();
+    }
+    
+    // Líneas horizontales del grid
+    for (let y = 0; y <= CANVAS_SIZE; y += 20) {
+        visualContext.beginPath();
+        visualContext.moveTo(0, y);
+        visualContext.lineTo(CANVAS_SIZE, y);
+        visualContext.stroke();
+    }
+    
+    // Título académico
+    visualContext.fillStyle = '#333333';
+    visualContext.font = 'bold 14px Arial';
+    visualContext.textAlign = 'center';
+    visualContext.fillText('Representación Gráfica de Matriz de Adyacencia', CANVAS_SIZE/2, 20);
+}
+
+function calculateNodePositions(nodeCount) {
+    const positions = [];
+    const centerX = CANVAS_SIZE / 2;
+    const centerY = CANVAS_SIZE / 2;
+    const radius = Math.min(CANVAS_SIZE, CANVAS_SIZE) * 0.32;
+    
+    for (let i = 0; i < nodeCount; i++) {
+        const angle = (2 * Math.PI * i) / nodeCount - Math.PI / 2;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        positions.push({ x: x, y: y });
+    }
+    
+    return positions;
+}
+
+function renderGraphEdges(matrix, positions) {
+    if (!visualContext) return;
+    
+    const nodeCount = matrix.length;
+    visualContext.strokeStyle = '#2196F3';
+    visualContext.lineWidth = 2;
+    
+    for (let i = 0; i < nodeCount; i++) {
+        for (let j = 0; j < nodeCount; j++) {
+            if (matrix[i][j] > 0 && i !== j) {
+                const start = positions[i];
+                const end = positions[j];
+                
+                visualContext.beginPath();
+                visualContext.moveTo(start.x, start.y);
+                visualContext.lineTo(end.x, end.y);
+                visualContext.stroke();
+                
+                drawArrow(start, end);
+            }
+        }
+    }
+}
+
+function drawArrow(start, end) {
+    if (!visualContext) return;
+    
+    const arrowLength = 10;
+    const arrowAngle = Math.PI / 6;
+    const angle = Math.atan2(end.y - start.y, end.x - start.x);
+    
+    const arrowX = end.x - (NODE_SIZE + 8) * Math.cos(angle);
+    const arrowY = end.y - (NODE_SIZE + 8) * Math.sin(angle);
+    
+    visualContext.beginPath();
+    visualContext.moveTo(arrowX, arrowY);
+    visualContext.lineTo(
+        arrowX - arrowLength * Math.cos(angle - arrowAngle),
+        arrowY - arrowLength * Math.sin(angle - arrowAngle)
+    );
+    visualContext.moveTo(arrowX, arrowY);
+    visualContext.lineTo(
+        arrowX - arrowLength * Math.cos(angle + arrowAngle),
+        arrowY - arrowLength * Math.sin(angle + arrowAngle)
+    );
+    visualContext.stroke();
+}
+
+function renderGraphNodes(positions) {
+    if (!visualContext) return;
+    
+    visualContext.fillStyle = '#4CAF50';
+    visualContext.strokeStyle = '#333333';
+    visualContext.lineWidth = 2;
+    visualContext.font = 'bold 12px Arial';
+    visualContext.textAlign = 'center';
+    visualContext.textBaseline = 'middle';
+    
+    for (let i = 0; i < positions.length; i++) {
+        const pos = positions[i];
+        
+        // Dibujar círculo del nodo
+        visualContext.beginPath();
+        visualContext.arc(pos.x, pos.y, NODE_SIZE, 0, 2 * Math.PI);
+        visualContext.fill();
+        visualContext.stroke();
+        
+        // Dibujar número del nodo
+        visualContext.fillStyle = '#FFFFFF';
+        visualContext.fillText((i + 1).toString(), pos.x, pos.y);
+        visualContext.fillStyle = '#4CAF50';
+    }
+}
+
+function visualizeMatrix1() {
+    visualizeMatrix(matrix_1, "Matrix 1");
+}
+
+function visualizeMatrix2() {
+    visualizeMatrix(matrix_2, "Matrix 2");
+}
+
+function visualizeMatrix(matrixElement, matrixName) {
+    if (!validateMatrix(matrixElement, matrixName)) {
+        return;
+    }
+    
+    try {
+        const matrix = JSON.parse(matrixElement.value);
+        const nodeCount = matrix.length;
+        
+        if (nodeCount > 10) {
+            showToast({ msg: `❌ ${matrixName} ist zu groß für Visualisierung (max 10 Knoten)!`, error: true });
+            return;
+        }
+        
+        clearGraphArea();
+        const positions = calculateNodePositions(nodeCount);
+        renderGraphEdges(matrix, positions);
+        renderGraphNodes(positions);
+        
+        showToast({ msg: `🎨 ${matrixName} erfolgreich visualisiert!`, error: false });
+        
+    } catch (error) {
+        showToast({ msg: `❌ Fehler bei Visualisierung: ${error.message}`, error: true });
+    }
+}

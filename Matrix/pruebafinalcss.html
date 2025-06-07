@@ -5,48 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Matrix Galactic Odyssey - News API</title>
   
-  <!-- CSS FILES - ORDEN IMPORTANTE -->
+  <!-- CSS FILES -->
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/pruebafinalcss.css" />
   <link rel="stylesheet" href="css/hackers-section.css" />
   <link rel="stylesheet" href="css/jedi-section-sinAuto.css" />
-  <link rel="stylesheet" href="css/matrix.css" />  
-  <link rel="stylesheet" href="css/algorithm-section.css" />
+  <link rel="stylesheet" href="css/Clima-weather-section.css" />
+  <!-- NUEVO: CSS para componentes de matriz -->
+  <link rel="stylesheet" href="css/matrix-components.css" />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
 </head>
 <body>
   <div class="container">
-    <h1>📰 DIE GALAKTISCHE NEWS ODYSSEE</h1>
+    <h1>DIE ODYSSEE DER GALAKTISCHEN BERECHNUNG</h1>
     <div class="lightsaber"></div>
 
     <!-- Navigation -->
     <div class="navigation-tabs">
-      <button class="nav-button active" id="matrix-tab">Matrix Voyager</button>
-      <button class="nav-button" id="nasa-tab">NASA Daten</button>
-      <button class="nav-button" id="jedi-tab">Jedi Weisheit</button>
-      <button class="nav-button" id="weather-tab">Wetter</button>
-      <button class="nav-button" id="hackers-tab">📰 Real News API</button>
-      
+      <button class="nav-button active" id="matrix-tab">🔐 Matrix Voyager</button>
+      <button class="nav-button" id="nasa-tab">🌍🪐 NASA Daten</button>
+      <button class="nav-button" id="jedi-tab">🌠 Jedi Weisheit</button>
+      <button class="nav-button" id="weather-tab">☀️🌧️ Wetter</button>
+      <button class="nav-button" id="hackers-tab">🔮 Universe News </button>
+      <button class="nav-button" id="dijkstra-tab">⚡ Dijkstra</button>
     </div>
 
-    <!-- MATRIX SECTION - CON TÍTULOS CREATIVOS -->
+    <!-- MATRIX SECTION -->
     <div id="matrix-section">
       <div class="matrix-size-container">
         <label for="matrix-size">🎛️ Matrix Dimension:</label>
         <input type="number" id="matrix-size" min="2" max="10" value="3" />
-        <button class="button" onclick="loadGraphExamples()">🌐 Graph Prototypen</button>
-        <button class="button" onclick="loadHyperraumDemo()">🚀 HYPERRAUM DEMO</button>
+        <button class="button" onclick="loadHyperraumDemo()">🤖 HYPERRAUM DEMO</button>
       </div>
 
       <h2>🌌 MATRIX VOYAGER - Galaktische Navigationsmatrix</h2>
       
-      <!-- Contenedor de matrices con títulos creativos -->
+      <!-- Contenedor de matrices -->
       <div class="matrix-container">
         <div class="matrix-display">
-          <div class="matrix-title">🎯 MATRIX ALPHA [M¹] - Quantenformat</div>
+          <div class="matrix-title">🔢 MATRIX ALPHA [M¹] - Quantenformat</div>
           <textarea 
             id="matrix_1" 
             class="matrix-textarea"
@@ -56,14 +56,14 @@
           </textarea>
           <div style="text-align: center; margin-top: 10px;">
             <button class="button" onclick="clearMatrix1()">🗑️ Reset</button>
-            <button class="button" onclick="validateMatrix1()">✅ Validieren</button>
-            <button class="button" onclick="potenzMatrix1()">🚀 Hypersprung</button>
-            <button class="button" onclick="analyzeMatrix1()">📊 Scan</button>
+            <button class="button" onclick="validateMatrix1()">🟢 Validieren</button>
+            <button class="button" onclick="potenzMatrix1()">🚁Hypersprung</button>
+            <button class="button" onclick="analyzeMatrix1()">🔎 Scan</button>
           </div>
         </div>
         
         <div class="matrix-display">
-          <div class="matrix-title">🎯 MATRIX BETA [M²] - Quantenformat</div>
+          <div class="matrix-title">🔢 MATRIX BETA [M²] - Quantenformat</div>
           <textarea 
             id="matrix_2" 
             class="matrix-textarea"
@@ -73,47 +73,47 @@
           </textarea>
           <div style="text-align: center; margin-top: 10px;">
             <button class="button" onclick="clearMatrix2()">🗑️ Reset</button>
-            <button class="button" onclick="validateMatrix2()">✅ Validieren</button>
-            <button class="button" onclick="potenzMatrix2()">🚀 Hypersprung</button>
-            <button class="button" onclick="analyzeMatrix2()">📊 Scan</button>
+            <button class="button" onclick="validateMatrix2()">🟢 Validieren</button>
+            <button class="button" onclick="potenzMatrix2()">🚁 Hypersprung</button>
+            <button class="button" onclick="analyzeMatrix2()">🔎 Scan</button>
           </div>
         </div>
       </div>
 
       <div class="lightsaber alt"></div>
-      <h2>🚀 Galaktische Rechenoperationen</h2>
+      <h2> 💾 Galaktische Rechenoperationen</h2>
       
       <!-- MATRIX KOMMANDOZENTRALE -->
-      <div style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(0, 30, 60, 0.3); border-radius: 8px; border: 1px solid var(--primary-color);">
-        <h3 style="color: var(--primary-color); margin-bottom: 20px;">⚡ MATRIX KOMMANDOZENTRALE</h3>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+      <div class="command-section">
+        <h3>⚡ MATRIX KOMMANDOZENTRALE</h3>
+        <div class="button-grid">
           <button class="button" onclick="calculateMatrix()" style="background: linear-gradient(45deg, #1e3c72, #2a5298);">
             🔢 MATRIX FUSION (A × B)
           </button>
           <button class="button" onclick="potenzMatrix1()" style="background: linear-gradient(45deg, #8360c3, #2ebf91);">
-            🚀 M1 HYPERSPRUNG (²·³)
+            🛸 M1 HYPERSPRUNG (²·³)
           </button>
           <button class="button" onclick="potenzMatrix2()" style="background: linear-gradient(45deg, #134e5e, #71b280);">
-            🚀 M2 HYPERSPRUNG (²·³)
+            🛸 M2 HYPERSPRUNG (²·³)
           </button>
         </div>
         
         <h4 style="color: var(--primary-color); margin: 20px 0 10px 0;">🔍 NETZWERK INTELLIGENCE</h4>
-        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <div class="button-grid">
           <button class="button" onclick="analyzeMatrix1()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a52);">
-            📊 M1 GRAPH SCANNER
+            🔍 M1 GRAPH SCANNER
           </button>
           <button class="button" onclick="analyzeMatrix2()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
-            📊 M2 GRAPH SCANNER
+            🔍 M2 GRAPH SCANNER
           </button>
           <button class="button" onclick="loadGraphExamples()" style="background: linear-gradient(45deg, #fce38a, #f38181);">
             🌐 GRAPH PROTOTYPEN LADEN
           </button>
         </div>
         
-        <div style="font-size: 0.9em; color: var(--accent-color); margin-top: 15px;">
-          🚀 <strong>HYPERSPRUNG:</strong> Berechnet Matrix² (Quadrat) und Matrix³ (Kubik)<br>
-          📊 <strong>GRAPH SCANNER:</strong> Analysiert Knoten, Kanten, Dichte, Verbindungen<br>
+        <div class="info-text">
+          🏆 <strong>HYPERSPRUNG:</strong> Berechnet Matrix² (Quadrat) und Matrix³ (Kubik)<br>
+          🛸🔍 UFO SCANNER<strong>GRAPH SCANNER:</strong> Analysiert Knoten, Kanten, Dichte, Verbindungen<br>
           🔢 <strong>MATRIX FUSION:</strong> Klassische Matrixmultiplikation A × B
         </div>
       </div>
@@ -130,12 +130,26 @@
           🗑️ Terminal löschen
         </button>
       </div>
+
+      <!-- Graph Visualization Canvas -->
+      <div class="graph-visualization" style="text-align: center; margin: 20px 0;">
+        <h3 style="color: var(--primary-color);">🎨 Graph Visualization</h3>
+        <canvas id="graph-canvas" style="border: 1px solid var(--primary-color); background: white; border-radius: 8px;"></canvas>
+        <div style="margin-top: 10px;">
+          <button class="button" onclick="visualizeMatrix1()" style="background: linear-gradient(45deg, #ff6b6b, #ee5a52);">
+            🎨 Visualizar Matrix 1
+          </button>
+          <button class="button" onclick="visualizeMatrix2()" style="background: linear-gradient(45deg, #4ecdc4, #44a08d);">
+            🎨 Visualizar Matrix 2
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- NASA SECTION -->
     <div id="nasa-section" style="display: none;">
       <div class="lightsaber alt"></div>
-      <h2>🌟 NASA Daten</h2>
+      <h2>☄️ NASA Daten</h2>
       <div id="react-root"></div>
     </div>
 
@@ -175,27 +189,62 @@
       <h2>🌍 Wetter</h2>
       <div class="weather-input">
         <input type="text" id="city-input" placeholder="Stadt eingeben..." />
-        <button class="button" onclick="getSimpleWeather()">Wetter abrufen</button>
+        <button class="button" onclick="getSimpleWeather()"> 🛰️ Wetter abrufen</button>
       </div>
       <div id="weather-output" class="output weather-output">
         <div class="weather-placeholder">Geben Sie eine Stadt ein, um das Wetter zu sehen...</div>
       </div>
     </div>
 
+    <!-- DIJKSTRA SECTION -->
+    <div id="dijkstra-section" style="display: none;">
+      <div class="lightsaber alt"></div>
+      <h2>🧮 Dijkstra</h2>
+      
+      <div class="command-section">
+        <div class="button-grid">
+          <button class="button" onclick="initializeApp()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
+            🔧 Graph Initialisieren
+          </button>
+          <button class="button" onclick="selectNodesManually()" style="background: linear-gradient(45deg, #3498db, #2980b9);">
+            🔗 Knoten Auswählen
+          </button>
+          <button class="button" onclick="runDijkstraWithLogging()" style="background: linear-gradient(45deg, #e74c3c, #c0392b);">
+            ⚡ Dijkstra Ausführen
+          </button>
+          <button class="button" onclick="showGraphStats()" style="background: linear-gradient(45deg, #f39c12, #e67e22);">
+            💥Graph Statistiken
+          </button>
+        </div>
+      </div>
+      
+      <div id="dijkstra-output" class="output dijkstra-output">
+        <div class="dijkstra-placeholder">
+          🌀  DIJKSTRA VOYAGER - Bereit für Pathfinding-Operationen...
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="button" onclick="clearAlgorithmOutput()" style="background: linear-gradient(45deg, #667eea, #764ba2);">
+          ❌ Terminal Löschen
+        </button>
+      </div>
+    </div>
+
     <!-- NEWS SECTION -->
     <div id="hackers-section" style="display: none;">
       <div class="lightsaber alt"></div>
-      <h2>📰 Real-Time News API Dashboard</h2>
+      <h2>📰 live Universe News Hub </h2>
       
-      <div class="api-status">
-        <h4>🔗 Live API Connection Status</h4>
-        <div class="api-details">
-          <strong>Primary API:</strong> jsonplaceholder.typicode.com/posts<br>
-          <strong>Backup:</strong> Local news database<br>
-          <strong>Status:</strong> 
-          <span class="status-indicator status-online"></span>
-          <span class="status-ready">Ready</span>
-        </div>
+    <div class="api-status">
+      <h4>📡 Intergalactic Signal Status</h4>
+      <div class="api-details">
+        <strong>Hyperspace Link:</strong> news.ycombinator.com (Hacker News)<br>
+        <strong>Station Database:</strong> Local quantum archives<br>
+        <strong>Signal Strength:</strong>
+        <span class="status-indicator status-online"></span>
+        <span class="status-ready">Ready</span>
+      </div>
       </div>
       
       <div class="controls-container">
@@ -206,7 +255,7 @@
           📰 Real News Feed
         </button>
         <button class="button local-news" onclick="loadLocalNews()">
-          📚 Local Backup
+          🗂️ Local Backup
         </button>
         <button class="button breaches" onclick="checkBreaches()">
           💀 Data Breaches
@@ -230,24 +279,12 @@
           💻 Click <strong>"Data Breaches"</strong> to view historical cybersecurity incidents...
         </div>
       </div>
-      
       <div class="info-footer">
-        <strong>📊 Technical Info:</strong> Real-time data from JSONPlaceholder API • 
-        100% free and reliable • No API key required • 
-        Local backup system included • 
-        <span class="production-ready">Production ready</span>
+        <strong>🧭Technical Info:</strong> Real-time data from Nasa and Hcker News,
+        100% free and reliable 
+        <span class="production-ready">Autor-KG</span>
       </div>
     </div>
-    <h4 style="color: var(--primary-color); margin: 20px 0 10px 0;">🔍 NETZWERK INTELLIGENCE</h4>
-    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-      <button class="button" onclick="analyzeMatrix1()">📊 M1 GRAPH SCANNER</button>
-      <button class="button" onclick="analyzeMatrix2()">📊 M2 GRAPH SCANNER</button>
-  <!-- AGREGA ESTA LÍNEA AQUÍ -->
-      <button class="button" onclick="initializeApp()" style="background: linear-gradient(45deg, #9b59b6, #8e44ad);">
-         🚀 DIJKSTRA VOYAGER
-     </button>
-  </div>
-
 
     <!-- EXTERNAL LIBRARIES -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -262,37 +299,39 @@
     <script type="text/babel" src="js/nasa-sinAuto.js"></script>
     <script src="js/dijkstra-sinAuto.js"></script>
     
-    <!-- NAVIGATION SCRIPT - SIMPLIFICADO -->
+    <!-- NAVIGATION SCRIPT -->
     <script>
       function showSection(sectionId) {
-        const sections = ['matrix-section', 'nasa-section', 'jedi-section', 'weather-section', 'hackers-section', 'algorithm-section'];
+        const sections = ['matrix-section', 'nasa-section', 'jedi-section', 'weather-section', 'hackers-section', 'dijkstra-section'];
         const buttonMap = {
           'matrix-section': 'matrix-tab',
           'nasa-section': 'nasa-tab', 
           'jedi-section': 'jedi-tab',
           'weather-section': 'weather-tab',
           'hackers-section': 'hackers-tab',
-          'algorithm-section': 'algorithm-tab'
+          'dijkstra-section': 'dijkstra-tab'
         };
-        
+      
         // Ocultar todas las secciones
-        sections.forEach(id => {
-          const element = document.getElementById(id);
+        sections.forEach(section => {
+          const element = document.getElementById(section);
           if (element) element.style.display = 'none';
         });
-        
+      
         // Quitar active de todos los botones
-        document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
-        
+        document.querySelectorAll('.nav-button').forEach(button => {
+          button.classList.remove('active');
+        });
+      
         // Mostrar sección y activar botón
         const targetSection = document.getElementById(sectionId);
         const targetButton = document.getElementById(buttonMap[sectionId]);
-        
+      
         if (targetSection) targetSection.style.display = 'block';
         if (targetButton) targetButton.classList.add('active');
       }
 
-      // Event listeners simplificados
+      // Event listeners
       document.addEventListener('DOMContentLoaded', function() {
         const tabs = [
           { id: 'matrix-tab', section: 'matrix-section' },
@@ -300,9 +339,9 @@
           { id: 'jedi-tab', section: 'jedi-section' },
           { id: 'weather-tab', section: 'weather-section' },
           { id: 'hackers-tab', section: 'hackers-section' },
-          { id: 'algorithm-tab', section: 'algorithm-section' }
+          { id: 'dijkstra-tab', section: 'dijkstra-section' }
         ];
-        
+      
         tabs.forEach(tab => {
           const element = document.getElementById(tab.id);
           if (element) {
