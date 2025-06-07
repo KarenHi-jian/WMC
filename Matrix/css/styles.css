@@ -164,6 +164,8 @@ h3 {
     padding: 5px;
     margin-right: 10px;
     -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+     appearance: textfield;
 }
 
 /* Tablas */
@@ -192,6 +194,8 @@ input.matrix-input {
     text-align: center;
     font-size: 16px;
     -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+     appearance: textfield;
 }
 
 input.matrix-input::-webkit-outer-spin-button,
