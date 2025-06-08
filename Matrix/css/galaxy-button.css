@@ -1,0 +1,115 @@
+/* OVERLAY MENOS OSCURO */
+.intro-overlay {
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* CONTENEDOR DEL BOTÓN START - CORREGIDO */
+.galaxy-button-wrapper {
+    position: fixed !important;  /* Cambio de relative a fixed */
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 2000 !important;
+    width: 500px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CANVAS DE GALAXIA - CORREGIDO */
+.galaxy-canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none;
+}
+
+/* EFECTO GLOW DETRÁS DEL BOTÓN */
+.galaxy-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 150px;
+    background: radial-gradient(ellipse at center,
+        rgba(0, 150, 255, 0.3) 0%,
+        rgba(255, 0, 150, 0.2) 40%,
+        transparent 70%);
+    filter: blur(40px);
+    animation: galaxyPulse 4s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes galaxyPulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* MEJORAR EL BOTÓN START INTRO */
+.galaxy-start-btn {
+    position: relative;
+    padding: 30px 60px;
+    font-size: 2.5em;
+    background: linear-gradient(135deg,
+        rgba(0, 100, 255, 0.2) 0%,
+        rgba(0, 200, 255, 0.3) 50%,
+        rgba(0, 100, 255, 0.2) 100%);
+    color: white;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Pathway Gothic One', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.8),
+               inset 0 0 20px rgba(0, 191, 255, 0.3);
+}
+
+/* BORDE ANIMADO */
+.galaxy-start-btn::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+        #00ffff, #ff00ff, #00ffff, #ff00ff, #00ffff);
+    border-radius: 50px;
+    z-index: -1;
+    opacity: 0.7;
+    animation: borderRotate 3s linear infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes borderRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.galaxy-start-btn:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 60px rgba(0, 191, 255, 1);
+}
+
+.galaxy-start-btn:active {
+    transform: scale(0.98);
+}
